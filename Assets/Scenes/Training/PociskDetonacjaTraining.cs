@@ -33,6 +33,7 @@ public class PociskDetonacjaTraining : MonoBehaviour
         tarcza.y = tarcza.y - 0.1f;
         tarcza.z = tarcza.z + RespawnTargetTraining.zOff;
         Destroy(gameObject);
+        ArrowShoot_keyboard.canRotate = true;
         float dist = Vector3.Distance(punkt, tarcza);
         if (dist <= 0.35)
         {
