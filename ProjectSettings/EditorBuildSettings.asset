@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MenuMedieval.unity
+    guid: 495864cdf0713cd42a2a040cc505a1c0
+  - enabled: 1
+    path: Assets/Scenes/MenuMedievalMissionChoice.unity
+    guid: 2a2107f33a41c2c4b975acf7505c876c
+  - enabled: 1
+    path: Assets/Scenes/MenuTrophies/MenuTrophies.unity
+    guid: a637270e4ab71754ea7dade1aca2c0b3
+  - enabled: 1
+    path: Assets/Scenes/Training/Training.unity
+    guid: 1cb782d5ea000e34ab454e43bdb4e87c
+  - enabled: 1
+    path: Assets/Scenes/Mission2/Mission2.unity
+    guid: d5cd1bb5e5876544a96ca41f8bd2ffea
+  - enabled: 1
+    path: Assets/Scenes/Mission1/Mission1.unity
+    guid: 9852a0a185c156e44944645cc6950092
+  m_configObjects: {}
