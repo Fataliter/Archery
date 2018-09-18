@@ -29,7 +29,9 @@ public class PociskDetonacja : MonoBehaviour
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().useGravity = false;
         GetComponent<Rigidbody>().isKinematic = true;
-        if (RespawnTarget.hitCounter <= 20)
+        PlayerRotation_keyboard.canRotateKeyboard = true;
+        PlayerRotation.canRotateSlider = true;
+        if (RespawnTarget.hitCounter < 20)
         {
             Vector3 punkt = collision.contacts[0].point;
             Vector3 tarcza = target.transform.position;
@@ -37,8 +39,6 @@ public class PociskDetonacja : MonoBehaviour
             tarcza.y = tarcza.y - 0.1f;
             tarcza.z = tarcza.z + RespawnTarget.zOff;
             Destroy(gameObject);
-            PlayerRotation_keyboard.canRotateKeyboard = true;
-            PlayerRotation.canRotateSlider = true;
             float dist = Vector3.Distance(punkt, tarcza);
             if (dist <= 0.35)
                 GivePoints("5", tarcza);
@@ -58,6 +58,16 @@ public class PociskDetonacja : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            if (collision.collider.tag == "Bandit")
+            {
+                RespawnBandits.banditsLife--;
+                if (RespawnBandits.banditsLife == 0)
+                {
+                    RespawnBandits.destroyBandit = true;
+                    RespawnTarget.hitCounter++;
+                    RespawnTarget.ifDestroy = true;
+                }
+            }
         }
     }
 

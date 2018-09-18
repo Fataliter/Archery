@@ -21,6 +21,7 @@ public class RespawnTarget : MonoBehaviour {
 
     GameObject target;
     Transform player;
+
     float endPoints = 0f;
     float rot1, rot2;
 
@@ -33,8 +34,8 @@ public class RespawnTarget : MonoBehaviour {
         if (ifDestroy == true)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-            Destroy(target);
             ifDestroy = false;
+            Destroy(target);
             rot2 = player.transform.localEulerAngles.y;
             PersistentManagerScript.Instance.data.angle += (rot1 - rot2).ToString() + ",";
             PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
@@ -43,14 +44,19 @@ public class RespawnTarget : MonoBehaviour {
             {
                 RespawnArcherTarget();
             }
-            else if (hitCounter == 20)
+            else if (hitCounter < 23)
             {
                 RespawnBandit();
-                //GiveRewards();
+            }
+            else
+            {
+                GiveRewards();
             }
         }
         if (hitCounter < 20)
+        {
             ShowArrow(IfTargetSeen());
+        }
         timer += Time.deltaTime;
     }
 
@@ -83,8 +89,13 @@ public class RespawnTarget : MonoBehaviour {
 
     void RespawnBandit()
     {
-        Debug.Log(respawnBandit.transform.position);
-        target = GameObject.Instantiate(respawnBandit);
+        if (hitCounter == 20)
+            respawnBandit.transform.position = new Vector3(200, 50, 250);
+        else if (hitCounter == 21)
+            respawnBandit.transform.position = new Vector3(170, 50, 250);
+        else if (hitCounter == 22)
+            respawnBandit.transform.position = new Vector3(250, 50, 200);
+        GameObject.Instantiate(respawnBandit);
     }
 
     void Offsets(float xOffMin, float xOffMax, float zOffMin, float zOffMax)
