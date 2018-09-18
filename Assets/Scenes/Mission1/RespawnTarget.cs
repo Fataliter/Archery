@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,15 +12,20 @@ public class RespawnTarget : MonoBehaviour {
     public static bool ifDestroy = false;
     public static float timer = 0f;
     public static int hitCounter = 19;
-    float endPoints = 0f;
+
     public GameObject targetPosition;
     public GameObject respawnBandit;
-    GameObject target;
-    Transform player;
-    float rot1, rot2;
+    public SaveMedals saveMedals;
+
     public Image targetLeft, targetRight;
 
+    GameObject target;
+    Transform player;
+    float endPoints = 0f;
+    float rot1, rot2;
+
     void Start () {
+        saveMedals = new SaveMedals();
         RespawnArcherTarget();
     }
 	
@@ -40,7 +43,7 @@ public class RespawnTarget : MonoBehaviour {
             {
                 RespawnArcherTarget();
             }
-            if (hitCounter == 20)
+            else if (hitCounter == 20)
             {
                 RespawnBandit();
                 //GiveRewards();
@@ -80,6 +83,7 @@ public class RespawnTarget : MonoBehaviour {
 
     void RespawnBandit()
     {
+        Debug.Log(respawnBandit.transform.position);
         target = GameObject.Instantiate(respawnBandit);
     }
 
@@ -87,14 +91,6 @@ public class RespawnTarget : MonoBehaviour {
     {
         xOff = UnityEngine.Random.Range(xOffMin, xOffMax);
         zOff = UnityEngine.Random.Range(zOffMin, zOffMax);
-    }
-
-    void Save()
-    {
-        FileStream file = File.Create(Application.persistentDataPath + "/trophies.data");
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, PersistentManagerScript.Instance.medalsMenu);
-        file.Close();
     }
 
     void GiveRewards()
@@ -107,7 +103,7 @@ public class RespawnTarget : MonoBehaviour {
             PersistentManagerScript.Instance.medalsMenu.medalg1 = 1;
         if (endPoints > 150)
             PersistentManagerScript.Instance.medalsMenu.trophy1 = 1;
-        Save();
+        saveMedals.Save();
         PersistentManagerScript.Instance.data.timeOfPlaying = BackToMenu.timePlay;
         PersistentManagerScript.Instance.data.missionName = "mission1";
         SendData.SaveDataFromMission();

@@ -3,6 +3,9 @@ using System.Collections;
 
 public class PociskDetonacjaTraining : MonoBehaviour
 {
+    public ParticleSystem particleCommonHit, particleCommonHit2;
+    ParticleSystem particleCommonHitPrivate;
+
     public GameObject target;
     Rigidbody ArrowRB;
     float xvelocity;
@@ -33,37 +36,43 @@ public class PociskDetonacjaTraining : MonoBehaviour
         tarcza.y = tarcza.y - 0.1f;
         tarcza.z = tarcza.z + RespawnTargetTraining.zOff;
         Destroy(gameObject);
-        ArrowShoot_keyboard.canRotate = true;
+        PlayerRotation.canRotateSlider = true;
+        PlayerRotation_keyboard.canRotateKeyboard = true;
         float dist = Vector3.Distance(punkt, tarcza);
         if (dist <= 0.35)
-        {
-            PersistentManagerScript.Instance.data.points += "5,";
-            RespawnTargetTraining.ifDestroy = true;
-        }
+            GivePoints("5", tarcza);
         else if (dist <= 0.7)
-        {
-            PersistentManagerScript.Instance.data.points += "4,";
-            RespawnTargetTraining.ifDestroy = true;
-        }
+            GivePoints("4", tarcza);
         else if (dist <= 1.5)
-        {
-            PersistentManagerScript.Instance.data.points += "3,";
-            RespawnTargetTraining.ifDestroy = true;
-        }
+            GivePoints("3", tarcza);
         else if (dist <= 2.3)
-        {
-            PersistentManagerScript.Instance.data.points += "2,";
-            RespawnTargetTraining.ifDestroy = true;
-        }
+            GivePoints("2", tarcza);
         else if (dist <= 2.7)
-        {
-            PersistentManagerScript.Instance.data.points += "1,";
-            RespawnTargetTraining.ifDestroy = true;
-        }
+            GivePoints("1", tarcza);
         else
         {
             Debug.Log("Nie zdobyles nic!!!");
         }
+    }
+
+    void GivePoints(string pointsFromTarget, Vector3 tarcza)
+    {
+        PersistentManagerScript.Instance.data.points += pointsFromTarget + ",";
+        RespawnTargetTraining.ifDestroy = true;
+        int random = Random.Range(0, 2);
+        if (random == 1)
+            PlayParticles(particleCommonHit, tarcza);
+        else
+            PlayParticles(particleCommonHit2, tarcza);
+    }
+
+    void PlayParticles(ParticleSystem particle, Vector3 tarcza)
+    {
+        if (particleCommonHitPrivate == null)
+            particleCommonHitPrivate = Instantiate(particle, tarcza, Quaternion.identity);
+        particleCommonHitPrivate.transform.position = tarcza;
+        particleCommonHitPrivate.startColor = new Color(Random.value, Random.value, Random.value, 1f);
+        particleCommonHitPrivate.Play();
     }
 
     void rotationOfArrow() //liczenie kątu obrotu strzały na podstawie jej współrzędnych wektora prędkości

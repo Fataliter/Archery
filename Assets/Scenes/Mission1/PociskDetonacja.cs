@@ -37,7 +37,8 @@ public class PociskDetonacja : MonoBehaviour
             tarcza.y = tarcza.y - 0.1f;
             tarcza.z = tarcza.z + RespawnTarget.zOff;
             Destroy(gameObject);
-            ArrowShoot_keyboard.canRotate = true;
+            PlayerRotation_keyboard.canRotateKeyboard = true;
+            PlayerRotation.canRotateSlider = true;
             float dist = Vector3.Distance(punkt, tarcza);
             if (dist <= 0.35)
                 GivePoints("5", tarcza);

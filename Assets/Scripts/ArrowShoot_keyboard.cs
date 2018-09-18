@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ArrowShoot_keyboard : MonoBehaviour
 {
-    public static bool canRotate = true;
     public float ForceValue = 0f;
     private bool keypressed = false;
     public GameObject arrow;
@@ -20,6 +19,7 @@ public class ArrowShoot_keyboard : MonoBehaviour
 
     private void Start()
     {
+        PlayerRotation_keyboard.canRotateKeyboard = true;
         Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>();
         shootangle = Arrowplace.eulerAngles.z * Mathf.PI / 180;
     }
@@ -77,7 +77,7 @@ public class ArrowShoot_keyboard : MonoBehaviour
         {
             power.fillAmount = 0;
             _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;
-            canRotate = false;
+            PlayerRotation_keyboard.canRotateKeyboard = false;
             _arrow.GetComponent<Rigidbody>().useGravity = true;
             _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
             _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));

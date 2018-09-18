@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4701593587920118}
-  - component: {fileID: 114963415754353258}
+  - component: {fileID: 114872849346568574}
   m_Layer: 0
-  m_Name: RespawnTarget
+  m_Name: RespawnTargetTraining
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114963415754353258
+--- !u!114 &114872849346568574
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,12 +48,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1523461863934444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf722642961032249aaa922e09287030, type: 3}
+  m_Script: {fileID: 11500000, guid: f009164b6e0673042b4fafbac8358fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {fileID: 1849640629119400, guid: d10b7d08d2cbfc04991d2048e735547a,
-    type: 2}
-  respawnBandit: {fileID: 1008907640959436, guid: 044e355aa9f0c51468dfd035d65b0c2c,
     type: 2}
   targetLeft: {fileID: 0}
   targetRight: {fileID: 0}

@@ -21,19 +21,20 @@ public class Arrowshoot : MonoBehaviour
 
     private void Start()
     {
+        PlayerRotation.canRotateSlider = true;
         Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>(); // pobranie komponentu pozycji obiektu "ArrowPosition"
         shootangle = Arrowplace.eulerAngles.z * Mathf.PI / 180;
     }
 
     private void FixedUpdate()
     {
-        parameters();
-        addingforce2();
-        shoot();
-        zoomout();
+        Parameters();
+        AddingForce2();
+        Shoot();
+        ZoomOut();
     }
 
-    void parameters() //parametry pobierane ze skryptu nasłuchującego aplikacje serwera zintegrowaną z interpreterem pionizatora
+    void Parameters() //parametry pobierane ze skryptu nasłuchującego aplikacje serwera zintegrowaną z interpreterem pionizatora
     {
         LeftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
         RightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
@@ -45,7 +46,7 @@ public class Arrowshoot : MonoBehaviour
         //if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10) //real
         if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10)   //test
         {
-            zoomin();
+            ZoomIn();
             if (Camera.main.fieldOfView == 40)
             {
                 if (ForceValue > 100)
@@ -57,12 +58,12 @@ public class Arrowshoot : MonoBehaviour
         }
     }
 
-    void addingforce2() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100, maleje, osiąga 0, powtórzenie cyklu
+    void AddingForce2() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100, maleje, osiąga 0, powtórzenie cyklu
     {
         //if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10) //real
         if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10)   //test
         {
-            zoomin();
+            ZoomIn();
             if (ForceValue <= 100 && forcemax == false && Camera.main.fieldOfView == 40)
             {
                 ForceValue += (Time.deltaTime * 25);    //ForceValue=100 osiągamy po 4s
@@ -78,13 +79,14 @@ public class Arrowshoot : MonoBehaviour
         }
     }
 
-    void shoot() //utworzenie pojedyńczej strzały i wystrzelenie jej
+    void Shoot() //utworzenie pojedyńczej strzały i wystrzelenie jej
     {
         GameObject _arrow;  //zmienna sterująca pojedynczą strzała, która zostaje utworzona tuż po puszczeniu prawego przycisku
         //if (keypressed == true && RightButton != 0) //real 
         if (keypressed == true && RightButton != 0) //test
         {
             _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;    //utworzenie strzały
+            PlayerRotation.canRotateSlider = false;
             _arrow.GetComponent<Rigidbody>().useGravity = true;
             _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
             _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));  //wystrzelenie
@@ -98,7 +100,7 @@ public class Arrowshoot : MonoBehaviour
         }
     }
 
-    void zoomin() //przybliżenie kamery do strzelania
+    void ZoomIn() //przybliżenie kamery do strzelania
     {
         if (Camera.main.fieldOfView > 40)
         {
@@ -112,7 +114,7 @@ public class Arrowshoot : MonoBehaviour
         }
     }
 
-    void zoomout() //oddalenie kamery
+    void ZoomOut() //oddalenie kamery
     {
         waitzoomout += Time.deltaTime;
         if (Camera.main.fieldOfView < 60 && zoom == true && waitzoomout >= .8f)
