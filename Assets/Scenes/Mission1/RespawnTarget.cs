@@ -98,7 +98,7 @@ public class RespawnTarget : MonoBehaviour {
         else if (hitCounter == 31)
             respawnBandit.transform.position = new Vector3(170, 50, 250);
         else if (hitCounter == 32)
-            respawnBandit.transform.position = new Vector3(250, 50, 200);
+            respawnBandit.transform.position = new Vector3(230, 50, 250);
         GameObject.Instantiate(respawnBandit);
     }
 

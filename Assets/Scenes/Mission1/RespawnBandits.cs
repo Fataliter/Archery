@@ -17,7 +17,12 @@ public class RespawnBandits : MonoBehaviour {
         currentClipInfo = this.animator.GetCurrentAnimatorClipInfo(0);
         if (currentClipInfo[0].clip.name == "Walk")
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, 2 * Time.deltaTime);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, 3 * Time.deltaTime);
+        }
+
+        if (Vector3.Distance(gameObject.transform.position, player.position) < 10)
+        {
+            animator.Play("Attack2");
         }
 	}
 
@@ -37,16 +42,16 @@ public class RespawnBandits : MonoBehaviour {
 
     IEnumerator OnHitAnimation()
     {
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f && !animator.IsInTransition(0))
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f && !animator.IsInTransition(0))
             yield return null;
 
         PociskDetonacja.banditsLife--;
+        animator.SetBool("airborneDown", false);
         if (PociskDetonacja.banditsLife == 0)
         {
             DestroyBandit();
             RespawnTarget.hitCounter++;
             PociskDetonacja.banditsLife = 3;
         }
-        animator.SetBool("airborneDown", false);
     }
 }
