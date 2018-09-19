@@ -2,8 +2,6 @@
 using UnityEngine;
 
 public class RespawnBandits : MonoBehaviour {
-    public static bool destroyBandit = false;
-    public static int banditsLife = 3;
 
     Transform player;
     Animator animator;
@@ -21,10 +19,6 @@ public class RespawnBandits : MonoBehaviour {
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, 2 * Time.deltaTime);
         }
-        if (destroyBandit)
-        {
-            DestroyBandit();
-        }
 	}
 
     void DestroyBandit()
@@ -34,7 +28,7 @@ public class RespawnBandits : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "arrow")
+        if (collision.collider.tag == "arrow" && currentClipInfo[0].clip.name == "Walk")
         {
             animator.SetBool("airborneDown", true);
             StartCoroutine("OnHitAnimation");
@@ -43,9 +37,16 @@ public class RespawnBandits : MonoBehaviour {
 
     IEnumerator OnHitAnimation()
     {
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f && !animator.IsInTransition(0))
             yield return null;
-        Debug.Log("hi");
+
+        PociskDetonacja.banditsLife--;
+        if (PociskDetonacja.banditsLife == 0)
+        {
+            DestroyBandit();
+            RespawnTarget.hitCounter++;
+            PociskDetonacja.banditsLife = 3;
+        }
         animator.SetBool("airborneDown", false);
     }
 }

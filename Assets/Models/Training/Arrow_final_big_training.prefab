@@ -214,9 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 059a429cbb02ae8419dc60ad04068258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleCommonHit: {fileID: 198510078088278420, guid: b9993df8753ff2a47ab8a40b738ce4b7,
+  particleCommonHit: {fileID: 198029979571598720, guid: 1ee71597ac9a7a24a8dca68255dbacec,
     type: 2}
-  particleCommonHit2: {fileID: 198014645769996470, guid: 312db9cd14ba87d45a3ed9477e4aec17,
+  particleCommonHit2: {fileID: 198918576488516308, guid: efa467f120f58fe43931dd8e35c2d187,
     type: 2}
   target: {fileID: 1523461863934444, guid: 2266db86fb2e6f248bd48fd0cb05ea8d, type: 2}
 --- !u!136 &136937542556304992

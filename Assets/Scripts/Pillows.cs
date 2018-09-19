@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pillows : MonoBehaviour {
-    
+    public static int legsDifference, pillowPress;
+
     public static float WindForce;
     float LeftLeg;
     float RightLeg;
@@ -29,9 +30,9 @@ public class Pillows : MonoBehaviour {
 
     void WindForceCalc()
     {
-        if ((LeftLeg - RightLeg) > 10 && RightPillow > 5)
+        if ((LeftLeg - RightLeg) > legsDifference && RightPillow > pillowPress)
             WindForce = RightPillow;
-        else if ((RightLeg - LeftLeg) > 10 && LeftPillow > 5)
+        else if ((RightLeg - LeftLeg) > legsDifference && LeftPillow > pillowPress)
             WindForce = -LeftPillow;
         else
             WindForce = 0f;

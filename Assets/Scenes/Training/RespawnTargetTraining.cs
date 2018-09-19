@@ -20,6 +20,8 @@ public class RespawnTargetTraining : MonoBehaviour {
     public Image targetLeft, targetRight;
 
     void Start () {
+        Pillows.legsDifference = 10;
+        Pillows.pillowPress = 5;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         RespawnArcherTarget();
     }

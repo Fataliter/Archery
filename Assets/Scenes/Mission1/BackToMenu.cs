@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BackToMenu : MonoBehaviour {
-    public static float timePlay = 0;
-	
-	public void Update () {
+    public static float timePlay;
+
+    private void Start()
+    {
+        timePlay = 0;
+    }
+
+    void Update () {
         timePlay += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Q))
         {
