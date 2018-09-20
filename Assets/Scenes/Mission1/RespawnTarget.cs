@@ -42,6 +42,7 @@ public class RespawnTarget : MonoBehaviour {
             rot2 = player.transform.localEulerAngles.y;
             PersistentManagerScript.Instance.data.angle += (rot1 - rot2).ToString() + ",";
             PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
+            PillowsData();
             endPoints += (10f / timer) * PociskDetonacja.points;
             if (hitCounter < 30)
             {
@@ -148,5 +149,15 @@ public class RespawnTarget : MonoBehaviour {
             targetRight.enabled = true;
         else
             targetRight.enabled = false;
+    }
+
+    void PillowsData()
+    {
+        PersistentManagerScript.Instance.data.timeOnLeftPillow += Pillows.leftPillowTimer.ToString() + ",";
+        PersistentManagerScript.Instance.data.timeOnRightPillow += Pillows.rightPillowTimer.ToString() + ",";
+        PersistentManagerScript.Instance.data.timeOnRearPillow += Pillows.rearPillowTimer.ToString() + ",";
+        Pillows.leftPillowTimer = 0f;
+        Pillows.rightPillowTimer = 0f;
+        Pillows.rearPillowTimer = 0f;
     }
 }

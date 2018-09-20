@@ -16,7 +16,7 @@ public class BackToMenu : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PersistentManagerScript.Instance.data.timeOfPlaying = timePlay;
-            PersistentManagerScript.Instance.data.missionName = "mission1";
+            PersistentManagerScript.Instance.data.missionName = "village";
             SendData.SaveDataFromMission();
             SceneManager.LoadScene("MenuMedievalMissionChoice");
         }

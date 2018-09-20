@@ -34,7 +34,7 @@ public class MenuMedievalMissionChoice : MonoBehaviour
             {
                 index = 0;
                 Vector2 position = transform.position;
-                position.y -= yOffset * 3f;
+                position.y -= yOffset * 4f;
                 transform.position = position;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Arrowshoot : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Arrowshoot : MonoBehaviour
     private float LeftLeg;
     private float RightLeg;
     private byte RightButton;
+    public Image power;
 
     private void Start()
     {
@@ -76,6 +78,7 @@ public class Arrowshoot : MonoBehaviour
                     forcemax = false;
             }
             keypressed = true;
+            power.fillAmount = ForceValue / 100f;
         }
     }
 
@@ -85,6 +88,7 @@ public class Arrowshoot : MonoBehaviour
         //if (keypressed == true && RightButton != 0) //real 
         if (keypressed == true && RightButton != 0) //test
         {
+            power.fillAmount = 0;
             _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;    //utworzenie strzały
             PlayerRotation.canRotateSlider = false;
             _arrow.GetComponent<Rigidbody>().useGravity = true;

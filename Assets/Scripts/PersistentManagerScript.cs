@@ -117,7 +117,13 @@ public class Data
     //public string timeOnTarget;
     public string angle = "";
     public string points = "";
-    //jeszcze zmienne z poduszkami
+    public string timeOnRightPillow = "";
+    public string timeOnLeftPillow = "";
+    public string timeOnRearPillow = "";
+    public string pressOnLeftLeg = "";
+    public string pressOnRightLeg = "";
+    public string pressOnLeft = "";
+    public string pressOnRight = "";
 }
 [Serializable]
 public class Medals

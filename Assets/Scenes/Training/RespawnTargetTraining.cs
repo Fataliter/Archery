@@ -36,6 +36,7 @@ public class RespawnTargetTraining : MonoBehaviour {
             rot2 = player.transform.localEulerAngles.y;
             PersistentManagerScript.Instance.data.angle += (rot1 - rot2).ToString() + ",";
             PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
+            PillowsData();
             RespawnArcherTarget();
         }
         ShowArrow(IfTargetSeen());
@@ -80,5 +81,15 @@ public class RespawnTargetTraining : MonoBehaviour {
             targetRight.enabled = true;
         else
             targetRight.enabled = false;
+    }
+
+    void PillowsData()
+    {
+        PersistentManagerScript.Instance.data.timeOnLeftPillow += Pillows.leftPillowTimer.ToString() + ",";
+        PersistentManagerScript.Instance.data.timeOnRightPillow += Pillows.rightPillowTimer.ToString() + ",";
+        PersistentManagerScript.Instance.data.timeOnRearPillow += Pillows.rearPillowTimer.ToString() + ",";
+        Pillows.leftPillowTimer = 0f;
+        Pillows.rightPillowTimer = 0f;
+        Pillows.rearPillowTimer = 0f;
     }
 }
