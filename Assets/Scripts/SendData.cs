@@ -9,22 +9,18 @@ public class SendData : MonoBehaviour {
         if (PersistentManagerScript.Instance.data.points.Length > 1)
         {
             StreamWriter writer = new StreamWriter(Application.persistentDataPath + "/Wyniki/" + PersistentManagerScript.Instance.date + ".txt", true);
-            writer.WriteLine(PersistentManagerScript.Instance.data.missionName);
-            writer.WriteLine(PersistentManagerScript.Instance.data.timeOfPlaying);
-            writer.WriteLine(PersistentManagerScript.Instance.data.timeToHit);
-            writer.WriteLine(PersistentManagerScript.Instance.data.angle);
-            writer.WriteLine(PersistentManagerScript.Instance.data.points);
-            writer.WriteLine(PersistentManagerScript.Instance.data.timeOnLeftPillow);
-            writer.WriteLine(PersistentManagerScript.Instance.data.timeOnRightPillow);
-            writer.WriteLine(PersistentManagerScript.Instance.data.timeOnRearPillow);
-            writer.WriteLine("left_leg");
-            writer.WriteLine(PersistentManagerScript.Instance.data.pressOnLeftLeg);
-            writer.WriteLine("right_leg");
-            writer.WriteLine(PersistentManagerScript.Instance.data.pressOnRightLeg);
-            writer.WriteLine("left_pillow");
-            writer.WriteLine(PersistentManagerScript.Instance.data.pressOnLeft);
-            writer.WriteLine("right_pillow");
-            writer.WriteLine(PersistentManagerScript.Instance.data.pressOnRight);
+            writer.Write(PersistentManagerScript.Instance.data.missionName + "@");
+            writer.Write(PersistentManagerScript.Instance.data.timeOfPlaying + "@");
+            writer.Write(PersistentManagerScript.Instance.data.timeToHit + "@");
+            writer.Write(PersistentManagerScript.Instance.data.angle + "@");
+            writer.Write(PersistentManagerScript.Instance.data.points + "@");
+            writer.Write(PersistentManagerScript.Instance.data.timeOnLeftPillow + "@");
+            writer.Write(PersistentManagerScript.Instance.data.timeOnRightPillow + "@");
+            writer.Write(PersistentManagerScript.Instance.data.timeOnRearPillow + "@");
+            writer.Write(PersistentManagerScript.Instance.data.pressOnLeftLeg + "@");
+            writer.Write(PersistentManagerScript.Instance.data.pressOnRightLeg + "@");
+            writer.Write(PersistentManagerScript.Instance.data.pressOnLeft + "@");
+            writer.Write(PersistentManagerScript.Instance.data.pressOnRight + "#");
             writer.Close();
 
             PersistentManagerScript.Instance.data.timeToHit = "";
