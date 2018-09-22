@@ -21,11 +21,15 @@ public class Arrowshoot : MonoBehaviour
     private byte RightButton;
     public Image power;
 
+    private Animator anim;
+
+    
     private void Start()
     {
         PlayerRotation.canRotateSlider = true;
         Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>(); // pobranie komponentu pozycji obiektu "ArrowPosition"
         shootangle = Arrowplace.eulerAngles.z * Mathf.PI / 180;
+        anim = GameObject.Find("bandit").GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -65,6 +69,7 @@ public class Arrowshoot : MonoBehaviour
         //if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10) //real
         if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10)   //test
         {
+            anim.SetBool("aimed", true);
             ZoomIn();
             if (ForceValue <= 100 && forcemax == false && Camera.main.fieldOfView == 40)
             {
@@ -88,6 +93,8 @@ public class Arrowshoot : MonoBehaviour
         //if (keypressed == true && RightButton != 0) //real 
         if (keypressed == true && RightButton != 0) //test
         {
+            anim.SetBool("ready", false);
+            anim.SetBool("aimed", false);
             power.fillAmount = 0;
             _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;    //utworzenie strzały
             PlayerRotation.canRotateSlider = false;
@@ -115,6 +122,7 @@ public class Arrowshoot : MonoBehaviour
         if (Camera.main.fieldOfView <= 40)
         {
             Camera.main.fieldOfView = 40;
+            anim.SetBool("ready", true);
         }
     }
 

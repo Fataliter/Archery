@@ -16,12 +16,15 @@ public class ArrowShoot_keyboard : MonoBehaviour
     private float shootangle;
     public Image power;
 
+    private Animator anim;
+
 
     private void Start()
     {
         PlayerRotation_keyboard.canRotateKeyboard = true;
         Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>();
         shootangle = Arrowplace.eulerAngles.z * Mathf.PI / 180;
+        anim = GameObject.Find("bandit").GetComponent<Animator>();
     }
 
 
@@ -53,6 +56,7 @@ public class ArrowShoot_keyboard : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
+            anim.SetBool("aimed", true);
             zoomin();
             if (ForceValue <= 100 && forcemax == false && Camera.main.fieldOfView == 40)
             {
@@ -75,6 +79,8 @@ public class ArrowShoot_keyboard : MonoBehaviour
         GameObject _arrow;
         if (keypressed == true && Input.GetKeyUp(KeyCode.Space))
         {
+            anim.SetBool("ready", false);
+            anim.SetBool("aimed", false);
             power.fillAmount = 0;
             _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;
             PlayerRotation_keyboard.canRotateKeyboard = false;
@@ -99,6 +105,7 @@ public class ArrowShoot_keyboard : MonoBehaviour
         if (Camera.main.fieldOfView <= 40)
         {
             Camera.main.fieldOfView = 40;
+            anim.SetBool("ready", true);
         }
     }
 
