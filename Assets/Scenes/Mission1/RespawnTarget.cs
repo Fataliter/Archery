@@ -121,7 +121,7 @@ public class RespawnTarget : MonoBehaviour {
             PersistentManagerScript.Instance.medalsMenu.trophy1 = 1;
         saveMedals.Save();
         PersistentManagerScript.Instance.data.timeOfPlaying = BackToMenu.timePlay;
-        PersistentManagerScript.Instance.data.missionName = "mission1";
+        PersistentManagerScript.Instance.data.missionName = "village";
         SendData.SaveDataFromMission();
         SceneManager.LoadScene("MenuMedievalMissionChoice");
     }
