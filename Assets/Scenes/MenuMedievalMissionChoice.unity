@@ -306,7 +306,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Misja 1
+  m_Text: 'Wioska
 
 '
 --- !u!222 &196895800
@@ -664,7 +664,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Misja 2
+  m_Text: 'Jezioro
 
 '
 --- !u!222 &644957861
