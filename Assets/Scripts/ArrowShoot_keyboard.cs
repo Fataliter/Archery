@@ -54,7 +54,8 @@ public class ArrowShoot_keyboard : MonoBehaviour
 
     void addingforce2() //0, raising, 100, decrease, 0, repeat of cycle
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && ((anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")) || keypressed==true))
+       // if (Input.GetKey(KeyCode.Space))
         {
             anim.SetBool("aimed", true);
             zoomin();
@@ -71,6 +72,11 @@ public class ArrowShoot_keyboard : MonoBehaviour
             }
             keypressed = true;
             power.fillAmount = ForceValue / 100f;
+        }
+        if (!Input.GetKey(KeyCode.Space))
+        {
+            anim.SetBool("aimed", false);
+            zoomout();
         }
     }
 

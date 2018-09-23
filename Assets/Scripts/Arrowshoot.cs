@@ -49,7 +49,6 @@ public class Arrowshoot : MonoBehaviour
 
     void addingforce1() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100 i od razu powraca do 0, powtórzenie cyklu
     {
-        //if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10) //real
         if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10)   //test
         {
             ZoomIn();
@@ -66,8 +65,7 @@ public class Arrowshoot : MonoBehaviour
 
     void AddingForce2() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100, maleje, osiąga 0, powtórzenie cyklu
     {
-        //if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10) //real
-        if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10)   //test
+        if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10 && ((anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")) || keypressed == true))   
         {
             anim.SetBool("aimed", true);
             ZoomIn();
@@ -85,12 +83,16 @@ public class Arrowshoot : MonoBehaviour
             keypressed = true;
             power.fillAmount = ForceValue / 100f;
         }
+        if (RightButton==1)
+        {
+            anim.SetBool("aimed", false);
+            ZoomOut();
+        }
     }
 
     void Shoot() //utworzenie pojedyńczej strzały i wystrzelenie jej
     {
         GameObject _arrow;  //zmienna sterująca pojedynczą strzała, która zostaje utworzona tuż po puszczeniu prawego przycisku
-        //if (keypressed == true && RightButton != 0) //real 
         if (keypressed == true && RightButton != 0) //test
         {
             anim.SetBool("ready", false);
@@ -103,7 +105,6 @@ public class Arrowshoot : MonoBehaviour
             _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));  //wystrzelenie
             if (Pillows.WindForce != 0f)
                 _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * Pillows.WindForce);  //uwzględnienie wiatru (utrudnienie stzrelania zintegrowane z poduszkami)
-            Debug.Log("siła strzału = " + ForceValue);
             keypressed = false;
             ForceValue = 0;
             zoom = true;
