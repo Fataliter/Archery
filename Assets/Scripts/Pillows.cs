@@ -60,7 +60,7 @@ public class Pillows : MonoBehaviour {
             WindForce = -LeftPillow;
         else
             WindForce = 0f;
-        Debug.Log("wiatr= " + WindForce);
+        //Debug.Log("wiatr= " + WindForce);
     }
 
     void WindForceCalcKeyboard()
