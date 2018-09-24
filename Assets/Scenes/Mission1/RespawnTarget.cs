@@ -44,11 +44,11 @@ public class RespawnTarget : MonoBehaviour {
             PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
             PillowsData();
             endPoints += (10f / timer) * PociskDetonacja.points;
-            if (hitCounter < 30)
+            if (hitCounter < 20)
             {
                 RespawnArcherTarget();
             }
-            else if (hitCounter < 33)
+            else if (hitCounter < 23)
             {
                 RespawnBandit();
             }
@@ -57,7 +57,7 @@ public class RespawnTarget : MonoBehaviour {
                 GiveRewards();
             }
         }
-        if (hitCounter < 30)
+        if (hitCounter < 20)
         {
             ShowArrow(IfTargetSeen());
         }
@@ -72,14 +72,14 @@ public class RespawnTarget : MonoBehaviour {
         rot1 = player.transform.localEulerAngles.y;
         target.name = "target";
         Vector3 vector = transform.position;
-        if (hitCounter < 15)
+        if (hitCounter < 10)
         {
             if (hitCounter % 2 == 0)
                 Offsets(10f, 15f, -17f, -15f);
             else
                 Offsets(-15f, -10f, -17f, -15f);
         }
-        else if (hitCounter < 30)
+        else if (hitCounter < 20)
         {
             if (hitCounter % 2 == 0)
                 Offsets(20f, 25f, 0f, 5f);
@@ -94,11 +94,11 @@ public class RespawnTarget : MonoBehaviour {
     void RespawnBandit()
     {
         timer = 0f;
-        if (hitCounter == 30)
+        if (hitCounter == 20)
             respawnBandit.transform.position = new Vector3(200, 50, 250);
-        else if (hitCounter == 31)
+        else if (hitCounter == 21)
             respawnBandit.transform.position = new Vector3(170, 50, 250);
-        else if (hitCounter == 32)
+        else if (hitCounter == 22)
             respawnBandit.transform.position = new Vector3(230, 50, 250);
         GameObject.Instantiate(respawnBandit);
     }

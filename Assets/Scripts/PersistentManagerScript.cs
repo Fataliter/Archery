@@ -7,6 +7,7 @@ using System.Threading;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using WebSocketSharp;
 
 public class PersistentManagerScript : MonoBehaviour {
 
@@ -34,6 +35,14 @@ public class PersistentManagerScript : MonoBehaviour {
 
     void Start()
     {
+        using (var ws = new WebSocket("ws://localhost:3000"))
+        {
+            ws.OnMessage += (sender, e) =>
+                mydata = JsonUtility.FromJson<MyData>(e.Data);
+
+            ws.Connect();
+        }
+
         try
         {
             clientReceiveThread = new Thread(new ThreadStart(ListenForData));
