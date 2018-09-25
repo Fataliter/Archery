@@ -1982,6 +1982,31 @@ Prefab:
       propertyPath: power
       value: 
       objectReference: {fileID: 858612255}
+    - target: {fileID: 114548556073017012, guid: 691d1c1dd83bf1340a730ca5402c039a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114476722649920526, guid: 691d1c1dd83bf1340a730ca5402c039a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114643960102875958, guid: 691d1c1dd83bf1340a730ca5402c039a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114612309431485668, guid: 691d1c1dd83bf1340a730ca5402c039a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81964462600121424, guid: 691d1c1dd83bf1340a730ca5402c039a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 691d1c1dd83bf1340a730ca5402c039a, type: 2}
   m_IsPrefabAsset: 0

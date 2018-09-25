@@ -65,7 +65,7 @@ public class Arrowshoot : MonoBehaviour
 
     void AddingForce2() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100, maleje, osiąga 0, powtórzenie cyklu
     {
-        if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10 && ((anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")) || keypressed == true))   
+        if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < 10 && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || keypressed == true))   
         {
             anim.SetBool("aimed", true);
             ZoomIn();
