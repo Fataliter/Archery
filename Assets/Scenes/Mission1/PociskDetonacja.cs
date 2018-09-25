@@ -33,7 +33,7 @@ public class PociskDetonacja : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
         PlayerRotation_keyboard.canRotateKeyboard = true;
         PlayerRotation.canRotateSlider = true;
-        if (RespawnTarget.hitCounter < 30)
+        if (RespawnTarget.hitCounter < 20)
         {
             Vector3 punkt = collision.contacts[0].point;
             Vector3 tarcza = target.transform.position;
@@ -76,9 +76,9 @@ public class PociskDetonacja : MonoBehaviour
         RespawnTarget.hitCounter++;
         RespawnTarget.ifDestroy = true;
         points = float.Parse(pointsFromTarget);
-        if (RespawnTarget.hitCounter <= 15)
+        if (RespawnTarget.hitCounter <= 10)
             PlayParticles(particleCommonHit, tarcza);
-        else if (RespawnTarget.hitCounter <= 30)
+        else if (RespawnTarget.hitCounter <= 20)
             PlayParticles(particleCommonHit2, tarcza);
     }
 
