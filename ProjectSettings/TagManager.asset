@@ -6,6 +6,8 @@ TagManager:
   tags:
   - arrow
   - Bandit
+  - ArrowAnim
+  - Looker
   layers:
   - Default
   - TransparentFX

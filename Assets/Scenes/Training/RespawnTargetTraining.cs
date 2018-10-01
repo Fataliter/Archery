@@ -16,27 +16,45 @@ public class RespawnTargetTraining : MonoBehaviour {
     public GameObject targetPosition;
     GameObject target;
     Transform player;
+    Transform looker;
     float rot1, rot2;
     public Image targetLeft, targetRight;
+
+    float nextActionTime = 0.2f;
+    float period = 0.2f;
+    float timerPeriod = 0f;
+
+    float targetLocation;
 
     void Start () {
         Pillows.legsDifference = 10;
         Pillows.pillowPress = 5;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        targetLocation = 0f;
         RespawnArcherTarget();
     }
 	
 	void Update ()
     {
+        timerPeriod += Time.deltaTime;
+        if (timerPeriod > nextActionTime)
+        {
+            nextActionTime += period;
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            PersistentManagerScript.Instance.data.angle += player.transform.localEulerAngles.y.ToString() + ",";
+            PersistentManagerScript.Instance.data.targetLocation += targetLocation + ",";
+        }
+
         if (ifDestroy == true)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             ifDestroy = false;
             Destroy(target);
             rot2 = player.transform.localEulerAngles.y;
-            PersistentManagerScript.Instance.data.angle += (rot1 - rot2).ToString() + ",";
+            //PersistentManagerScript.Instance.data.angle += (rot1 - rot2).ToString() + ",";
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            PersistentManagerScript.Instance.data.hitAngle += player.transform.localEulerAngles.y.ToString() + ",";
             PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
-            PillowsData();
             RespawnArcherTarget();
         }
         ShowArrow(IfTargetSeen());
@@ -46,6 +64,7 @@ public class RespawnTargetTraining : MonoBehaviour {
     public void RespawnArcherTarget()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        looker = GameObject.FindGameObjectWithTag("Looker").GetComponent<Transform>();
         timer = 0f;
         target = GameObject.Instantiate(targetPosition);
         rot1 = player.transform.localEulerAngles.y;
@@ -56,6 +75,10 @@ public class RespawnTargetTraining : MonoBehaviour {
         vector.z = vector.z + zOff;
         vector.x = vector.x + xOff;
         target.transform.position = vector;
+        looker.LookAt(target.transform.position);
+        targetLocation = looker.transform.localEulerAngles.y - 90;
+        if (targetLocation > 180)
+            targetLocation = targetLocation - 360;
     }
 
     string IfTargetSeen()
@@ -81,15 +104,5 @@ public class RespawnTargetTraining : MonoBehaviour {
             targetRight.enabled = true;
         else
             targetRight.enabled = false;
-    }
-
-    void PillowsData()
-    {
-        PersistentManagerScript.Instance.data.timeOnLeftPillow += Pillows.leftPillowTimer.ToString() + ",";
-        PersistentManagerScript.Instance.data.timeOnRightPillow += Pillows.rightPillowTimer.ToString() + ",";
-        PersistentManagerScript.Instance.data.timeOnRearPillow += Pillows.rearPillowTimer.ToString() + ",";
-        Pillows.leftPillowTimer = 0f;
-        Pillows.rightPillowTimer = 0f;
-        Pillows.rearPillowTimer = 0f;
     }
 }

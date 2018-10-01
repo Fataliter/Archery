@@ -58,7 +58,7 @@ public class MenuMedieval : MonoBehaviour
             }
             if (index == 3)
             {
-                PersistentManagerScript.client.Close();
+                PersistentManagerScript.Instance.WebSocketClose();
                 Application.Quit();
             }
         }
@@ -102,7 +102,7 @@ public class MenuMedieval : MonoBehaviour
             }
             if (index == 3)
             {
-                PersistentManagerScript.client.Close();
+                PersistentManagerScript.Instance.WebSocketClose();
                 Application.Quit();
             }
         }

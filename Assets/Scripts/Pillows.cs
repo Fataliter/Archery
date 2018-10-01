@@ -16,22 +16,10 @@ public class Pillows : MonoBehaviour {
     float period = 0.2f;
     float timer = 0f;
 
-    public static float leftPillowTimer;
-    public static float rightPillowTimer;
-    public static float rearPillowTimer;
-
-    private void Start()
-    {
-        leftPillowTimer = 0f;
-        rightPillowTimer = 0f;
-        rearPillowTimer = 0f;
-    }
-
     void Update () {
         Parameters();
         WindForceCalc();
         WindForceCalcKeyboard();
-        Timers();
         timer += Time.deltaTime;
         if (timer > nextActionTime)
         {
@@ -40,6 +28,7 @@ public class Pillows : MonoBehaviour {
             PersistentManagerScript.Instance.data.pressOnRightLeg += RightLeg.ToString() + ",";
             PersistentManagerScript.Instance.data.pressOnLeft += LeftPillow.ToString() + ",";
             PersistentManagerScript.Instance.data.pressOnRight += RightPillow.ToString() + ",";
+            PersistentManagerScript.Instance.data.pressOnRear += RearPillow.ToString() + ",";
         }
     }
 
@@ -71,15 +60,5 @@ public class Pillows : MonoBehaviour {
             WindForce = -50f;
         else
             WindForce = 0f;
-    }
-
-    void Timers()
-    {
-        if (LeftPillow > 0)
-            leftPillowTimer += Time.deltaTime;
-        if (RightPillow > 0)
-            rightPillowTimer += Time.deltaTime;
-        if (RearPillow > 0)
-            rearPillowTimer += Time.deltaTime;
     }
 }

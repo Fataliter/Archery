@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -13,13 +12,11 @@ public class PersistentManagerScript : MonoBehaviour {
 
     public string date;
     public static PersistentManagerScript Instance { get; private set; }
-    static string HOST = "127.0.0.1";
-    static int PORT = 5001;
-    public static TcpClient client;
-    static Thread clientReceiveThread;
     public MyData mydata = new MyData();
     public Data data = new Data();
     public Medals medalsMenu = new Medals();
+    WebSocket ws;
+
     void Awake()
     {
         if (Instance == null)
@@ -31,32 +28,27 @@ public class PersistentManagerScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-    }
 
-    void Start()
-    {
-        using (var ws = new WebSocket("ws://localhost:3000"))
-        {
-            ws.OnMessage += (sender, e) =>
-                mydata = JsonUtility.FromJson<MyData>(e.Data);
-
-            ws.Connect();
-        }
-
-        try
-        {
-            clientReceiveThread = new Thread(new ThreadStart(ListenForData));
-            clientReceiveThread.IsBackground = true;
-            clientReceiveThread.Start();
-        }
-        catch (Exception e)
-        {
-            Debug.Log("On client connect exception " + e);
-        }
         date = System.DateTime.Now.ToString("dd_MM_yyyy HH_mm_ss");
         if (!Directory.Exists(Application.persistentDataPath + "/Wyniki"))
             Directory.CreateDirectory(Application.persistentDataPath + "/Wyniki");
         ReadTrophies();
+    }
+
+    public void WebSocketClose()
+    {
+        ws.Close();
+    }
+
+    void Start()
+    {
+        ws = new WebSocket("ws://localhost:8080/JanekWebServer/measurement");
+        ws.OnOpen += (sender, e) => Debug.Log("opened");
+        ws.Connect();
+        ws.OnMessage += (sender, e) =>
+        {
+            mydata = JsonUtility.FromJson<MyData>(e.Data);
+        };
     }
 
     void AssignData(string json)
@@ -64,7 +56,8 @@ public class PersistentManagerScript : MonoBehaviour {
         mydata = JsonUtility.FromJson<MyData>(json);
     }
 
-    private void ListenForData()
+    #region old connection
+    /*private void ListenForData()
     {
         try
         {
@@ -72,16 +65,16 @@ public class PersistentManagerScript : MonoBehaviour {
             byte[] bytes = new byte[1024];
             while (true)
             {
-                // Get a stream object for reading 				
+                // Get a stream object for reading
                 using (NetworkStream stream = client.GetStream())
                 {
                     int length;
-                    // Read incomming stream into byte arrary. 					
+                    // Read incomming stream into byte arrary.
                     while ((length = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
                         var incommingData = new byte[length];
                         Array.Copy(bytes, 0, incommingData, 0, length);
-                        // Convert byte array to string message. 						
+                        // Convert byte array to string message.
                         string serverMessage = Encoding.ASCII.GetString(incommingData);
                         Debug.Log(serverMessage);
                         AssignData(serverMessage);
@@ -93,7 +86,8 @@ public class PersistentManagerScript : MonoBehaviour {
         {
             Debug.Log("Socket exception: " + socketException);
         }
-    }
+    }*/
+    #endregion
 
     void ReadTrophies()
     {
@@ -121,18 +115,16 @@ public class Data
 {
     public string missionName = "";
     public float timeOfPlaying = 0;
-    //public float timeAim;
     public string timeToHit = "";
-    //public string timeOnTarget;
     public string angle = "";
+    public string targetLocation = "";
+    public string hitAngle = "";
     public string points = "";
-    public string timeOnRightPillow = "";
-    public string timeOnLeftPillow = "";
-    public string timeOnRearPillow = "";
     public string pressOnLeftLeg = "";
     public string pressOnRightLeg = "";
     public string pressOnLeft = "";
     public string pressOnRight = "";
+    public string pressOnRear = "";
 }
 [Serializable]
 public class Medals
