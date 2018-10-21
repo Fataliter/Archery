@@ -8,10 +8,13 @@ public class BackToMenuTraining : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        PersistentManagerScript.Instance.data.timeOfPlaying = timePlay;
-        PersistentManagerScript.Instance.data.missionName = "training";
-        SendData.SaveDataFromMission();
-        SceneManager.LoadScene("MenuMedieval");
+        if (collision.collider.tag == "arrow")
+        {
+            PersistentManagerScript.Instance.data.timeOfPlaying = timePlay;
+            PersistentManagerScript.Instance.data.missionName = "training";
+            SendData.SaveDataFromMission();
+            SceneManager.LoadScene("MenuMedieval");
+        }
     }
 
     void Update () {

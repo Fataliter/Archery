@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +17,7 @@ public class RespawnTarget : MonoBehaviour {
     public SaveMedals saveMedals;
 
     public Image targetLeft, targetRight;
+    public GameObject endMissionParticles;
 
     GameObject target;
     Transform player;
@@ -31,22 +31,22 @@ public class RespawnTarget : MonoBehaviour {
     float period = 0.2f;
     float timerPeriod = 0f;
 
-    void Start () {
+    void Start() {
         Pillows.legsDifference = 10;
         Pillows.pillowPress = 5;
-        hitCounter = 0;
+        hitCounter = 19;
         saveMedals = new SaveMedals();
         targetLocation = 0f;
         RespawnArcherTarget();
     }
-	
-	void Update () {
+
+    void Update() {
         timerPeriod += Time.deltaTime;
         if (timerPeriod > nextActionTime)
         {
             nextActionTime += period;
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-            PersistentManagerScript.Instance.data.angle += player.transform.localEulerAngles.y.ToString() + ",";
+            PersistentManagerScript.Instance.data.angle += (player.transform.eulerAngles.y - 360f).ToString() + ",";
             PersistentManagerScript.Instance.data.targetLocation += targetLocation + ",";
         }
 
@@ -55,17 +55,15 @@ public class RespawnTarget : MonoBehaviour {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             ifDestroy = false;
             Destroy(target);
-            rot2 = player.transform.localEulerAngles.y;
-            //PersistentManagerScript.Instance.data.angle += (rot1 - rot2).ToString() + ",";
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-            PersistentManagerScript.Instance.data.hitAngle += player.transform.localEulerAngles.y.ToString() + ",";
-            PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
+            PersistentManagerScript.Instance.data.hitAngle += (player.transform.eulerAngles.y - 360f).ToString() + ",";
+            PersistentManagerScript.Instance.data.timeToHit += timerPeriod.ToString() + ",";
             endPoints += (10f / timer) * PociskDetonacja.points;
             if (hitCounter < 20)
             {
                 RespawnArcherTarget();
             }
-            else if (hitCounter < 22)
+            else if (hitCounter < 23)
             {
                 RespawnBandit();
             }
@@ -87,7 +85,6 @@ public class RespawnTarget : MonoBehaviour {
         looker = GameObject.FindGameObjectWithTag("Looker").GetComponent<Transform>();
         timer = 0f;
         target = GameObject.Instantiate(targetPosition);
-        rot1 = player.transform.localEulerAngles.y;
         target.name = "target";
         Vector3 vector = transform.position;
         if (hitCounter < 10)
@@ -145,7 +142,7 @@ public class RespawnTarget : MonoBehaviour {
         PersistentManagerScript.Instance.data.timeOfPlaying = BackToMenu.timePlay;
         PersistentManagerScript.Instance.data.missionName = "village";
         SendData.SaveDataFromMission();
-        SceneManager.LoadScene("MenuMedievalMissionChoice");
+        GameObject.Instantiate(endMissionParticles);
     }
 
     string IfTargetSeen()

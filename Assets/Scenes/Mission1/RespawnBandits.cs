@@ -33,7 +33,7 @@ public class RespawnBandits : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "arrow" && currentClipInfo[0].clip.name == "Walk")
+        if (collision.collider.tag == "arrow" && (currentClipInfo[0].clip.name == "Walk" || currentClipInfo[0].clip.name == "Attack2"))
         {
             animator.SetBool("airborneDown", true);
             StartCoroutine("OnHitAnimation");
