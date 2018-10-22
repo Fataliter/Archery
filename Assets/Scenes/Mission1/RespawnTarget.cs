@@ -34,7 +34,7 @@ public class RespawnTarget : MonoBehaviour {
     void Start() {
         Pillows.legsDifference = 10;
         Pillows.pillowPress = 5;
-        hitCounter = 19;
+        hitCounter = 0;
         saveMedals = new SaveMedals();
         targetLocation = 0f;
         RespawnArcherTarget();
