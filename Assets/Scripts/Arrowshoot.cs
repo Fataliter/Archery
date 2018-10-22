@@ -98,13 +98,16 @@ public class Arrowshoot : MonoBehaviour
             anim.SetBool("ready", false);
             anim.SetBool("aimed", false);
             power.fillAmount = 0;
-            _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;    //utworzenie strzały
-            PlayerRotation.canRotateSlider = false;
-            _arrow.GetComponent<Rigidbody>().useGravity = true;
-            _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
-            _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));  //wystrzelenie
-            if (Pillows.WindForce != 0f)
-                _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * Pillows.WindForce);  //uwzględnienie wiatru (utrudnienie stzrelania zintegrowane z poduszkami)
+            if (ForceValue != 0)
+            {
+                _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;    //utworzenie strzały
+                PlayerRotation.canRotateSlider = false;
+                _arrow.GetComponent<Rigidbody>().useGravity = true;
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));  //wystrzelenie
+                if (Pillows.WindForce != 0f)
+                    _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * Pillows.WindForce);  //uwzględnienie wiatru (utrudnienie stzrelania zintegrowane z poduszkami)
+            }
             keypressed = false;
             ForceValue = 0;
             zoom = true;

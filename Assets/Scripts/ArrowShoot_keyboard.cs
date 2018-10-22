@@ -88,13 +88,16 @@ public class ArrowShoot_keyboard : MonoBehaviour
             anim.SetBool("ready", false);
             anim.SetBool("aimed", false);
             power.fillAmount = 0;
-            _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;
-            PlayerRotation_keyboard.canRotateKeyboard = false;
-            _arrow.GetComponent<Rigidbody>().useGravity = true;
-            _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
-            _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));
-            if (Pillows.WindForce != 0f)
-                _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * Pillows.WindForce * 10);
+            if (ForceValue != 0)
+            {
+                _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;
+                PlayerRotation_keyboard.canRotateKeyboard = false;
+                _arrow.GetComponent<Rigidbody>().useGravity = true;
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));
+                if (Pillows.WindForce != 0f)
+                    _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * Pillows.WindForce * 10);
+            }
             keypressed = false;
             ForceValue = 0;
             zoom = true;
