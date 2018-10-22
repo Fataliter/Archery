@@ -143,6 +143,8 @@ public class RespawnTarget : MonoBehaviour {
         PersistentManagerScript.Instance.data.missionName = "village";
         SendData.SaveDataFromMission();
         GameObject.Instantiate(endMissionParticles);
+        Debug.Log("punkty: " + endPoints);
+        Debug.Log("timer: " + timer);
     }
 
     string IfTargetSeen()
