@@ -32,14 +32,17 @@ public class PociskDetonacja : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        audioSrc.clip = clipOnHit;
-        audioSrc.Play();
+        if (RespawnTarget.hitCounter < 30)
+        {
+            audioSrc.clip = clipOnHit;
+            audioSrc.Play();
+        }
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().useGravity = false;
         GetComponent<Rigidbody>().isKinematic = true;
         PlayerRotation_keyboard.canRotateKeyboard = true;
         PlayerRotation.canRotateSlider = true;
-        if (RespawnTarget.hitCounter < 20)
+        if (RespawnTarget.hitCounter < 30)
         {
             Vector3 punkt = collision.contacts[0].point;
             Vector3 tarcza = target.transform.position;
@@ -87,9 +90,9 @@ public class PociskDetonacja : MonoBehaviour
         RespawnTarget.hitCounter++;
         RespawnTarget.ifDestroy = true;
         points = float.Parse(pointsFromTarget);
-        if (RespawnTarget.hitCounter <= 10)
+        if (RespawnTarget.hitCounter <= 15)
             PlayParticles(particleCommonHit, tarcza);
-        else if (RespawnTarget.hitCounter <= 20)
+        else if (RespawnTarget.hitCounter <= 30)
             PlayParticles(particleCommonHit2, tarcza);
     }
 

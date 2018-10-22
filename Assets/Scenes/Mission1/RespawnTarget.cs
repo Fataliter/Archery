@@ -32,8 +32,8 @@ public class RespawnTarget : MonoBehaviour {
     float timerPeriod = 0f;
 
     void Start() {
-        Pillows.legsDifference = 10;
-        Pillows.pillowPress = 5;
+        Pillows.legsDifference = 20;
+        Pillows.pillowPress = 25;
         hitCounter = 0;
         saveMedals = new SaveMedals();
         targetLocation = 0f;
@@ -59,20 +59,20 @@ public class RespawnTarget : MonoBehaviour {
             PersistentManagerScript.Instance.data.hitAngle += (player.transform.eulerAngles.y - 360f).ToString() + ",";
             PersistentManagerScript.Instance.data.timeToHit += timerPeriod.ToString() + ",";
             endPoints += (10f / timer) * PociskDetonacja.points;
-            if (hitCounter < 20)
+            if (hitCounter < 30)
             {
                 RespawnArcherTarget();
             }
-            else if (hitCounter < 23)
+            /*else if (hitCounter < 23)
             {
                 RespawnBandit();
-            }
+            }*/
             else
             {
                 GiveRewards();
             }
         }
-        if (hitCounter < 20)
+        if (hitCounter < 30)
         {
             ShowArrow(IfTargetSeen());
         }
@@ -87,14 +87,14 @@ public class RespawnTarget : MonoBehaviour {
         target = GameObject.Instantiate(targetPosition);
         target.name = "target";
         Vector3 vector = transform.position;
-        if (hitCounter < 10)
+        if (hitCounter < 15)
         {
             if (hitCounter % 2 == 0)
                 Offsets(10f, 15f, -17f, -15f);
             else
                 Offsets(-15f, -10f, -17f, -15f);
         }
-        else if (hitCounter < 20)
+        else if (hitCounter < 30)
         {
             if (hitCounter % 2 == 0)
                 Offsets(20f, 25f, 0f, 5f);
@@ -130,13 +130,13 @@ public class RespawnTarget : MonoBehaviour {
 
     void GiveRewards()
     {
-        if (endPoints > 20)
-            PersistentManagerScript.Instance.medalsMenu.medalb1 = 1;
         if (endPoints > 50)
-            PersistentManagerScript.Instance.medalsMenu.medals1 = 1;
+            PersistentManagerScript.Instance.medalsMenu.medalb1 = 1;
         if (endPoints > 80)
+            PersistentManagerScript.Instance.medalsMenu.medals1 = 1;
+        if (endPoints > 300)
             PersistentManagerScript.Instance.medalsMenu.medalg1 = 1;
-        if (endPoints > 150)
+        if (endPoints > 350)
             PersistentManagerScript.Instance.medalsMenu.trophy1 = 1;
         saveMedals.Save();
         PersistentManagerScript.Instance.data.timeOfPlaying = BackToMenu.timePlay;
@@ -144,7 +144,6 @@ public class RespawnTarget : MonoBehaviour {
         SendData.SaveDataFromMission();
         GameObject.Instantiate(endMissionParticles);
         Debug.Log("punkty: " + endPoints);
-        Debug.Log("timer: " + timer);
     }
 
     string IfTargetSeen()
