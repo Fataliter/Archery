@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Net.Sockets;
-using System.Text;
+﻿using UnityEngine;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using WebSocketSharp;
+using SharpConfig;
 
 public class PersistentManagerScript : MonoBehaviour {
 
@@ -15,6 +12,7 @@ public class PersistentManagerScript : MonoBehaviour {
     public MyData mydata = new MyData();
     public Data data = new Data();
     public Medals medalsMenu = new Medals();
+    public Configuration config = new Configuration();
     WebSocket ws;
 
     void Awake()
@@ -33,6 +31,7 @@ public class PersistentManagerScript : MonoBehaviour {
         if (!Directory.Exists(Application.persistentDataPath + "/Wyniki"))
             Directory.CreateDirectory(Application.persistentDataPath + "/Wyniki");
         ReadTrophies();
+        ReadConfig();
     }
 
     public void WebSocketClose()
@@ -56,38 +55,10 @@ public class PersistentManagerScript : MonoBehaviour {
         mydata = JsonUtility.FromJson<MyData>(json);
     }
 
-    #region old connection
-    /*private void ListenForData()
+    void ReadConfig()
     {
-        try
-        {
-            client = new TcpClient(HOST, PORT);
-            byte[] bytes = new byte[1024];
-            while (true)
-            {
-                // Get a stream object for reading
-                using (NetworkStream stream = client.GetStream())
-                {
-                    int length;
-                    // Read incomming stream into byte arrary.
-                    while ((length = stream.Read(bytes, 0, bytes.Length)) != 0)
-                    {
-                        var incommingData = new byte[length];
-                        Array.Copy(bytes, 0, incommingData, 0, length);
-                        // Convert byte array to string message.
-                        string serverMessage = Encoding.ASCII.GetString(incommingData);
-                        Debug.Log(serverMessage);
-                        AssignData(serverMessage);
-                    }
-                }
-            }
-        }
-        catch (SocketException socketException)
-        {
-            Debug.Log("Socket exception: " + socketException);
-        }
-    }*/
-    #endregion
+        config = Configuration.LoadFromFile(Application.persistentDataPath + "/config.cfg");
+    }
 
     void ReadTrophies()
     {
