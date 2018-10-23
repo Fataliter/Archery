@@ -8,14 +8,16 @@ public class Arrowshoot : MonoBehaviour
 
     public float ForceValue = 0f;
     public static bool keypressed = false;
-    public GameObject arrow;    //zmienna przechowująca obiekt macierzysty dla strzały
-    private Transform Arrowplace;   //zmienna pozycji strzały wystrzelanej
+    public GameObject arrow;
+    private Transform Arrowplace;  
     private float forcefactor = 100f;
     private bool forcemax = false;
     private bool zoom = false;
     private float waitzoomout = 0f;
     private float shootangle;
 
+
+    int LegsDiff;
     private float LeftLeg;
     private float RightLeg;
     private byte RightButton;
@@ -27,7 +29,7 @@ public class Arrowshoot : MonoBehaviour
     private void Start()
     {
         PlayerRotation.canRotateSlider = true;
-        Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>(); // pobranie komponentu pozycji obiektu "ArrowPosition"
+        Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>(); 
         shootangle = Arrowplace.eulerAngles.z * Mathf.PI / 180;
         anim = GameObject.Find("bandit").GetComponent<Animator>();
     }
@@ -42,31 +44,17 @@ public class Arrowshoot : MonoBehaviour
 
     void Parameters() //parametry pobierane ze skryptu nasłuchującego aplikacje serwera zintegrowaną z interpreterem pionizatora
     {
+        LegsDiff = PersistentManagerScript.Instance.config["general"]["LegsDifferenceForRotation"].IntValue;
         LeftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
         RightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
         RightButton = (byte)PersistentManagerScript.Instance.mydata.RightButton;
     }
-
-    void addingforce1() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100 i od razu powraca do 0, powtórzenie cyklu
-    {
-        if (RightButton == 0 && Mathf.Abs(LeftLeg - RightLeg) < 10)   //test
-        {
-            ZoomIn();
-            if (Camera.main.fieldOfView == 40)
-            {
-                if (ForceValue > 100)
-                    ForceValue = 0;
-                else
-                    ForceValue += (Time.deltaTime * 25);
-            }
-            keypressed = true;
-        }
-    }
+    
 
     void AddingForce2() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100, maleje, osiąga 0, powtórzenie cyklu
     {
         //if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < 20 && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || keypressed == true))  //moze stac byle jak podczas ladowania siły strzału  
-        if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < 20 && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || (Mathf.Abs(LeftLeg - RightLeg) < 20 && keypressed == true)))  //traci rownowage = strzela
+        if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < LegsDiff && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || (Mathf.Abs(LeftLeg - RightLeg) < LegsDiff && keypressed == true)))  //traci rownowage = strzela
         {
             anim.SetBool("aimed", true);
             ZoomIn();
@@ -95,20 +83,18 @@ public class Arrowshoot : MonoBehaviour
     {
         GameObject _arrow;
         //if (keypressed == true && RightButton != 0) //moze stac byle jak podczas ladowania siły strzału
-        if ((keypressed == true && RightButton != 0) || (keypressed == true && Mathf.Abs(LeftLeg - RightLeg) >= 20)) //traci rownowage = strzela
+        if ((keypressed == true && RightButton != 0) || (keypressed == true && Mathf.Abs(LeftLeg - RightLeg) >= LegsDiff)) //traci rownowage = strzela
         {
             anim.SetBool("ready", false);
             anim.SetBool("aimed", false);
             power.fillAmount = 0;
             if (ForceValue != 0)
             {
-                _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;    //utworzenie strzały
+                _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;  
                 PlayerRotation.canRotateSlider = false;
                 _arrow.GetComponent<Rigidbody>().useGravity = true;
                 _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
-                _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));  //wystrzelenie
-                if (Pillows.WindForce != 0f)
-                    _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * Pillows.WindForce);  //uwzględnienie wiatru (utrudnienie stzrelania zintegrowane z poduszkami)
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));  
             }
             keypressed = false;
             ForceValue = 0;

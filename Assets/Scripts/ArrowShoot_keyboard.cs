@@ -36,22 +36,6 @@ public class ArrowShoot_keyboard : MonoBehaviour
     }
 
 
-    void addingforce1() //0, raising, 100, instantly change to 0, repeat of cycle
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            zoomin();
-            if (Camera.main.fieldOfView == 40)
-            {
-                if (ForceValue > 100)
-                    ForceValue = 0;
-                else
-                    ForceValue += (Time.deltaTime * 25);
-            }
-            keypressed = true;
-        }
-    }
-
     void addingforce2() //0, raising, 100, decrease, 0, repeat of cycle
     {
         if (Input.GetKey(KeyCode.Space) && ((anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")) || keypressed==true))

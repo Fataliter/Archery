@@ -7,17 +7,15 @@ public class GameMusicManager : MonoBehaviour {
 
     private AudioSource AudioSrc;
     public AudioClip[] Clips;
-    Scene activeScene;
 
     void Awake()
     {
-        activeScene = SceneManager.GetActiveScene();
+        bool[] ActSc = ActualSceneInfo.actualScene;
+        //Clips = new AudioClip[ActSc.Length];
         AudioSrc = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
-        string[] sceneNames = { "Training", "Mission1", "Mission2" };
-        //Clips = new AudioClip[sceneNames.Length];
-        for(int i=0; i<sceneNames.Length; i++)
+        for(int i=0; i< ActSc.Length; i++)
         {
-            if (sceneNames[i] == activeScene.name)
+            if (ActualSceneInfo.actualScene[i] == true)
             {
                 AudioSrc.clip = Clips[i];
                 AudioSrc.Play();

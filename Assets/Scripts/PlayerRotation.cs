@@ -6,8 +6,8 @@ public class PlayerRotation : MonoBehaviour
 {
     public static bool canRotateSlider = false;
 
-    float Rotation_sensitivity = 0.01f/2; 
-
+    float RotationSens;
+    int LegsDiff;
     float LeftLeg;
     float RightLeg;
     byte RightButton;
@@ -21,6 +21,8 @@ public class PlayerRotation : MonoBehaviour
 
     void parameters() 
     {
+        RotationSens = PersistentManagerScript.Instance.config["general"]["rotationSensitivity"].FloatValue;
+        LegsDiff = PersistentManagerScript.Instance.config["general"]["LegsDifferenceForRotation"].IntValue;
         LeftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
         RightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
         RightButton = (byte)PersistentManagerScript.Instance.mydata.RightButton;
@@ -28,8 +30,8 @@ public class PlayerRotation : MonoBehaviour
 
     void rotation() 
     {
-        if (Mathf.Abs(LeftLeg - RightLeg) >= 20 && Arrowshoot.keypressed == false && canRotateSlider)    
-            transform.Rotate(0, (RightLeg - LeftLeg) * Rotation_sensitivity, 0); 
+        if (Mathf.Abs(LeftLeg - RightLeg) >= LegsDiff && Arrowshoot.keypressed == false && canRotateSlider)    
+            transform.Rotate(0, (RightLeg - LeftLeg) * RotationSens, 0); 
         else
             transform.Rotate(0, 0, 0);
     }
