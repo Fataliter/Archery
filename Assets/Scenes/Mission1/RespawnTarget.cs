@@ -144,6 +144,7 @@ public class RespawnTarget : MonoBehaviour {
         SendData.SaveDataFromMission();
         GameObject.Instantiate(endMissionParticles);
         Debug.Log("punkty: " + endPoints);
+        Debug.Log("czas: " + timer);
     }
 
     string IfTargetSeen()
