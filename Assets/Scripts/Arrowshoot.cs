@@ -65,7 +65,8 @@ public class Arrowshoot : MonoBehaviour
 
     void AddingForce2() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100, maleje, osiąga 0, powtórzenie cyklu
     {
-        if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < 10 && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || keypressed == true))   
+        //if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < 20 && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || keypressed == true))  //moze stac byle jak podczas ladowania siły strzału  
+        if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < 20 && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || (Mathf.Abs(LeftLeg - RightLeg) < 20 && keypressed == true)))  //traci rownowage = strzela
         {
             anim.SetBool("aimed", true);
             ZoomIn();
@@ -92,8 +93,9 @@ public class Arrowshoot : MonoBehaviour
 
     void Shoot() //utworzenie pojedyńczej strzały i wystrzelenie jej
     {
-        GameObject _arrow;  //zmienna sterująca pojedynczą strzała, która zostaje utworzona tuż po puszczeniu prawego przycisku
-        if (keypressed == true && RightButton != 0) //test
+        GameObject _arrow;
+        //if (keypressed == true && RightButton != 0) //moze stac byle jak podczas ladowania siły strzału
+        if ((keypressed == true && RightButton != 0) || (keypressed == true && Mathf.Abs(LeftLeg - RightLeg) >= 20)) //traci rownowage = strzela
         {
             anim.SetBool("ready", false);
             anim.SetBool("aimed", false);

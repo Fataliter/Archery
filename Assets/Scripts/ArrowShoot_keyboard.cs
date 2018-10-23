@@ -57,8 +57,9 @@ public class ArrowShoot_keyboard : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && ((anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")) || keypressed==true))
        // if (Input.GetKey(KeyCode.Space))
         {
-            anim.SetBool("aimed", true);
+            
             zoomin();
+            anim.SetBool("aimed", true);
             if (ForceValue <= 100 && forcemax == false && Camera.main.fieldOfView == 40)
             {
                 ForceValue += (Time.deltaTime * 25);

@@ -13,9 +13,13 @@ public class PociskDetonacjaTraining : MonoBehaviour
     float zvelocity;
     float rotateangle;
 
+    AudioSource audioSrc;
+    public AudioClip clipOnHit;
+
     void Start()
     {
-        ArrowRB = this.gameObject.GetComponent<Rigidbody>();
+        ArrowRB = GetComponent<Rigidbody>();
+        audioSrc = GetComponent<AudioSource>();
     }
 
 
@@ -26,6 +30,9 @@ public class PociskDetonacjaTraining : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        audioSrc.clip = clipOnHit;
+        audioSrc.Play();
+
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().useGravity = false;
         GetComponent<Rigidbody>().isKinematic = true;
@@ -35,22 +42,26 @@ public class PociskDetonacjaTraining : MonoBehaviour
         tarcza.x = tarcza.x + RespawnTargetTraining.xOff;
         tarcza.y = tarcza.y - 0.1f;
         tarcza.z = tarcza.z + RespawnTargetTraining.zOff;
-        Destroy(gameObject);
         PlayerRotation.canRotateSlider = true;
         PlayerRotation_keyboard.canRotateKeyboard = true;
         float dist = Vector3.Distance(punkt, tarcza);
-        if (dist <= 0.35)
-            GivePoints("5", tarcza);
-        else if (dist <= 0.7)
-            GivePoints("4", tarcza);
-        else if (dist <= 1.5)
-            GivePoints("3", tarcza);
-        else if (dist <= 2.3)
-            GivePoints("2", tarcza);
-        else if (dist <= 2.7)
-            GivePoints("1", tarcza);
+        if (dist <= 2.7)
+        {
+            if (dist <= 0.35)
+                GivePoints("5", tarcza);
+            else if (dist <= 0.7)
+                GivePoints("4", tarcza);
+            else if (dist <= 1.5)
+                GivePoints("3", tarcza);
+            else if (dist <= 2.3)
+                GivePoints("2", tarcza);
+            else
+                GivePoints("1", tarcza);
+            Destroy(gameObject);
+        }
         else
         {
+            Destroy(gameObject, 1);
             Debug.Log("Nie zdobyles nic!!!");
         }
     }
