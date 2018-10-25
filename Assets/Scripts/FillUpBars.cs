@@ -5,10 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class FillUpBars : MonoBehaviour {
+    public Sprite bronze, silver, gold, trophy, win;
+
     Image mission1, mission2, mission3, mission4;
     float time1, time2, time3, time4;
     float[] target1, target2, target3, target4;
-    Text targetMission1, timeMission1;
+    Text dragon, goblin, bandit, target, time;
+    Image dragonImage, goblinImage, banditImage, targetImage, timeImage;
+    Image achiev1, achiev2, achiev3, achiev4;
 
 	void Start ()
     {
@@ -19,24 +23,21 @@ public class FillUpBars : MonoBehaviour {
         GetData();
         if (mission1Object != null)
         {
-            SaveManager.Instance.state.timePlayedMission1 = 395f;
-            SaveManager.Instance.state.targetsMission1 = "486";
-
             mission1 = mission1Object.GetComponent<Image>();
             mission1.fillAmount = 0f;
 
-            GameObject targetMission1Object = GameObject.Find("TargetsMission1");
-            targetMission1 = targetMission1Object.GetComponent<Text>();
-            GameObject timeMission1Object = GameObject.Find("TimeMission1");
-            timeMission1 = timeMission1Object.GetComponent<Text>();
+            GameObject targetObject = GameObject.Find("TargetsMission1");
+            target = targetObject.GetComponent<Text>();
+            GameObject timeObject = GameObject.Find("TimeMission1");
+            time = timeObject.GetComponent<Text>();
 
             float timePlayed = SaveManager.Instance.state.timePlayedMission1;
             string[] targets = SaveManager.Instance.state.targetsMission1.Split(',');
 
-            targetMission1.text = targets[0] + "/" + target1[0].ToString();
-            timeMission1.text = timePlayed.ToString() + "/" + time1.ToString();
+            target.text = targets[0] + "/" + target1[0].ToString();
+            time.text = timePlayed.ToString() + "/" + time1.ToString();
 
-            if (SaveManager.Instance.state.targetsMission1 != "")
+            if (SaveManager.Instance.state.targetsMission1 != "0")
             {
                 float progress = CheckProgress(timePlayed, time1, targets, target1);
                 mission1.fillAmount = progress;
@@ -44,16 +45,43 @@ public class FillUpBars : MonoBehaviour {
         }
         if (mission2Object != null)
         {
-            SaveManager.Instance.state.timePlayedMission2 = 20f;
-            SaveManager.Instance.state.targetsMission2 = "23,1";
-
             mission2 = mission2Object.GetComponent<Image>();
             mission2.fillAmount = 0f;
+
+            GameObject targetObject = GameObject.Find("TargetsMission2");
+            target = targetObject.GetComponent<Text>();
+            GameObject timeObject = GameObject.Find("TimeMission2");
+            time = timeObject.GetComponent<Text>();
+            GameObject banditObject = GameObject.Find("BanditMission2");
+            bandit = banditObject.GetComponent<Text>();
+
+            GameObject targetImageObject = GameObject.Find("TargetImageMission2");
+            targetImage = targetImageObject.GetComponent<Image>();
+            GameObject timeImageObject = GameObject.Find("TimeImageMission2");
+            timeImage = timeImageObject.GetComponent<Image>();
+            GameObject banditImageObject = GameObject.Find("BanditImageMission2");
+            banditImage = banditImageObject.GetComponent<Image>();
 
             float timePlayed = SaveManager.Instance.state.timePlayedMission2;
             string[] targets = SaveManager.Instance.state.targetsMission2.Split(',');
 
-            if (SaveManager.Instance.state.targetsMission2 != "")
+            if (PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
+            {
+                target.text = targets[0] + "/" + target2[0].ToString();
+                time.text = timePlayed.ToString() + "/" + time2.ToString();
+                bandit.text = targets[1] + "/" + target2[1].ToString();
+            }
+            else
+            {
+                target.enabled = false;
+                time.enabled = false;
+                bandit.enabled = false;
+                targetImage.enabled = false;
+                timeImage.enabled = false;
+                banditImage.enabled = false;
+            }
+
+            if (SaveManager.Instance.state.targetsMission2 != "0,0")
             {
                 float progress = CheckProgress(timePlayed, time2, targets, target2);
                 mission2.fillAmount = progress;
@@ -64,10 +92,47 @@ public class FillUpBars : MonoBehaviour {
             mission3 = mission3Object.GetComponent<Image>();
             mission3.fillAmount = 0f;
 
+            GameObject targetObject = GameObject.Find("TargetsMission3");
+            target = targetObject.GetComponent<Text>();
+            GameObject timeObject = GameObject.Find("TimeMission3");
+            time = timeObject.GetComponent<Text>();
+            GameObject banditObject = GameObject.Find("BanditMission3");
+            bandit = banditObject.GetComponent<Text>();
+            GameObject goblinObject = GameObject.Find("GoblinMission3");
+            goblin = goblinObject.GetComponent<Text>();
+
+            GameObject targetImageObject = GameObject.Find("TargetImageMission3");
+            targetImage = targetImageObject.GetComponent<Image>();
+            GameObject timeImageObject = GameObject.Find("TimeImageMission3");
+            timeImage = timeImageObject.GetComponent<Image>();
+            GameObject banditImageObject = GameObject.Find("BanditImageMission3");
+            banditImage = banditImageObject.GetComponent<Image>();
+            GameObject goblinImageObject = GameObject.Find("GoblinImageMission3");
+            goblinImage = goblinImageObject.GetComponent<Image>();
+
             float timePlayed = SaveManager.Instance.state.timePlayedMission3;
             string[] targets = SaveManager.Instance.state.targetsMission3.Split(',');
 
-            if (SaveManager.Instance.state.targetsMission3 != "")
+            if (PersistentManagerScript.Instance.medalsMenu.medals2 == 1)
+            {
+                target.text = targets[0] + "/" + target3[0].ToString();
+                time.text = timePlayed.ToString() + "/" + time3.ToString();
+                bandit.text = targets[1] + "/" + target3[1].ToString();
+                goblin.text = targets[2] + "/" + target3[2].ToString();
+            }
+            else
+            {
+                target.enabled = false;
+                time.enabled = false;
+                bandit.enabled = false;
+                goblin.enabled = false;
+                targetImage.enabled = false;
+                timeImage.enabled = false;
+                banditImage.enabled = false;
+                goblinImage.enabled = false;
+            }
+
+            if (SaveManager.Instance.state.targetsMission3 != "0,0,0")
             {
                 float progress = CheckProgress(timePlayed, time3, targets, target3);
                 mission3.fillAmount = progress;
@@ -78,10 +143,47 @@ public class FillUpBars : MonoBehaviour {
             mission4 = mission4Object.GetComponent<Image>();
             mission4.fillAmount = 0f;
 
+            GameObject targetObject = GameObject.Find("TargetsMission4");
+            target = targetObject.GetComponent<Text>();
+            GameObject timeObject = GameObject.Find("TimeMission4");
+            time = timeObject.GetComponent<Text>();
+            GameObject goblinObject = GameObject.Find("GoblinMission4");
+            goblin = goblinObject.GetComponent<Text>();
+            GameObject dragonObject = GameObject.Find("DragonMission4");
+            dragon = dragonObject.GetComponent<Text>();
+
+            GameObject targetImageObject = GameObject.Find("TargetImageMission4");
+            targetImage = targetImageObject.GetComponent<Image>();
+            GameObject timeImageObject = GameObject.Find("TimeImageMission4");
+            timeImage = timeImageObject.GetComponent<Image>();
+            GameObject goblinImageObject = GameObject.Find("GoblinImageMission4");
+            goblinImage = goblinImageObject.GetComponent<Image>();
+            GameObject dragonImageObject = GameObject.Find("DragonImageMission4");
+            dragonImage = dragonImageObject.GetComponent<Image>();
+
             float timePlayed = SaveManager.Instance.state.timePlayedMission4;
             string[] targets = SaveManager.Instance.state.targetsMission4.Split(',');
 
-            if (SaveManager.Instance.state.targetsMission4 != "")
+            if (PersistentManagerScript.Instance.medalsMenu.medals3 == 1)
+            {
+                target.text = targets[0] + "/" + target4[0].ToString();
+                time.text = timePlayed.ToString() + "/" + time4.ToString();
+                goblin.text = targets[1] + "/" + target4[1].ToString();
+                dragon.text = targets[2] + "/" + target4[2].ToString();
+            }
+            else
+            {
+                target.enabled = false;
+                time.enabled = false;
+                goblin.enabled = false;
+                dragon.enabled = false;
+                targetImage.enabled = false;
+                timeImage.enabled = false;
+                goblinImage.enabled = false;
+                dragonImage.enabled = false;
+            }
+
+            if (SaveManager.Instance.state.targetsMission4 != "0,0,0")
             {
                 float progress = CheckProgress(timePlayed, time4, targets, target4);
                 mission4.fillAmount = progress;
@@ -91,49 +193,139 @@ public class FillUpBars : MonoBehaviour {
 
     void GetData()
     {
+        GameObject achievObject = GameObject.Find("AchievImageMission1");
+        achiev1 = achievObject.GetComponent<Image>();
+        achievObject = GameObject.Find("AchievImageMission2");
+        achiev2 = achievObject.GetComponent<Image>();
+        achievObject = GameObject.Find("AchievImageMission3");
+        achiev3 = achievObject.GetComponent<Image>();
+        achievObject = GameObject.Find("AchievImageMission4");
+        achiev4 = achievObject.GetComponent<Image>();
+
         if (PersistentManagerScript.Instance.medalsMenu.trophy1 == 1)
+        {
             GetDataMission1("trophy");
+            achiev1.sprite = win;
+        }
         else if (PersistentManagerScript.Instance.medalsMenu.medalg1 == 1)
-            GetDataMission1("gold");
+        {
+            GetDataMission1("trophy");
+            achiev1.sprite = trophy;
+        }
         else if (PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
+        {
+            GetDataMission1("gold");
+            achiev1.sprite = gold;
+        }
+        else if (PersistentManagerScript.Instance.medalsMenu.medalb1 == 1)
+        {
             GetDataMission1("silver");
-        else if (PersistentManagerScript.Instance.medalsMenu.medalb1 == 1 || PersistentManagerScript.Instance.medalsMenu.medalb1 == 0)
+            achiev1.sprite = silver;
+        }
+        else if (PersistentManagerScript.Instance.medalsMenu.medalb1 == 0)
+        {
             GetDataMission1("bronze");
+            achiev1.sprite = bronze;
+        }
 
         if (PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
         {
             if (PersistentManagerScript.Instance.medalsMenu.trophy2 == 1)
+            {
                 GetDataMission2("trophy");
+                achiev2.sprite = win;
+            }
             else if (PersistentManagerScript.Instance.medalsMenu.medalg2 == 1)
-                GetDataMission2("gold");
+            {
+                GetDataMission2("trophy");
+                achiev2.sprite = trophy;
+            }
             else if (PersistentManagerScript.Instance.medalsMenu.medals2 == 1)
+            {
+                GetDataMission2("gold");
+                achiev2.sprite = gold;
+            }
+            else if (PersistentManagerScript.Instance.medalsMenu.medalb2 == 1)
+            {
                 GetDataMission2("silver");
-            else if (PersistentManagerScript.Instance.medalsMenu.medalb2 == 1 || PersistentManagerScript.Instance.medalsMenu.medalb2 == 0)
+                achiev2.sprite = silver;
+            }
+            else if (PersistentManagerScript.Instance.medalsMenu.medalb2 == 0)
+            {
                 GetDataMission2("bronze");
+                achiev2.sprite = bronze;
+            }
 
             if (PersistentManagerScript.Instance.medalsMenu.medals2 == 1)
             {
                 if (PersistentManagerScript.Instance.medalsMenu.trophy3 == 1)
+                {
                     GetDataMission3("trophy");
+                    achiev3.sprite = win;
+                }
                 else if (PersistentManagerScript.Instance.medalsMenu.medalg3 == 1)
-                    GetDataMission3("gold");
+                {
+                    GetDataMission3("trophy");
+                    achiev3.sprite = trophy;
+                }
                 else if (PersistentManagerScript.Instance.medalsMenu.medals3 == 1)
+                {
+                    GetDataMission3("gold");
+                    achiev3.sprite = gold;
+                }
+                else if (PersistentManagerScript.Instance.medalsMenu.medalb3 == 1)
+                {
                     GetDataMission3("silver");
-                else if (PersistentManagerScript.Instance.medalsMenu.medalb3 == 1 || PersistentManagerScript.Instance.medalsMenu.medalb3 == 0)
+                    achiev3.sprite = silver;
+                }
+                else if (PersistentManagerScript.Instance.medalsMenu.medalb3 == 0)
+                {
                     GetDataMission3("bronze");
+                    achiev3.sprite = bronze;
+                }
 
                 if (PersistentManagerScript.Instance.medalsMenu.medals3 == 1)
                 {
                     if (PersistentManagerScript.Instance.medalsMenu.trophy4 == 1)
+                    {
                         GetDataMission4("trophy");
+                        achiev4.sprite = win;
+                    }
                     else if (PersistentManagerScript.Instance.medalsMenu.medalg4 == 1)
-                        GetDataMission4("gold");
+                    {
+                        GetDataMission4("trophy");
+                        achiev4.sprite = trophy;
+                    }
                     else if (PersistentManagerScript.Instance.medalsMenu.medals4 == 1)
+                    {
+                        GetDataMission4("gold");
+                        achiev4.sprite = gold;
+                    }
+                    else if (PersistentManagerScript.Instance.medalsMenu.medalb4 == 1)
+                    {
                         GetDataMission4("silver");
-                    else if (PersistentManagerScript.Instance.medalsMenu.medalb4 == 1 || PersistentManagerScript.Instance.medalsMenu.medalb4 == 0)
+                        achiev4.sprite = silver;
+                    }
+                    else if (PersistentManagerScript.Instance.medalsMenu.medalb4 == 0)
+                    {
                         GetDataMission4("bronze");
+                        achiev4.sprite = bronze;
+                    }
                 }
+                else
+                    achiev4.enabled = false;
             }
+            else
+            {
+                achiev3.enabled = false;
+                achiev4.enabled = false;
+            }
+        }
+        else
+        {
+            achiev2.enabled = false;
+            achiev3.enabled = false;
+            achiev4.enabled = false;
         }
     }
 

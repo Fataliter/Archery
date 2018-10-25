@@ -18,6 +18,7 @@ public class SaveManager : MonoBehaviour
         else
             Destroy(gameObject);
         Load();
+        Debug.Log(SerializeHelper.Serialize<SaveState>(state));
     }
 
     public void Save()
