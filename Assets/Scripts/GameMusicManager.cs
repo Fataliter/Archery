@@ -11,9 +11,8 @@ public class GameMusicManager : MonoBehaviour {
     void Awake()
     {
         bool[] ActSc = ActualSceneInfo.actualScene;
-        //Clips = new AudioClip[ActSc.Length];
         AudioSrc = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
-        for(int i=0; i< ActSc.Length; i++)
+        for (int i=0; i< ActSc.Length; i++)
         {
             if (ActualSceneInfo.actualScene[i] == true)
             {

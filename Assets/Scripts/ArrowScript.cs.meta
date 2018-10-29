@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b24afbb013cb7344bbf82e3cd2b0dfe8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - particleCommonHit: {fileID: 198029979571598720, guid: 1ee71597ac9a7a24a8dca68255dbacec,
+      type: 2}
+  - particleCommonHit2: {fileID: 198918576488516308, guid: efa467f120f58fe43931dd8e35c2d187,
+      type: 2}
+  - clipOnHit: {fileID: 8300000, guid: 8a9c4bdf3bf8148b1818aef628ff4f1f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

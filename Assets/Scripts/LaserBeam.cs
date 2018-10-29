@@ -5,12 +5,10 @@ using UnityEngine;
 public class LaserBeam : MonoBehaviour {
 
     private LineRenderer lineRendComp;
-    private Transform transformComp;
     RaycastHit hit;
 
     void Start () {
         lineRendComp = GetComponent<LineRenderer>();
-        transformComp = GetComponent<Transform>();
         lineRendComp.useWorldSpace = true;
     }
 	

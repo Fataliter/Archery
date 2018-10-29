@@ -37,9 +37,9 @@ public class PociskDetonacja : MonoBehaviour
             audioSrc.clip = clipOnHit;
             audioSrc.Play();
         }
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Rigidbody>().isKinematic = true;
+        ArrowRB.velocity = Vector3.zero;
+        ArrowRB.useGravity = false;
+        ArrowRB.isKinematic = true;
         PlayerRotation_keyboard.canRotateKeyboard = true;
         PlayerRotation.canRotateSlider = true;
         if (RespawnTarget.hitCounter < 30)
@@ -100,14 +100,14 @@ public class PociskDetonacja : MonoBehaviour
     {
         if (particleCommonHitPrivate == null)
             particleCommonHitPrivate = Instantiate(particle, tarcza, Quaternion.identity);
-        particleCommonHitPrivate.transform.position = tarcza;
-        particleCommonHitPrivate.startColor = new Color(Random.value, Random.value, Random.value, 1f);
+        //particleCommonHitPrivate.transform.position = tarcza;
+        //particleCommonHitPrivate.startColor = new Color(Random.value, Random.value, Random.value, 1f);
         particleCommonHitPrivate.Play();
     }
 
     void rotationOfArrow() //liczenie kątu obrotu strzały na podstawie jej współrzędnych wektora prędkości
     {
-        if (this.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        if (ArrowRB.velocity != Vector3.zero)
         {
             xvelocity = ArrowRB.velocity.x;
             yvelocity = ArrowRB.velocity.y;

@@ -8,6 +8,7 @@ TagManager:
   - Bandit
   - ArrowAnim
   - Looker
+  - Target
   layers:
   - Default
   - TransparentFX

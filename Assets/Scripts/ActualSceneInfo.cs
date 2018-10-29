@@ -8,9 +8,10 @@ public class ActualSceneInfo : MonoBehaviour {
     Scene activeScene;
     public static bool[] actualScene;
 
-    void Awake () {
+    void Awake()
+    {
         activeScene = SceneManager.GetActiveScene();
-        string[] sceneNames = { "Training", "Mission1", "Mission2", "Mission3", "Mission4"};
+        string[] sceneNames = { "Training", "Mission1", "Mission2", "Mission3", "Mission4" };
         actualScene = new bool[sceneNames.Length];
         for (int i = 0; i < sceneNames.Length; i++)
         {
@@ -18,5 +19,4 @@ public class ActualSceneInfo : MonoBehaviour {
             else actualScene[i] = false;
         }
     }
-	
 }

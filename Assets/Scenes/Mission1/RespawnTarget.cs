@@ -85,7 +85,7 @@ public class RespawnTarget : MonoBehaviour {
         looker = GameObject.FindGameObjectWithTag("Looker").GetComponent<Transform>();
         timer = 0f;
         target = GameObject.Instantiate(targetPosition);
-        target.name = "target";
+        target.name = "Target";
         Vector3 vector = transform.position;
         if (hitCounter < 15)
         {

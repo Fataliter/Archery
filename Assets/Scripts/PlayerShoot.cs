@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Arrowshoot : MonoBehaviour
+public class PlayerShoot : MonoBehaviour
 {
 
     public float ForceValue = 0f;
@@ -30,8 +30,9 @@ public class Arrowshoot : MonoBehaviour
     {
         PlayerRotation.canRotateSlider = true;
         Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>(); 
-        shootangle = Arrowplace.eulerAngles.z * Mathf.PI / 180;
+        shootangle = PersistentManagerScript.Instance.config["general"]["arrowPositionAngle"].FloatValue * Mathf.PI / 180;
         anim = GameObject.Find("bandit").GetComponent<Animator>();
+        LegsDiff = PersistentManagerScript.Instance.config["general"]["LegsDifferenceForRotation"].IntValue;
     }
 
     private void FixedUpdate()
@@ -42,16 +43,15 @@ public class Arrowshoot : MonoBehaviour
         ZoomOut();
     }
 
-    void Parameters() //parametry pobierane ze skryptu nasłuchującego aplikacje serwera zintegrowaną z interpreterem pionizatora
+    void Parameters() 
     {
-        LegsDiff = PersistentManagerScript.Instance.config["general"]["LegsDifferenceForRotation"].IntValue;
         LeftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
         RightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
         RightButton = (byte)PersistentManagerScript.Instance.mydata.RightButton;
     }
     
 
-    void AddingForce2() //siła strzału (naciągnięcia cięciwy) = 0, rośnie, osiąga 100, maleje, osiąga 0, powtórzenie cyklu
+    void AddingForce2() 
     {
         //if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < 20 && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || keypressed == true))  //moze stac byle jak podczas ladowania siły strzału  
         if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < LegsDiff && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || (Mathf.Abs(LeftLeg - RightLeg) < LegsDiff && keypressed == true)))  //traci rownowage = strzela
@@ -79,7 +79,7 @@ public class Arrowshoot : MonoBehaviour
         }
     }
 
-    void Shoot() //utworzenie pojedyńczej strzały i wystrzelenie jej
+    void Shoot() 
     {
         GameObject _arrow;
         //if (keypressed == true && RightButton != 0) //moze stac byle jak podczas ladowania siły strzału

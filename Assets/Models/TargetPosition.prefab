@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114759202174366578}
   m_Layer: 0
   m_Name: TargetPosition
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ Transform:
   m_GameObject: {fileID: 1849640629119400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 200, y: 15, z: 180}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children:
   - {fileID: 4257428245491180}
   m_Father: {fileID: 0}
@@ -155,4 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6816b9f3ce9104fa01053a8aff4678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4388556277348636, guid: a8d117aa233678448b9275345f101e74, type: 2}
+  player: {fileID: 4236730655473604, guid: 3e28edc4754988549afd08e6a18c9ed1, type: 2}

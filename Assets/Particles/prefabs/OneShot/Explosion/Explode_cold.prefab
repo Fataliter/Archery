@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 198918576488516308}
   - component: {fileID: 199728565965822330}
   - component: {fileID: 82213411729667574}
+  - component: {fileID: 114067079721344612}
   m_Layer: 0
   m_Name: Explode_cold
   m_TagString: Untagged
@@ -261,6 +262,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114067079721344612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270126634788680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d502c10a869d9ec4989371f9cb3e2c9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198548878214047728
 ParticleSystem:
   m_ObjectHideFlags: 1
