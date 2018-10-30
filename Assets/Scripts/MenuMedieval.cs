@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 
 public class MenuMedieval : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class MenuMedieval : MonoBehaviour
     public int lPrzyciskow = 4;
     public Text textMission, textTraining;
     float yOffset;
+    bool pressed = false;
 
     void Start()
     {
@@ -17,51 +17,54 @@ public class MenuMedieval : MonoBehaviour
         Cursor.visible = false;//Ukrycie pokazanie kursora myszy.
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (PersistentManagerScript.Instance.mydata.RightButton == 0)
-        { //Jeżeli naciśnięto klawisz "RightButton"
-            while (PersistentManagerScript.Instance.mydata.RightButton == 0)
-            { }
-            if (index < lPrzyciskow - 1)
-            {
-                index++;
-                Vector2 position = transform.position;
-                position.y += yOffset;
-                transform.position = position;
+        if (pressed == false)
+        {
+            if (PersistentManagerScript.Instance.mydata.RightButton == 0)
+            { //Jeżeli naciśnięto klawisz "RightButton"
+                if (index < lPrzyciskow - 1)
+                {
+                    index++;
+                    Vector2 position = transform.position;
+                    position.y += yOffset;
+                    transform.position = position;
+                }
+                else
+                {
+                    index = 0;
+                    Vector2 position = transform.position;
+                    position.y -= yOffset * 3f;
+                    transform.position = position;
+                }
+
             }
-            else
-            {
-                index = 0;
-                Vector2 position = transform.position;
-                position.y -= yOffset * 3f;
-                transform.position = position;
+            if (PersistentManagerScript.Instance.mydata.LeftButton == 0)
+            { //Jeżeli naciśnięto klawisz "LeftButton"
+                if (index == 0)
+                {
+                    SceneManager.LoadScene("MenuMedievalMissionChoice");
+                }
+                if (index == 1)
+                {
+                    SceneManager.LoadScene("Training");
+                }
+                if (index == 2)
+                {
+                    SceneManager.LoadScene("MenuTrophies");
+                }
+                if (index == 3)
+                {
+                    PersistentManagerScript.Instance.WebSocketClose();
+                    Application.Quit();
+                }
             }
-            
         }
-        if (PersistentManagerScript.Instance.mydata.LeftButton == 0)
-        { //Jeżeli naciśnięto klawisz "LeftButton"
-            while (PersistentManagerScript.Instance.mydata.LeftButton == 0)
-            { }
-            if (index == 0)
-            {
-                SceneManager.LoadScene("MenuMedievalMissionChoice");
-            }
-            if (index == 1)
-            {
-                SceneManager.LoadScene("Training");
-            }
-            if (index == 2)
-            {
-                SceneManager.LoadScene("MenuTrophies");
-            }
-            if (index == 3)
-            {
-                PersistentManagerScript.Instance.WebSocketClose();
-                Application.Quit();
-            }
-        }
+
+        if (PersistentManagerScript.Instance.mydata.RightButton == 0 || PersistentManagerScript.Instance.mydata.LeftButton == 0)
+            pressed = true;
+        else
+            pressed = false;
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         { //Jeżeli naciśnięto klawisz "RightArrow"
