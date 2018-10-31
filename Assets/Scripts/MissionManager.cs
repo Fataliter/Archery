@@ -15,6 +15,7 @@ public class MissionManager : MonoBehaviour {
     public static float pillowsPress = 0f;
     public static float pillowsLegsDiff = 0f;
 
+
     public static int hitCounter=0;
 
     byte leftButton;
@@ -27,8 +28,12 @@ public class MissionManager : MonoBehaviour {
     float timePlayed = 0f;
     float keypressTime = 0f;
     public static float timeAlreadyPlayed = 0f;
+    public static int[] targetsOnEnd;
+    public static bool endOfMission = false;
 
     void Awake () {
+        endOfMission = false;
+        keyPressed = false;
         activeScene = SceneManager.GetActiveScene().name;
         timeAlreadyPlayed = GetDataFromSaveState();
     }
@@ -54,7 +59,8 @@ public class MissionManager : MonoBehaviour {
             pillowsPress = PersistentManagerScript.Instance.config["training"]["pillowsPress"].FloatValue;
             savedData = SaveManager.Instance.state.targetsTraining;
             missionTime = SaveManager.Instance.state.timePlayedTraining;
-            int.TryParse(savedData, out shootTargetCount);
+            //int.TryParse(savedData, out shootTargetCount);
+            shootTargetCount = int.Parse(savedData);
         }
         if (activeScene == "Mission1")
         {
@@ -62,7 +68,8 @@ public class MissionManager : MonoBehaviour {
             pillowsPress = PersistentManagerScript.Instance.config["mission1"]["pillowsPress"].FloatValue;
             savedData = SaveManager.Instance.state.targetsMission1;
             missionTime = SaveManager.Instance.state.timePlayedMission1;
-            int.TryParse(savedData, out shootTargetCount);
+            //int.TryParse(savedData, out shootTargetCount);
+            shootTargetCount = int.Parse(savedData);
         }
         if (activeScene == "Mission2")
         {
@@ -96,9 +103,6 @@ public class MissionManager : MonoBehaviour {
             enemy2Count = data[1];
             enemy3Count = data[2];
         }
-        Debug.Log("Aktualna misja: " + activeScene);
-        Debug.Log("wczytane targety: " + savedData);
-        Debug.Log("wczytany czas w sekundach: " + missionTime);
         
         return missionTime;
     }
@@ -108,80 +112,72 @@ public class MissionManager : MonoBehaviour {
         {
             SaveManager.Instance.state.timePlayedTraining = timeAlreadyPlayed;     
             SaveManager.Instance.state.targetsTraining = T.ToString();
+            targetsOnEnd = new int[1];
+            targetsOnEnd[0] = T;
         }   
         if (activeScene == "Mission1")
         {
             SaveManager.Instance.state.timePlayedMission1 = timeAlreadyPlayed;     
             SaveManager.Instance.state.targetsMission1 = T.ToString();
+            targetsOnEnd = new int[1];
+            targetsOnEnd[0] = T;
         } 
         if (activeScene == "Mission2")
         {
             SaveManager.Instance.state.timePlayedMission2 = timeAlreadyPlayed;  
             SaveManager.Instance.state.targetsMission2 = T.ToString() + "," + E1.ToString();
+            targetsOnEnd = new int[2];
+            targetsOnEnd[0] = T;
+            targetsOnEnd[1] = E1;
         }
         if (activeScene == "Mission3")
         {
             SaveManager.Instance.state.timePlayedMission3 = timeAlreadyPlayed;  
             SaveManager.Instance.state.targetsMission3 = T.ToString() + "," + E1.ToString() + "," + E2.ToString();
+            targetsOnEnd = new int[3];
+            targetsOnEnd[0] = T;
+            targetsOnEnd[1] = E1;
+            targetsOnEnd[2] = E2;
         }
         if (activeScene == "Mission4")
         {
             SaveManager.Instance.state.timePlayedMission4 = timeAlreadyPlayed;  
             SaveManager.Instance.state.targetsMission4 = T.ToString() + "," + E2.ToString() + "," + E3.ToString();
+            targetsOnEnd = new int[3];
+            targetsOnEnd[0] = T;
+            targetsOnEnd[1] = E2;
+            targetsOnEnd[2] = E3;
         }
     }
 
 
     void EndMission()
     {
+        bool onetime = true;
         if (Input.GetKey(KeyCode.Escape) || leftButton == 0) keypressTime += Time.deltaTime;
         else keypressTime = 0f;
         if (timePlayed >= maxTime)
         {
-            timeAlreadyPlayed += 300f;
-            SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
-            SaveManager.Instance.Save();
-            ShowSavedData();
+            if (onetime)
+            {
+                endOfMission = true;
+                timeAlreadyPlayed += 300f;
+                SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
+                SaveManager.Instance.Save();
+                onetime = false;
+            }
             GameObject.Instantiate(EndMissionParticles);
         }
         if (keypressTime > 3 && keyPressed == false)
         {
+            endOfMission = true;
             keyPressed = true;
             timeAlreadyPlayed += timePlayed;
             SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
             SaveManager.Instance.Save();
-            ShowSavedData();
             SceneManager.LoadScene("MenuMedievalMissionChoice");
         }
 
     }
-
-    void ShowSavedData()
-    {
-        if (activeScene == "Training")
-        {
-            Debug.Log("Zapisane targety: " + SaveManager.Instance.state.targetsTraining);
-            Debug.Log("zapisany czas w sekundach: " + SaveManager.Instance.state.timePlayedTraining);
-        }
-        if (activeScene == "Mission1")
-        {
-            Debug.Log("Zapisane targety: " + SaveManager.Instance.state.targetsMission1);
-            Debug.Log("zapisany czas w sekundach: " +  SaveManager.Instance.state.timePlayedMission1);
-        }
-        if (activeScene == "Mission2")
-        {
-            Debug.Log("Zapisane targety: " + SaveManager.Instance.state.targetsMission2);
-            Debug.Log("zapisany czas w sekundach: " + SaveManager.Instance.state.timePlayedMission2);
-        }
-        if (activeScene == "Mission3")
-        {
-            Debug.Log("Zapisane targety: " + SaveManager.Instance.state.targetsMission3);
-            Debug.Log("zapisany czas w sekundach: " + SaveManager.Instance.state.timePlayedMission3);
-        }
-        if (activeScene == "Mission4")
-        {
-            Debug.Log("Zapisane targety: " + SaveManager.Instance.state.targetsMission4);
-            Debug.Log("zapisany czas w sekundach: " + SaveManager.Instance.state.timePlayedMission4);
-        }
-    }
+    
 }

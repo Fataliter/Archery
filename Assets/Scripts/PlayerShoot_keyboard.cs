@@ -25,7 +25,6 @@ public class PlayerShoot_keyboard : MonoBehaviour
         Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>();
         shootangle = PersistentManagerScript.Instance.config["general"]["arrowPositionAngle"].FloatValue * Mathf.PI / 180;
         anim = GameObject.Find("bandit").GetComponent<Animator>();
-        Debug.Log(shootangle / Mathf.PI * 180);
     }
 
 
