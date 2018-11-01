@@ -25,7 +25,6 @@ public class RespawnTarget : MonoBehaviour {
 
     float endPoints = 0f;
     float targetLocation;
-    float rot1, rot2;
 
     float nextActionTime = 0.2f;
     float period = 0.2f;
