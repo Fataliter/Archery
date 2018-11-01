@@ -25,7 +25,7 @@ public class TrainingAchievements : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedTraining;
             string targetsScored = SaveManager.Instance.state.targetsTraining;
 
-            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+            float timeFloat = Convert.ToSingle(Math.Floor(Convert.ToDouble(timePlayed / 60f)));
 
             targetsText.text = targetsScored + "/" + targets.ToString();
             timeText.text = timeFloat.ToString() + "/" + time.ToString();

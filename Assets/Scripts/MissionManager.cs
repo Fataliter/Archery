@@ -24,8 +24,8 @@ public class MissionManager : MonoBehaviour {
 
     bool keyPressed = false;
 
-    int maxTime = 302;
-    float timePlayed = 0f;
+    public static float maxTime = 302;
+    public static float timePlayed = 0f;
     float keypressTime = 0f;
     public static float timeAlreadyPlayed = 0f;
     public static int[] targetsOnEnd;

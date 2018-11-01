@@ -34,7 +34,7 @@ public class FillUpBars : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedMission1;
             string[] targets = SaveManager.Instance.state.targetsMission1.Split(',');
 
-            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+            float timeFloat = Convert.ToSingle(Math.Floor(Convert.ToDouble(timePlayed / 60f)));
 
             target.text = targets[0] + "/" + target1[0].ToString();
             time.text = timeFloat.ToString() + "/" + time1.ToString();
@@ -67,7 +67,7 @@ public class FillUpBars : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedMission2;
             string[] targets = SaveManager.Instance.state.targetsMission2.Split(',');
 
-            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+            float timeFloat = Convert.ToSingle(Math.Floor(Convert.ToDouble(timePlayed / 60f)));
 
             if (PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
             {
@@ -117,7 +117,7 @@ public class FillUpBars : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedMission3;
             string[] targets = SaveManager.Instance.state.targetsMission3.Split(',');
 
-            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+            float timeFloat = Convert.ToSingle(Math.Floor(Convert.ToDouble(timePlayed / 60f)));
 
             if (PersistentManagerScript.Instance.medalsMenu.medals2 == 1)
             {
@@ -170,7 +170,7 @@ public class FillUpBars : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedMission4;
             string[] targets = SaveManager.Instance.state.targetsMission4.Split(',');
 
-            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+            float timeFloat = Convert.ToSingle(Math.Floor(Convert.ToDouble(timePlayed / 60f)));
 
             if (PersistentManagerScript.Instance.medalsMenu.medals3 == 1)
             {

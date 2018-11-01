@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657683, g: 0.49641192, b: 0.5748182, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657642, g: 0.49641156, b: 0.5748181, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2327,6 +2327,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fcc4c1b87e7f2c48bcc08ebcf4a5c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bronze: {fileID: 0}
+  silver: {fileID: 0}
+  gold: {fileID: 0}
+  trophy: {fileID: 0}
 --- !u!1001 &964453236
 Prefab:
   m_ObjectHideFlags: 0
