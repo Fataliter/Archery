@@ -13,7 +13,7 @@ public class MenuMedieval : MonoBehaviour
 
     void Start()
     {
-        yOffset = textTraining.transform.position.y - textMission.transform.position.y;
+        yOffset = textMission.transform.position.y - textTraining.transform.position.y;
         Cursor.visible = false;//Ukrycie pokazanie kursora myszy.
     }
 
@@ -43,11 +43,11 @@ public class MenuMedieval : MonoBehaviour
             { //Jeżeli naciśnięto klawisz "LeftButton"
                 if (index == 0)
                 {
-                    SceneManager.LoadScene("MenuMedievalMissionChoice");
+                    SceneManager.LoadScene("Training");
                 }
                 if (index == 1)
                 {
-                    SceneManager.LoadScene("Training");
+                    SceneManager.LoadScene("MenuMedievalMissionChoice");
                 }
                 if (index == 2)
                 {
@@ -93,11 +93,11 @@ public class MenuMedieval : MonoBehaviour
         {
             if (index == 0)
             {
-                SceneManager.LoadScene("MenuMedievalMissionChoice");
+                SceneManager.LoadScene("Training");
             }
             if (index == 1)
             {
-                SceneManager.LoadScene("Training");
+                SceneManager.LoadScene("MenuMedievalMissionChoice");
             }
             if (index == 2)
             {

@@ -116,4 +116,8 @@ public class Medals
     public int trophy2 = 0;
     public int trophy3 = 0;
     public int trophy4 = 0;
+    public int training1 = 0;
+    public int training2 = 0;
+    public int training3 = 0;
+    public int training4 = 0;
 }

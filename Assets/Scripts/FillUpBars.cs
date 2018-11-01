@@ -34,12 +34,14 @@ public class FillUpBars : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedMission1;
             string[] targets = SaveManager.Instance.state.targetsMission1.Split(',');
 
+            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+
             target.text = targets[0] + "/" + target1[0].ToString();
-            time.text = timePlayed.ToString() + "/" + time1.ToString();
+            time.text = timeFloat.ToString() + "/" + time1.ToString();
 
             if (SaveManager.Instance.state.targetsMission1 != "0")
             {
-                float progress = CheckProgress(timePlayed, time1, targets, target1);
+                float progress = CheckProgress(timeFloat, time1, targets, target1);
                 mission1.fillAmount = progress;
             }
         }
@@ -65,10 +67,12 @@ public class FillUpBars : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedMission2;
             string[] targets = SaveManager.Instance.state.targetsMission2.Split(',');
 
+            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+
             if (PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
             {
                 target.text = targets[0] + "/" + target2[0].ToString();
-                time.text = timePlayed.ToString() + "/" + time2.ToString();
+                time.text = timeFloat.ToString() + "/" + time2.ToString();
                 bandit.text = targets[1] + "/" + target2[1].ToString();
             }
             else
@@ -113,10 +117,12 @@ public class FillUpBars : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedMission3;
             string[] targets = SaveManager.Instance.state.targetsMission3.Split(',');
 
+            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+
             if (PersistentManagerScript.Instance.medalsMenu.medals2 == 1)
             {
                 target.text = targets[0] + "/" + target3[0].ToString();
-                time.text = timePlayed.ToString() + "/" + time3.ToString();
+                time.text = timeFloat.ToString() + "/" + time3.ToString();
                 bandit.text = targets[1] + "/" + target3[1].ToString();
                 goblin.text = targets[2] + "/" + target3[2].ToString();
             }
@@ -164,10 +170,12 @@ public class FillUpBars : MonoBehaviour {
             float timePlayed = SaveManager.Instance.state.timePlayedMission4;
             string[] targets = SaveManager.Instance.state.targetsMission4.Split(',');
 
+            float timeFloat = Convert.ToSingle(Math.Round(Convert.ToDouble(timePlayed / 60f)));
+
             if (PersistentManagerScript.Instance.medalsMenu.medals3 == 1)
             {
                 target.text = targets[0] + "/" + target4[0].ToString();
-                time.text = timePlayed.ToString() + "/" + time4.ToString();
+                time.text = timeFloat.ToString() + "/" + time4.ToString();
                 goblin.text = targets[1] + "/" + target4[1].ToString();
                 dragon.text = targets[2] + "/" + target4[2].ToString();
             }
