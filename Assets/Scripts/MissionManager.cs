@@ -24,8 +24,8 @@ public class MissionManager : MonoBehaviour {
 
     bool keyPressed = false;
 
-    int maxTime = 302;
-    float timePlayed = 0f;
+    public static float maxTime = 0f;
+    public static float timePlayed = 0f;
     float keypressTime = 0f;
     public static float timeAlreadyPlayed = 0f;
     public static int[] targetsOnEnd;
@@ -55,24 +55,25 @@ public class MissionManager : MonoBehaviour {
         int[] data;
         if(activeScene == "Training")
         {
+            maxTime = Mathf.Infinity;
             pillowsLegsDiff = PersistentManagerScript.Instance.config["training"]["legsDifferenceForPillows"].FloatValue;
             pillowsPress = PersistentManagerScript.Instance.config["training"]["pillowsPress"].FloatValue;
             savedData = SaveManager.Instance.state.targetsTraining;
             missionTime = SaveManager.Instance.state.timePlayedTraining;
-            //int.TryParse(savedData, out shootTargetCount);
             shootTargetCount = int.Parse(savedData);
         }
         if (activeScene == "Mission1")
         {
+            maxTime = PersistentManagerScript.Instance.config["mission1"]["missionTime"].FloatValue;
             pillowsLegsDiff = PersistentManagerScript.Instance.config["mission1"]["legsDifferenceForPillows"].FloatValue;
             pillowsPress = PersistentManagerScript.Instance.config["mission1"]["pillowsPress"].FloatValue;
             savedData = SaveManager.Instance.state.targetsMission1;
             missionTime = SaveManager.Instance.state.timePlayedMission1;
-            //int.TryParse(savedData, out shootTargetCount);
             shootTargetCount = int.Parse(savedData);
         }
         if (activeScene == "Mission2")
         {
+            maxTime = PersistentManagerScript.Instance.config["mission2"]["missionTime"].FloatValue;
             pillowsLegsDiff = PersistentManagerScript.Instance.config["mission2"]["legsDifferenceForPillows"].FloatValue;
             pillowsPress = PersistentManagerScript.Instance.config["mission2"]["pillowsPress"].FloatValue;
             savedData = SaveManager.Instance.state.targetsMission2;
@@ -83,6 +84,7 @@ public class MissionManager : MonoBehaviour {
         }
         if (activeScene == "Mission3")
         {
+            maxTime = PersistentManagerScript.Instance.config["mission3"]["missionTime"].FloatValue;
             pillowsLegsDiff = PersistentManagerScript.Instance.config["mission3"]["legsDifferenceForPillows"].FloatValue;
             pillowsPress = PersistentManagerScript.Instance.config["mission3"]["pillowsPress"].FloatValue;
             savedData = SaveManager.Instance.state.targetsMission3;
@@ -94,6 +96,7 @@ public class MissionManager : MonoBehaviour {
         }
         if (activeScene == "Mission4")
         {
+            maxTime = PersistentManagerScript.Instance.config["mission4"]["missionTime"].FloatValue;
             pillowsLegsDiff = PersistentManagerScript.Instance.config["mission4"]["legsDifferenceForPillows"].FloatValue;
             pillowsPress = PersistentManagerScript.Instance.config["mission4"]["pillowsPress"].FloatValue;
             savedData = SaveManager.Instance.state.targetsMission4;
@@ -161,7 +164,7 @@ public class MissionManager : MonoBehaviour {
             if (onetime)
             {
                 endOfMission = true;
-                timeAlreadyPlayed += 300f;
+                timeAlreadyPlayed += maxTime;
                 SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
                 SaveManager.Instance.Save();
                 onetime = false;
@@ -175,7 +178,7 @@ public class MissionManager : MonoBehaviour {
             timeAlreadyPlayed += timePlayed;
             SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
             SaveManager.Instance.Save();
-            SceneManager.LoadScene("MenuMedievalMissionChoice");
+            SceneManager.LoadScene("MenuMedieval");
         }
 
     }

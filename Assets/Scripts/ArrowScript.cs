@@ -32,7 +32,7 @@ public class ArrowScript : MonoBehaviour {
         ArrowRB.isKinematic = true;
         PlayerRotation_keyboard.canRotateKeyboard = true;
         PlayerRotation.canRotateSlider = true;
-        if (collision.gameObject.tag == "Target")
+        if (collision.gameObject.name == "Target")
         {
             TakeParticles(collision.gameObject.transform.position);
             MissionManager.shootTargetCount++;
@@ -41,19 +41,19 @@ public class ArrowScript : MonoBehaviour {
             RespawnTarget.ifDestroy = true; //do zmiany
             RespawnTarget.hitCounter++;  //do zmiany
         }
-        else if (collision.gameObject.tag == "Enemy1")
+        else if (collision.gameObject.name == "Enemy1")
         {
             MissionManager.enemy1Count++;
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "Enemy2")
+        else if (collision.gameObject.name == "Enemy2")
         {
             MissionManager.enemy2Count++;
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "Enemy3")
+        else if (collision.gameObject.name == "Enemy3")
         {
             MissionManager.enemy3Count++;
             Destroy(collision.gameObject);
