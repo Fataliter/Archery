@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114948823552119390}
   - component: {fileID: 114787990256488568}
   - component: {fileID: 114215418520029116}
+  - component: {fileID: 114482465392428802}
   m_Layer: 0
   m_Name: Management
   m_TagString: Untagged
@@ -122,6 +123,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EndMissionParticles: {fileID: 1491309961526236, guid: d9992f6a2cd77f743946458a027e6bcb,
     type: 2}
+--- !u!114 &114482465392428802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539126716337918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fcc4c1b87e7f2c48bcc08ebcf4a5c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114787990256488568
 MonoBehaviour:
   m_ObjectHideFlags: 1

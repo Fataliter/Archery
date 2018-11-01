@@ -15,6 +15,9 @@ public class PersistentManagerScript : MonoBehaviour {
     public Configuration config = new Configuration();
     WebSocket ws;
 
+
+    public SaveMedals saveMedals;
+
     void Awake()
     {
         if (Instance == null)
@@ -26,6 +29,7 @@ public class PersistentManagerScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
 
         date = System.DateTime.Now.ToString("dd_MM_yyyy HH_mm_ss");
         if (!Directory.Exists(Application.persistentDataPath + "/Wyniki"))
@@ -68,6 +72,11 @@ public class PersistentManagerScript : MonoBehaviour {
             BinaryFormatter bf = new BinaryFormatter();
             medalsMenu = (Medals)bf.Deserialize(file);
             file.Close();
+        }
+        else
+        {
+            saveMedals = new SaveMedals();
+            saveMedals.Save();
         }
     }
 }
