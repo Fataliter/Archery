@@ -36,6 +36,8 @@ public class ArrowScript : MonoBehaviour {
         {
             TakeParticles(collision.gameObject.transform.position);
             MissionManager.shootTargetCount++;
+            ProgressDuringMission.hit = true;
+            ProgressDuringMission.targetName = "Target";
             //Destroy(collision.gameObject);
             Destroy(gameObject);
             RespawnTarget.ifDestroy = true; //do zmiany
@@ -44,18 +46,24 @@ public class ArrowScript : MonoBehaviour {
         else if (collision.gameObject.name == "Enemy1")
         {
             MissionManager.enemy1Count++;
-            Destroy(collision.gameObject);
+            ProgressDuringMission.hit = true;
+            ProgressDuringMission.targetName = "Enemy1";
+            //Destroy(collision.gameObject);
             Destroy(gameObject);
         }
         else if (collision.gameObject.name == "Enemy2")
         {
             MissionManager.enemy2Count++;
+            ProgressDuringMission.hit = true;
+            ProgressDuringMission.targetName = "Enemy2";
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
         else if (collision.gameObject.name == "Enemy3")
         {
             MissionManager.enemy3Count++;
+            ProgressDuringMission.hit = true;
+            ProgressDuringMission.targetName = "Enemy3";
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

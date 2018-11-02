@@ -43,21 +43,21 @@ public class RespawnTarget : MonoBehaviour {
         timerPeriod += Time.deltaTime;
         if (timerPeriod > nextActionTime)
         {
-            nextActionTime += period;
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-            PersistentManagerScript.Instance.data.angle += (player.transform.eulerAngles.y - 360f).ToString() + ",";
-            PersistentManagerScript.Instance.data.targetLocation += targetLocation + ",";
+           // nextActionTime += period;
+           // player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+           // PersistentManagerScript.Instance.data.angle += (player.transform.eulerAngles.y - 360f).ToString() + ",";
+           // PersistentManagerScript.Instance.data.targetLocation += targetLocation + ",";
         }
 
         if (ifDestroy == true)
         {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+           // player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             ifDestroy = false;
             Destroy(target);
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-            PersistentManagerScript.Instance.data.hitAngle += (player.transform.eulerAngles.y - 360f).ToString() + ",";
-            PersistentManagerScript.Instance.data.timeToHit += timerPeriod.ToString() + ",";
-            endPoints += (10f / timer) * PociskDetonacja.points;
+          //  player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+          //  PersistentManagerScript.Instance.data.hitAngle += (player.transform.eulerAngles.y - 360f).ToString() + ",";
+           // PersistentManagerScript.Instance.data.timeToHit += timerPeriod.ToString() + ",";
+           // endPoints += (10f / timer) * PociskDetonacja.points;
             if (hitCounter < 30)
             {
                 RespawnArcherTarget();
@@ -138,9 +138,9 @@ public class RespawnTarget : MonoBehaviour {
         if (endPoints > 350)
             PersistentManagerScript.Instance.medalsMenu.trophy1 = 1;
         saveMedals.Save();
-        PersistentManagerScript.Instance.data.timeOfPlaying = BackToMenu.timePlay;
-        PersistentManagerScript.Instance.data.missionName = "village";
-        SendData.SaveDataFromMission();
+      //  PersistentManagerScript.Instance.data.timeOfPlaying = BackToMenu.timePlay;
+      //  PersistentManagerScript.Instance.data.missionName = "village";
+      //  SendData.SaveDataFromMission();
         GameObject.Instantiate(endMissionParticles);
         Debug.Log("punkty: " + endPoints);
         Debug.Log("czas: " + timer);

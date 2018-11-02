@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 96130205276961634}
   - component: {fileID: 82455003858777298}
   m_Layer: 1
-  m_Name: Arrow_final_big
+  m_Name: Arrow_final
   m_TagString: arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

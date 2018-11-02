@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - EndMissionParticles: {fileID: 1491309961526236, guid: d9992f6a2cd77f743946458a027e6bcb,
       type: 2}
-  executionOrder: 0
+  executionOrder: -500
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

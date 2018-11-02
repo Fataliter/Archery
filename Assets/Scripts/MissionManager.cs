@@ -30,12 +30,14 @@ public class MissionManager : MonoBehaviour {
     public static float timeAlreadyPlayed = 0f;
     public static int[] targetsOnEnd;
     public static bool endOfMission = false;
+    bool onetime;
 
     void Awake () {
         endOfMission = false;
         keyPressed = false;
         activeScene = SceneManager.GetActiveScene().name;
         timeAlreadyPlayed = GetDataFromSaveState();
+        onetime = true;
     }
 
     private void Update() {
@@ -156,7 +158,7 @@ public class MissionManager : MonoBehaviour {
 
     void EndMission()
     {
-        bool onetime = true;
+        
         if (Input.GetKey(KeyCode.Escape) || leftButton == 0) keypressTime += Time.deltaTime;
         else keypressTime = 0f;
         if (timePlayed >= maxTime)
@@ -168,8 +170,8 @@ public class MissionManager : MonoBehaviour {
                 SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
                 SaveManager.Instance.Save();
                 onetime = false;
+                GameObject.Instantiate(EndMissionParticles);
             }
-            GameObject.Instantiate(EndMissionParticles);
         }
         if (keypressTime > 3 && keyPressed == false)
         {
@@ -180,7 +182,6 @@ public class MissionManager : MonoBehaviour {
             SaveManager.Instance.Save();
             SceneManager.LoadScene("MenuMedieval");
         }
-
     }
     
 }

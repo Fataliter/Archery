@@ -93,7 +93,7 @@ public class PlayerShoot : MonoBehaviour
                 _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;  
                 PlayerRotation.canRotateSlider = false;
                 _arrow.GetComponent<Rigidbody>().useGravity = true;
-                _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * ForceValue * forcefactor * Mathf.Cos(shootangle));
                 _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));  
             }
             keypressed = false;

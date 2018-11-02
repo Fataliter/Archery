@@ -31,7 +31,17 @@ public class ScoreBrowser : MonoBehaviour {
         if (timer > nextActionTime)
         {
             LowerDiagram();
+            UpperDiagram();
             nextActionTime += period;
+        }
+        if(ProgressDuringMission.hit == true)
+        {
+            if (playerTransform.eulerAngles.y > 180)
+                PersistentManagerScript.Instance.data.hitAngle += (playerTransform.eulerAngles.y - 360f).ToString() + ",";
+            else
+                PersistentManagerScript.Instance.data.hitAngle += (playerTransform.eulerAngles.y).ToString() + ",";
+            PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
+            ProgressDuringMission.hit = false;
         }
         if(MissionManager.endOfMission==true)
         {
@@ -59,8 +69,15 @@ public class ScoreBrowser : MonoBehaviour {
 
     void UpperDiagram()
     {
-        PersistentManagerScript.Instance.data.angle += (playerTransform.transform.eulerAngles.y + 90f).ToString() + ",";
-
+        
+        if (lookerTransform.eulerAngles.y > 180)
+            PersistentManagerScript.Instance.data.targetLocation += (lookerTransform.eulerAngles.y - 360f).ToString() + ",";
+        else
+            PersistentManagerScript.Instance.data.targetLocation += lookerTransform.eulerAngles.y.ToString() + ",";
+        if (playerTransform.eulerAngles.y > 180)
+            PersistentManagerScript.Instance.data.angle += (playerTransform.eulerAngles.y - 360f).ToString() + ",";
+        else
+            PersistentManagerScript.Instance.data.angle += (playerTransform.eulerAngles.y).ToString() + ",";
     }
 
 }

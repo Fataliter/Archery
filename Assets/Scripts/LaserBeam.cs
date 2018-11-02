@@ -13,8 +13,8 @@ public class LaserBeam : MonoBehaviour {
     }
 	
 	void Update () {
-        Ray myRay = new Ray(transform.position, transform.right);
-        if(Physics.Raycast(myRay,out hit,400,2)) // 2 = pomijanie obiektów w warstwie 1 (wystrzelona strzała)
+        Ray myRay = new Ray(transform.position, transform.forward);
+        if(Physics.Raycast(myRay,out hit,400,1)) // 1 = pomijanie obiektów w warstwie 1 (wystrzelona strzała)
         {
             //Debug.Log(hit.transform.name);
             //Debug.DrawLine(myRay.origin, hit.point, Color.magenta);

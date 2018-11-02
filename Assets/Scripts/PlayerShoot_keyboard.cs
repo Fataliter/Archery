@@ -78,10 +78,8 @@ public class PlayerShoot_keyboard : MonoBehaviour
                 _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;
                 PlayerRotation_keyboard.canRotateKeyboard = false;
                 _arrow.GetComponent<Rigidbody>().useGravity = true;
-                _arrow.GetComponent<Rigidbody>().AddForce(transform.right * ForceValue * forcefactor * Mathf.Cos(shootangle));
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * ForceValue * forcefactor * Mathf.Cos(shootangle));
                 _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));
-                if (Pillows.WindForce != 0f)
-                    _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * Pillows.WindForce * 10);
             }
             keypressed = false;
             ForceValue = 0;
