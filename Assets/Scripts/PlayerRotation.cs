@@ -6,15 +6,15 @@ public class PlayerRotation : MonoBehaviour
 {
     public static bool canRotateSlider = false;
 
-    float RotationSens;
-    int LegsDiff;
-    float LeftLeg;
-    float RightLeg;
+    float rotationSens;
+    int legsDiff;
+    float leftLeg;
+    float rightLeg;
 
     private void Start()
     {
-        RotationSens = PersistentManagerScript.Instance.config["general"]["rotationSensitivity"].FloatValue;
-        LegsDiff = PersistentManagerScript.Instance.config["general"]["LegsDifferenceForRotation"].IntValue;
+        rotationSens = PersistentManagerScript.Instance.config["general"]["rotationSensitivity"].FloatValue;
+        legsDiff = PersistentManagerScript.Instance.config["general"]["LegsDifferenceForRotation"].IntValue;
     }
 
     void Update()
@@ -25,14 +25,14 @@ public class PlayerRotation : MonoBehaviour
 
     void parameters() 
     {
-        LeftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
-        RightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
+        leftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
+        rightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
     }
 
     void rotation() 
     {
-        if (Mathf.Abs(LeftLeg - RightLeg) >= LegsDiff && PlayerShoot.keypressed == false && canRotateSlider)    
-            transform.Rotate(0, (RightLeg - LeftLeg) * RotationSens, 0); 
+        if (Mathf.Abs(leftLeg - rightLeg) >= legsDiff && PlayerShoot.keypressed == false && canRotateSlider)    
+            transform.Rotate(0, (rightLeg - leftLeg) * rotationSens, 0); 
         else
             transform.Rotate(0, 0, 0);
     }

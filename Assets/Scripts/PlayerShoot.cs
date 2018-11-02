@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class PlayerShoot : MonoBehaviour
 {
 
-    public float ForceValue = 0f;
+    public float forceValue = 0f;
     public static bool keypressed = false;
     public GameObject arrow;
-    private Transform Arrowplace;  
+    private Transform arrowplace;  
     private float forcefactor = 100f;
     private bool forcemax = false;
     private bool zoom = false;
@@ -17,10 +17,10 @@ public class PlayerShoot : MonoBehaviour
     private float shootangle;
 
 
-    int LegsDiff;
-    private float LeftLeg;
-    private float RightLeg;
-    private byte RightButton;
+    int legsDiff;
+    private float leftLeg;
+    private float rightLeg;
+    private byte rightButton;
     public Image power;
 
     private Animator anim;
@@ -29,50 +29,50 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         PlayerRotation.canRotateSlider = true;
-        Arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>(); 
+        arrowplace = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>(); 
         shootangle = PersistentManagerScript.Instance.config["general"]["arrowPositionAngle"].FloatValue * Mathf.PI / 180;
         anim = GameObject.Find("bandit").GetComponent<Animator>();
-        LegsDiff = PersistentManagerScript.Instance.config["general"]["LegsDifferenceForRotation"].IntValue;
+        legsDiff = PersistentManagerScript.Instance.config["general"]["LegsDifferenceForRotation"].IntValue;
     }
 
     private void FixedUpdate()
     {
         Parameters();
-        AddingForce2();
+        AddingForce();
         Shoot();
         ZoomOut();
     }
 
     void Parameters() 
     {
-        LeftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
-        RightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
-        RightButton = (byte)PersistentManagerScript.Instance.mydata.RightButton;
+        leftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
+        rightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
+        rightButton = (byte)PersistentManagerScript.Instance.mydata.RightButton;
     }
     
 
-    void AddingForce2() 
+    void AddingForce() 
     {
-        //if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < 20 && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || keypressed == true))  //moze stac byle jak podczas ladowania siły strzału  
-        if (RightButton == 0 && ((Mathf.Abs(LeftLeg - RightLeg) < LegsDiff && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || (Mathf.Abs(LeftLeg - RightLeg) < LegsDiff && keypressed == true)))  //traci rownowage = strzela
+        //if (rightButton == 0 && ((Mathf.Abs(leftLeg - rightLeg) < legsDiff && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || keypressed == true))  //moze stac byle jak podczas ladowania siły strzału  
+        if (rightButton == 0 && ((Mathf.Abs(leftLeg - rightLeg) < legsDiff && (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) || (Mathf.Abs(leftLeg - rightLeg) < legsDiff && keypressed == true)))  //traci rownowage = strzela
         {
             anim.SetBool("aimed", true);
             ZoomIn();
-            if (ForceValue <= 100 && forcemax == false && Camera.main.fieldOfView == 40)
+            if (forceValue <= 100 && forcemax == false && Camera.main.fieldOfView == 40)
             {
-                ForceValue += (Time.deltaTime * 25);    //ForceValue=100 osiągamy po 4s
+                forceValue += (Time.deltaTime * 25);    //ForceValue=100 osiągamy po 4s
             }
-            else if (ForceValue > 100 || forcemax == true)
+            else if (forceValue > 100 || forcemax == true)
             {
                 forcemax = true;
-                ForceValue -= (Time.deltaTime * 25);
-                if (ForceValue <= 0)
+                forceValue -= (Time.deltaTime * 25);
+                if (forceValue <= 0)
                     forcemax = false;
             }
             keypressed = true;
-            power.fillAmount = ForceValue / 100f;
+            power.fillAmount = forceValue / 100f;
         }
-        if (RightButton==1)
+        if (rightButton==1)
         {
             anim.SetBool("aimed", false);
             ZoomOut();
@@ -82,22 +82,22 @@ public class PlayerShoot : MonoBehaviour
     void Shoot() 
     {
         GameObject _arrow;
-        //if (keypressed == true && RightButton != 0) //moze stac byle jak podczas ladowania siły strzału
-        if ((keypressed == true && RightButton != 0) || (keypressed == true && Mathf.Abs(LeftLeg - RightLeg) >= LegsDiff)) //traci rownowage = strzela
+        //if (keypressed == true && rightButton != 0) //moze stac byle jak podczas ladowania siły strzału
+        if ((keypressed == true && rightButton != 0) || (keypressed == true && Mathf.Abs(leftLeg - rightLeg) >= legsDiff)) //traci rownowage = strzela
         {
             anim.SetBool("ready", false);
             anim.SetBool("aimed", false);
             power.fillAmount = 0;
-            if (ForceValue != 0)
+            if (forceValue != 0)
             {
-                _arrow = Instantiate(arrow, Arrowplace.transform.position, Arrowplace.transform.rotation) as GameObject;  
+                _arrow = Instantiate(arrow, arrowplace.transform.position, arrowplace.transform.rotation) as GameObject;  
                 PlayerRotation.canRotateSlider = false;
                 _arrow.GetComponent<Rigidbody>().useGravity = true;
-                _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * ForceValue * forcefactor * Mathf.Cos(shootangle));
-                _arrow.GetComponent<Rigidbody>().AddForce(transform.up * ForceValue * forcefactor * Mathf.Sin(shootangle));  
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.forward * forceValue * forcefactor * Mathf.Cos(shootangle));
+                _arrow.GetComponent<Rigidbody>().AddForce(transform.up * forceValue * forcefactor * Mathf.Sin(shootangle));  
             }
             keypressed = false;
-            ForceValue = 0;
+            forceValue = 0;
             zoom = true;
             waitzoomout = 0f;
         }

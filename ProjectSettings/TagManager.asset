@@ -9,6 +9,9 @@ TagManager:
   - ArrowAnim
   - Looker
   - Target
+  - Enemy1
+  - Enemy2
+  - Enemy3
   layers:
   - Default
   - TransparentFX

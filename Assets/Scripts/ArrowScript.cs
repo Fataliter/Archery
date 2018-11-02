@@ -7,17 +7,18 @@ public class ArrowScript : MonoBehaviour {
     public ParticleSystem particleCommonHit, particleCommonHit2;
     ParticleSystem particleCommonHitPrivate;
     
-    Rigidbody ArrowRB;
+    Rigidbody arrowRB;
     float xVelocity;
     float yVelocity;
     float zVelocity;
     float rotateangle;
+    
 
     AudioSource audioSrc;
     public AudioClip clipOnHit;
 
     void Start () {
-        ArrowRB = GetComponent<Rigidbody>();
+        arrowRB = GetComponent<Rigidbody>();
         audioSrc = GetComponent<AudioSource>();
     }
 	
@@ -27,44 +28,46 @@ public class ArrowScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        ArrowRB.velocity = Vector3.zero;
-        ArrowRB.useGravity = false;
-        ArrowRB.isKinematic = true;
+        arrowRB.velocity = Vector3.zero;
+        arrowRB.useGravity = false;
+        arrowRB.isKinematic = true;
         PlayerRotation_keyboard.canRotateKeyboard = true;
         PlayerRotation.canRotateSlider = true;
-        if (collision.gameObject.name == "Target")
+        if (collision.gameObject.tag == "Target" )
         {
             TakeParticles(collision.gameObject.transform.position);
             MissionManager.shootTargetCount++;
+            MissionManager.hit = true;
             ProgressDuringMission.hit = true;
             ProgressDuringMission.targetName = "Target";
-            //Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
             Destroy(gameObject);
-            RespawnTarget.ifDestroy = true; //do zmiany
-            RespawnTarget.hitCounter++;  //do zmiany
         }
-        else if (collision.gameObject.name == "Enemy1")
+        else if (collision.gameObject.tag == "Enemy1")
         {
             MissionManager.enemy1Count++;
+            ScoreBrowser.hit = true;
             ProgressDuringMission.hit = true;
             ProgressDuringMission.targetName = "Enemy1";
             //Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.name == "Enemy2")
+        else if (collision.gameObject.tag == "Enemy2")
         {
             MissionManager.enemy2Count++;
+            ScoreBrowser.hit = true;
             ProgressDuringMission.hit = true;
             ProgressDuringMission.targetName = "Enemy2";
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.name == "Enemy3")
+        else if (collision.gameObject.tag == "Enemy3")
         {
             MissionManager.enemy3Count++;
+            ScoreBrowser.hit = true;
             ProgressDuringMission.hit = true;
             ProgressDuringMission.targetName = "Enemy3";
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
             Destroy(gameObject);
         }
         else
@@ -96,11 +99,11 @@ public class ArrowScript : MonoBehaviour {
 
     void rotationOfArrow() 
     {
-        if (ArrowRB.velocity != Vector3.zero)
+        if (arrowRB.velocity != Vector3.zero)
         {
-            xVelocity = ArrowRB.velocity.x;
-            yVelocity = ArrowRB.velocity.y;
-            zVelocity = ArrowRB.velocity.z;
+            xVelocity = arrowRB.velocity.x;
+            yVelocity = arrowRB.velocity.y;
+            zVelocity = arrowRB.velocity.z;
             float combinedVelocity = Mathf.Sqrt(xVelocity * xVelocity + zVelocity * zVelocity);
             rotateangle = Mathf.Atan2(yVelocity, combinedVelocity) * 180 / Mathf.PI;
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotateangle);

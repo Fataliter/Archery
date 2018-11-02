@@ -31,6 +31,7 @@ public class MissionManager : MonoBehaviour {
     public static int[] targetsOnEnd;
     public static bool endOfMission = false;
     bool onetime;
+    public static bool hit = false;
 
     void Awake () {
         endOfMission = false;
@@ -38,6 +39,7 @@ public class MissionManager : MonoBehaviour {
         activeScene = SceneManager.GetActiveScene().name;
         timeAlreadyPlayed = GetDataFromSaveState();
         onetime = true;
+        hit = false;
     }
 
     private void Update() {

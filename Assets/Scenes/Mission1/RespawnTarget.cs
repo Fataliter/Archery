@@ -103,7 +103,7 @@ public class RespawnTarget : MonoBehaviour {
         vector.z = vector.z + zOff;
         vector.x = vector.x + xOff;
         target.transform.position = vector;
-        looker.LookAt(target.transform.position);
+        //looker.LookAt(target.transform.position);
         targetLocation = looker.transform.localEulerAngles.y - 90;
         if (targetLocation > 180)
             targetLocation = targetLocation - 360;

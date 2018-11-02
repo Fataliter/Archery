@@ -9,17 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1849043019395492}
+  m_RootGameObject: {fileID: 1485184430220474}
   m_IsPrefabAsset: 1
---- !u!1 &1752748113667766
+--- !u!1 &1362072712043114
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4055244262985762}
-  - component: {fileID: 108900438065620350}
+  - component: {fileID: 4245439682305980}
+  - component: {fileID: 108883932990783954}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -27,19 +27,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1849043019395492
+--- !u!1 &1485184430220474
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4655649623576814}
-  - component: {fileID: 114323169405857462}
-  - component: {fileID: 114898217123987262}
-  - component: {fileID: 114103830797724864}
-  - component: {fileID: 114413430691198228}
-  - component: {fileID: 114627251100481052}
+  - component: {fileID: 4583217688409134}
+  - component: {fileID: 114234360618901924}
+  - component: {fileID: 114663347749802200}
+  - component: {fileID: 114986416230995042}
+  - component: {fileID: 114678235441840238}
+  - component: {fileID: 114777492197644588}
   m_Layer: 0
   m_Name: Management
   m_TagString: Untagged
@@ -47,39 +47,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4055244262985762
+--- !u!4 &4245439682305980
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752748113667766}
+  m_GameObject: {fileID: 1362072712043114}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 180, y: 3, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4655649623576814}
+  m_Father: {fileID: 4583217688409134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
---- !u!4 &4655649623576814
+--- !u!4 &4583217688409134
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849043019395492}
+  m_GameObject: {fileID: 1485184430220474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4055244262985762}
+  - {fileID: 4245439682305980}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &108900438065620350
+--- !u!108 &108883932990783954
 Light:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752748113667766}
+  m_GameObject: {fileID: 1362072712043114}
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
@@ -111,36 +111,40 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114103830797724864
+--- !u!114 &114234360618901924
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849043019395492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593269e4333e68c419dd2b154e76bbc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EndMissionParticles: {fileID: 1491309961526236, guid: d9992f6a2cd77f743946458a027e6bcb,
-    type: 2}
---- !u!114 &114323169405857462
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849043019395492}
+  m_GameObject: {fileID: 1485184430220474}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 880d6007b51467c449b7902c2072bede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114413430691198228
+--- !u!114 &114663347749802200
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849043019395492}
+  m_GameObject: {fileID: 1485184430220474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a70fb383341db84eaf83f30c6a4664f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 6a82a14c4691fb941b36a80b8bd62ffd, type: 3}
+  - {fileID: 8300000, guid: 043540c46d0ccd84f91b3cccdae0b6a1, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &114678235441840238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1485184430220474}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fcc4c1b87e7f2c48bcc08ebcf4a5c68, type: 3}
@@ -150,31 +154,27 @@ MonoBehaviour:
   silver: {fileID: 0}
   gold: {fileID: 0}
   trophy: {fileID: 0}
---- !u!114 &114627251100481052
+--- !u!114 &114777492197644588
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849043019395492}
+  m_GameObject: {fileID: 1485184430220474}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c30a7ac6dd3432c469d2d46cdf1b7e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114898217123987262
+--- !u!114 &114986416230995042
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849043019395492}
+  m_GameObject: {fileID: 1485184430220474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a70fb383341db84eaf83f30c6a4664f, type: 3}
+  m_Script: {fileID: 11500000, guid: 593269e4333e68c419dd2b154e76bbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Clips:
-  - {fileID: 8300000, guid: 6a82a14c4691fb941b36a80b8bd62ffd, type: 3}
-  - {fileID: 8300000, guid: 043540c46d0ccd84f91b3cccdae0b6a1, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  EndMissionParticles: {fileID: 1491309961526236, guid: d9992f6a2cd77f743946458a027e6bcb,
+    type: 2}

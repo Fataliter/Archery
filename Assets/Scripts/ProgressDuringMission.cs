@@ -56,6 +56,7 @@ public class ProgressDuringMission : MonoBehaviour {
             text3.text = (int.Parse(text3.text) + 1).ToString();
         if (targetName == "Enemy3")
             text2.text = (int.Parse(text2.text) + 1).ToString();
+        hit = false;
     }
 
     void SetImages()

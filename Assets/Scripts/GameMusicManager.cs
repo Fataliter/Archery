@@ -5,19 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class GameMusicManager : MonoBehaviour {
 
-    private AudioSource AudioSrc;
-    public AudioClip[] Clips;
+    private AudioSource audioSrc;
+    public AudioClip[] clips;
 
     void Awake()
     {
         bool[] ActSc = ActualSceneInfo.actualScene;
-        AudioSrc = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+        audioSrc = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
         for (int i=0; i< ActSc.Length; i++)
         {
             if (ActualSceneInfo.actualScene[i] == true)
             {
-                AudioSrc.clip = Clips[i];
-                AudioSrc.Play();
+                audioSrc.clip = clips[i];
+                audioSrc.Play();
             }
         }
     }
