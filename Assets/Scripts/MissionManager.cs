@@ -24,16 +24,17 @@ public class MissionManager : MonoBehaviour {
 
     bool keyPressed = false;
 
-    public static float maxTime = 0f;
-    public static float timePlayed = 0f;
+    public static float maxTime;
+    public static float timePlayed;
     float keypressTime = 0f;
-    public static float timeAlreadyPlayed = 0f;
+    public static float timeAlreadyPlayed;
     public static int[] targetsOnEnd;
-    public static bool endOfMission = false;
+    public static bool endOfMission;
     bool onetime;
     public static bool hit = false;
 
     void Awake () {
+        timePlayed = 0f;
         endOfMission = false;
         keyPressed = false;
         activeScene = SceneManager.GetActiveScene().name;
