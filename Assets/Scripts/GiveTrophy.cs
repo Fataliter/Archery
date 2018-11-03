@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GiveTrophy : MonoBehaviour {
 
-    public Sprite bronze, silver, gold, trophy;
+    public Sprite[] trophies;
+
+    int[] trophyOnStart = new int[4];
+
+    int[] trophyOnEnd = new int[4];
 
     string activeScene = "";
     string[] achievmentName = { "bronze", "silver", "gold", "trophy" };
@@ -17,8 +21,12 @@ public class GiveTrophy : MonoBehaviour {
     int timeToScore = 0;
     int[] targetsToScore;
 
+    public static bool gave;
+
     void Start () {
+        gave = false;
         activeScene = SceneManager.GetActiveScene().name;
+        MedalsOnStart();
         saveMedals = new SaveMedals();
     }
 	
@@ -28,6 +36,8 @@ public class GiveTrophy : MonoBehaviour {
             scoredTime = MissionManager.timeAlreadyPlayed;
             scoredTargets = MissionManager.targetsOnEnd;
             ScoredAchievment();
+            gave = true;
+            MedalsOnEnd();
         }
 	}
 
@@ -91,6 +101,80 @@ public class GiveTrophy : MonoBehaviour {
             if (k >= 1) PersistentManagerScript.Instance.medalsMenu.medals4 = 1;
             if (k >= 2) PersistentManagerScript.Instance.medalsMenu.medalg4 = 1;
             if (k >= 3) PersistentManagerScript.Instance.medalsMenu.trophy4 = 1;
+        }
+    }
+
+    void MedalsOnStart()
+    {
+        if (activeScene == "Mission1")
+        {
+            trophyOnStart[0] = PersistentManagerScript.Instance.medalsMenu.medalb1;
+            trophyOnStart[1] = PersistentManagerScript.Instance.medalsMenu.medals1;
+            trophyOnStart[2] = PersistentManagerScript.Instance.medalsMenu.medalg1;
+            trophyOnStart[3] = PersistentManagerScript.Instance.medalsMenu.trophy1;
+        }
+        if (activeScene == "Mission2")
+        {
+            trophyOnStart[0] = PersistentManagerScript.Instance.medalsMenu.medalb2;
+            trophyOnStart[1] = PersistentManagerScript.Instance.medalsMenu.medals2;
+            trophyOnStart[2] = PersistentManagerScript.Instance.medalsMenu.medalg2;
+            trophyOnStart[3] = PersistentManagerScript.Instance.medalsMenu.trophy2;
+        }
+        if (activeScene == "Mission3")
+        {
+            trophyOnStart[0] = PersistentManagerScript.Instance.medalsMenu.medalb3;
+            trophyOnStart[1] = PersistentManagerScript.Instance.medalsMenu.medals3;
+            trophyOnStart[2] = PersistentManagerScript.Instance.medalsMenu.medalg3;
+            trophyOnStart[3] = PersistentManagerScript.Instance.medalsMenu.trophy3;
+        }
+        if (activeScene == "Mission4")
+        {
+            trophyOnStart[0] = PersistentManagerScript.Instance.medalsMenu.medalb4;
+            trophyOnStart[1] = PersistentManagerScript.Instance.medalsMenu.medals4;
+            trophyOnStart[2] = PersistentManagerScript.Instance.medalsMenu.medalg4;
+            trophyOnStart[3] = PersistentManagerScript.Instance.medalsMenu.trophy4;
+        }
+    }
+
+    void MedalsOnEnd()
+    {
+        if (gave)
+        {
+            if (activeScene == "Mission1")
+            {
+                trophyOnEnd[0] = PersistentManagerScript.Instance.medalsMenu.medalb1;
+                trophyOnEnd[1] = PersistentManagerScript.Instance.medalsMenu.medals1;
+                trophyOnEnd[2] = PersistentManagerScript.Instance.medalsMenu.medalg1;
+                trophyOnEnd[3] = PersistentManagerScript.Instance.medalsMenu.trophy1;
+            }
+            if (activeScene == "Mission2")
+            {
+                trophyOnEnd[0] = PersistentManagerScript.Instance.medalsMenu.medalb2;
+                trophyOnEnd[1] = PersistentManagerScript.Instance.medalsMenu.medals2;
+                trophyOnEnd[2] = PersistentManagerScript.Instance.medalsMenu.medalg2;
+                trophyOnEnd[3] = PersistentManagerScript.Instance.medalsMenu.trophy2;
+            }
+            if (activeScene == "Mission3")
+            {
+                trophyOnEnd[0] = PersistentManagerScript.Instance.medalsMenu.medalb3;
+                trophyOnEnd[1] = PersistentManagerScript.Instance.medalsMenu.medals3;
+                trophyOnEnd[2] = PersistentManagerScript.Instance.medalsMenu.medalg3;
+                trophyOnEnd[3] = PersistentManagerScript.Instance.medalsMenu.trophy3;
+            }
+            if (activeScene == "Mission4")
+            {
+                trophyOnEnd[0] = PersistentManagerScript.Instance.medalsMenu.medalb4;
+                trophyOnEnd[1] = PersistentManagerScript.Instance.medalsMenu.medals4;
+                trophyOnEnd[2] = PersistentManagerScript.Instance.medalsMenu.medalg4;
+                trophyOnEnd[3] = PersistentManagerScript.Instance.medalsMenu.trophy4;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                if (trophyOnStart[i] != trophyOnEnd[i])
+                {
+                    //wyswietl sprite[i]
+                }
+            }
         }
     }
 }

@@ -38,6 +38,7 @@ public class ArrowScript : MonoBehaviour {
             TakeParticles(collision.gameObject.transform.position);
             MissionManager.shootTargetCount++;
             MissionManager.hit = true;
+            ScoreBrowser.hit = true;
             ProgressDuringMission.hit = true;
             ProgressDuringMission.targetName = "Target";
             Destroy(collision.gameObject);

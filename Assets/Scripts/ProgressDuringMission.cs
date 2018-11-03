@@ -104,7 +104,7 @@ public class ProgressDuringMission : MonoBehaviour {
         {
             image1.sprite = target;
             image1.color = new Color(1f, 1f, 1f, 1f);
-            text2.text = "0";
+            text1.text = "0";
         }
     }
 }
