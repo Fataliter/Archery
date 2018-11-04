@@ -27,22 +27,22 @@ public class MenuTrophies : MonoBehaviour
 
         if (ControlMenuTrophies.index == 0)
         {
-            actualMission.text = "Misja 1";
+            actualMission.text = "Wioska";
             background.sprite = mission1;
         }
         else if (ControlMenuTrophies.index == 1)
         {
-            actualMission.text = "Misja 2";
+            actualMission.text = "Jezioro";
             background.sprite = mission2;
         }
         else if (ControlMenuTrophies.index == 2)
         {
-            actualMission.text = "Misja 3";
+            actualMission.text = "";
             background.sprite = mission3;
         }
         else if (ControlMenuTrophies.index == 3)
         {
-            actualMission.text = "Misja 4";
+            actualMission.text = "";
             background.sprite = mission4;
         }
 

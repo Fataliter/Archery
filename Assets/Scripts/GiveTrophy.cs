@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GiveTrophy : MonoBehaviour {
 
-    public Sprite[] trophies;
+    public Sprite[] trophies = new Sprite[4];
+    Canvas missionEnd, arrows;
+    Text medalText;
+    Image medal;
 
     int[] trophyOnStart = new int[4];
 
@@ -28,6 +32,10 @@ public class GiveTrophy : MonoBehaviour {
         activeScene = SceneManager.GetActiveScene().name;
         MedalsOnStart();
         saveMedals = new SaveMedals();
+
+        GameObject missionEndObject = GameObject.Find("EndOfMission");
+        missionEnd = missionEndObject.GetComponent<Canvas>();
+        missionEnd.enabled = false;
     }
 	
 	void Update () {
@@ -38,6 +46,7 @@ public class GiveTrophy : MonoBehaviour {
             ScoredAchievment();
             gave = true;
             MedalsOnEnd();
+            MissionManager.endOfMission = false;
         }
 	}
 
@@ -140,6 +149,20 @@ public class GiveTrophy : MonoBehaviour {
     {
         if (gave)
         {
+            GameObject arrowsObject = GameObject.Find("PowerAndArrows");
+            arrows = arrowsObject.GetComponent<Canvas>();
+            arrows.enabled = false;
+
+            missionEnd.enabled = true;
+
+            GameObject medalTextObject = GameObject.Find("MedalText");
+            medalText = medalTextObject.GetComponent<Text>();
+            medalText.enabled = false;
+
+            GameObject medalObject = GameObject.Find("Medal");
+            medal = medalObject.GetComponent<Image>();
+            medal.enabled = false;
+
             if (activeScene == "Mission1")
             {
                 trophyOnEnd[0] = PersistentManagerScript.Instance.medalsMenu.medalb1;
@@ -172,7 +195,9 @@ public class GiveTrophy : MonoBehaviour {
             {
                 if (trophyOnStart[i] != trophyOnEnd[i])
                 {
-                    //wyswietl sprite[i]
+                    medalText.enabled = true;
+                    medal.enabled = true;
+                    medal.sprite = trophies[i];
                 }
             }
         }

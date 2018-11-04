@@ -729,71 +729,56 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 224369038652712952, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224016482054872070, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224787936130450694, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4023350846726478, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+    - target: {fileID: 4186193519767890, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
       propertyPath: m_LocalPosition.x
       value: 286.10114
       objectReference: {fileID: 0}
-    - target: {fileID: 4023350846726478, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+    - target: {fileID: 4186193519767890, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
       propertyPath: m_LocalPosition.y
       value: -16.066933
       objectReference: {fileID: 0}
-    - target: {fileID: 4023350846726478, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+    - target: {fileID: 4186193519767890, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
       propertyPath: m_LocalPosition.z
       value: 523.8385
       objectReference: {fileID: 0}
-    - target: {fileID: 4023350846726478, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+    - target: {fileID: 4186193519767890, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4023350846726478, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+    - target: {fileID: 4186193519767890, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4023350846726478, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+    - target: {fileID: 4186193519767890, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4023350846726478, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+    - target: {fileID: 4186193519767890, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4023350846726478, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+    - target: {fileID: 4186193519767890, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50, type: 2}
+  m_SourcePrefab: {fileID: 100100000, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331, type: 2}
   m_IsPrefabAsset: 0
 --- !u!114 &275066957 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114666220428782860, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50,
+  m_CorrespondingSourceObject: {fileID: 114399559007803772, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331,
     type: 2}
   m_PrefabInternal: {fileID: 275066956}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &275066958 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114958596647153444, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50,
+  m_CorrespondingSourceObject: {fileID: 114683406531049058, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331,
     type: 2}
   m_PrefabInternal: {fileID: 275066956}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &275066959 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114831727738880418, guid: 2118c8ed4783f2e4eb69fdeaedc6ac50,
+  m_CorrespondingSourceObject: {fileID: 114420332934622250, guid: 4d5d3db3e9eb6c349bbed7f9dacf4331,
     type: 2}
   m_PrefabInternal: {fileID: 275066956}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}

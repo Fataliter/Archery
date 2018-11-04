@@ -150,10 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fcc4c1b87e7f2c48bcc08ebcf4a5c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bronze: {fileID: 0}
-  silver: {fileID: 0}
-  gold: {fileID: 0}
-  trophy: {fileID: 0}
+  trophies:
+  - {fileID: 21300000, guid: 220b2d86e8b8d2546a88b0036303dfe6, type: 3}
+  - {fileID: 21300000, guid: c6a24cd1e39d9564286040e94a24f0ec, type: 3}
+  - {fileID: 21300000, guid: e71062112fa66f1489087b353462d9dd, type: 3}
+  - {fileID: 21300000, guid: e4e4c754d92507743ab26f6d122f2296, type: 3}
 --- !u!114 &114777492197644588
 MonoBehaviour:
   m_ObjectHideFlags: 1

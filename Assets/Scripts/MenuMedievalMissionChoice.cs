@@ -43,7 +43,7 @@ public class MenuMedievalMissionChoice : MonoBehaviour
             { //Jeżeli naciśnięto klawisz "LeftButton"
                 if (index == 0)
                     SceneManager.LoadScene("Mission1");
-                if (index == 1) { }
+                if (index == 1 && PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
                     SceneManager.LoadScene("Mission2");
                 if (index == 2) { }
                     //SceneManager.LoadScene("Mission3");
@@ -86,7 +86,7 @@ public class MenuMedievalMissionChoice : MonoBehaviour
         {
             if (index == 0)
                 SceneManager.LoadScene("Mission1");
-            if (index == 1)
+            if (index == 1 && PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
                 SceneManager.LoadScene("Mission2");
             if (index == 2) { }
             //SceneManager.LoadScene("Mission3");
