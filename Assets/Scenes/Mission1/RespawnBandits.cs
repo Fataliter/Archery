@@ -2,29 +2,40 @@
 using UnityEngine;
 
 public class RespawnBandits : MonoBehaviour {
-
+    public static bool kill = false;
+    bool canPlayAttack = true;
     Transform player;
     Animator animator;
     AnimatorClipInfo[] currentClipInfo;
 
 	void Start () {
+        RespawnMission2.banditLife = 2;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         animator = gameObject.GetComponent<Animator>();
-	}
+        currentClipInfo = this.animator.GetCurrentAnimatorClipInfo(0);
+    }
 	
 	void Update () {
         gameObject.transform.LookAt(player);
         currentClipInfo = this.animator.GetCurrentAnimatorClipInfo(0);
-        if (currentClipInfo[0].clip.name == "Walk")
+        float distance = Vector3.Distance(gameObject.transform.position, player.position);
+        if (currentClipInfo.Length > 0)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, 3 * Time.deltaTime);
+            if (currentClipInfo[0].clip.name == "Walk" && distance > 10)
+            {
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, 3 * Time.deltaTime);
+            }
         }
 
-        if (Vector3.Distance(gameObject.transform.position, player.position) < 10)
+        if (distance < 11)
         {
-            animator.Play("Attack2");
+            if (canPlayAttack == true)
+            {
+                animator.Play("Attack2");
+                canPlayAttack = false;
+            }
         }
-	}
+    }
 
     void DestroyBandit()
     {
@@ -33,25 +44,26 @@ public class RespawnBandits : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "arrow" && (currentClipInfo[0].clip.name == "Walk" || currentClipInfo[0].clip.name == "Attack2"))
+        if (collision.collider.tag == "arrow" && (currentClipInfo[0].clip.name != "Matinee_sleep1" && currentClipInfo[0].clip.name != "Airborne_Down"))
         {
             animator.SetBool("airborneDown", true);
-            StartCoroutine("OnHitAnimation");
+            RespawnMission2.banditLife--;
         }
     }
 
-    IEnumerator OnHitAnimation()
+    void BanditDeath()
     {
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f && !animator.IsInTransition(0))
-            yield return null;
-
-        PociskDetonacja.banditsLife--;
-        animator.SetBool("airborneDown", false);
-        if (PociskDetonacja.banditsLife == 0)
+        if (kill == true)
         {
             DestroyBandit();
-            RespawnTarget.hitCounter++;
-            PociskDetonacja.banditsLife = 3;
+            kill = false;
         }
+        else
+            canPlayAttack = true;
+    }
+
+    void StopAirborneDown()
+    {
+        animator.SetBool("airborneDown", false);
     }
 }

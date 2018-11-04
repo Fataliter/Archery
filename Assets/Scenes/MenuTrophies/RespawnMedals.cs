@@ -19,11 +19,6 @@ public class RespawnMedals : MonoBehaviour {
     {
         Respawn();
     }
-	
-	void Update ()
-    {
-		
-	}
 
     public void Respawn()
     {

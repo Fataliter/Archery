@@ -7,12 +7,7 @@ public class ControlMenuTrophies : MonoBehaviour {
     public static int index = 0;
     public int lMisji = 4;
     public RespawnMedals resp;
-    // Use this for initialization
-    void Start () {
-        
-    }
 	
-	// Update is called once per frame
 	void Update () {
         if (PersistentManagerScript.Instance.mydata.RightButton == 0)
         { //Jeżeli naciśnięto klawisz "RightArrow"

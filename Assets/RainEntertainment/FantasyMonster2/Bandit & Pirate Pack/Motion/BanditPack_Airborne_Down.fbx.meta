@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: ed674793ee5f4b34d8a544f105072666
-timeCreated: 1532938973
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: bandana01_Bone
     100002: bandana02_Bone
@@ -106,10 +104,12 @@ ModelImporter:
     7400002: Airborne_Down
     9500000: //RootNode
     13700000: MOC_Banditwarrior_B_SKEL
+  externalObjects: {}
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -119,31 +119,18 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Bip001-Spine' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'Bip001-Spine3' has translation
-      animation that will be discarded.\n\t'Bip001-Neck' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'Bip001-L-Clavicle' has
-      translation animation that will be discarded.\n\t'Bip001-R-Clavicle' has translation
-      animation that will be discarded.\n\t'Bip001-Prop1' has translation animation
-      that will be discarded.\n\nClip 'Airborne_Down' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'Bip001-Spine' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'Bip001-Spine3' has translation
-      animation that will be discarded.\n\t'Bip001-Neck' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'Bip001-L-Clavicle' has
-      translation animation that will be discarded.\n\t'Bip001-R-Clavicle' has translation
-      animation that will be discarded.\n\t'Bip001-Prop1' has translation animation
-      that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Airborne_Down
@@ -168,7 +155,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.23636363
+        functionName: StopAirborneDown
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.62545455
+        functionName: BanditDeath
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -275,22 +276,30 @@ ModelImporter:
     globalScale: 0.25
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 0.00635
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -305,7 +314,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: Dummy_root
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    rootMotionBoneRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 0

@@ -87,7 +87,8 @@ public class FillUpBars : MonoBehaviour {
 
             if (SaveManager.Instance.state.targetsMission2 != "0,0")
             {
-                float progress = CheckProgress(timePlayed, time2, targets, target2);
+                float progress = CheckProgress(timeFloat, time2, targets, target2);
+                Debug.Log(progress);
                 mission2.fillAmount = progress;
             }
         }
@@ -140,7 +141,7 @@ public class FillUpBars : MonoBehaviour {
 
             if (SaveManager.Instance.state.targetsMission3 != "0,0,0")
             {
-                float progress = CheckProgress(timePlayed, time3, targets, target3);
+                float progress = CheckProgress(timeFloat, time3, targets, target3);
                 mission3.fillAmount = progress;
             }
         }
@@ -193,7 +194,7 @@ public class FillUpBars : MonoBehaviour {
 
             if (SaveManager.Instance.state.targetsMission4 != "0,0,0")
             {
-                float progress = CheckProgress(timePlayed, time4, targets, target4);
+                float progress = CheckProgress(timeFloat, time4, targets, target4);
                 mission4.fillAmount = progress;
             }
         }

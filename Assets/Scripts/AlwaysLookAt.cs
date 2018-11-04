@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class AlwaysLookAt : MonoBehaviour {
 
-    public Transform player;
+    Transform player;
 
+    private void Start()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        player = playerObject.GetComponent<Transform>();
+    }
 
-    // Update is called once per frame
     void Update()
     {
         transform.LookAt(player);

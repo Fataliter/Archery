@@ -128,8 +128,8 @@ GameObject:
   - component: {fileID: 54553265001696904}
   - component: {fileID: 114548346065187316}
   m_Layer: 0
-  m_Name: BanditMission1
-  m_TagString: Bandit
+  m_Name: Bandit
+  m_TagString: Enemy1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1328,8 +1328,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1067590198439696}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 200, y: 50, z: 250}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalPosition: {x: 205, y: 30, z: 20}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children:
   - {fileID: 4927633634593626}
   - {fileID: 4265982274681202}

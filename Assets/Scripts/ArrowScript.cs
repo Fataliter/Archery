@@ -38,6 +38,7 @@ public class ArrowScript : MonoBehaviour {
             TakeParticles(collision.gameObject.transform.position);
             MissionManager.shootTargetCount++;
             MissionManager.hit = true;
+            ScoreBrowser.hit = true;
             ProgressDuringMission.hit = true;
             ProgressDuringMission.targetName = "Target";
             Destroy(collision.gameObject);
@@ -45,11 +46,15 @@ public class ArrowScript : MonoBehaviour {
         }
         else if (collision.gameObject.tag == "Enemy1")
         {
-            MissionManager.enemy1Count++;
+            if (RespawnMission2.banditLife == 0)
+            {
+                MissionManager.enemy1Count++;
+                MissionManager.hit = true;
+                ProgressDuringMission.hit = true;
+                ProgressDuringMission.targetName = "Enemy1";
+                RespawnBandits.kill = true;
+            }
             ScoreBrowser.hit = true;
-            ProgressDuringMission.hit = true;
-            ProgressDuringMission.targetName = "Enemy1";
-            //Destroy(collision.gameObject);
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Enemy2")

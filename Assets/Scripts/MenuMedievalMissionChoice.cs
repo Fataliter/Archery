@@ -44,7 +44,7 @@ public class MenuMedievalMissionChoice : MonoBehaviour
                 if (index == 0)
                     SceneManager.LoadScene("Mission1");
                 if (index == 1) { }
-                    //SceneManager.LoadScene("Mission2");
+                    SceneManager.LoadScene("Mission2");
                 if (index == 2) { }
                     //SceneManager.LoadScene("Mission3");
                 if (index == 3) { }
@@ -86,8 +86,8 @@ public class MenuMedievalMissionChoice : MonoBehaviour
         {
             if (index == 0)
                 SceneManager.LoadScene("Mission1");
-            if (index == 1) { }
-            //SceneManager.LoadScene("Mission2");
+            if (index == 1)
+                SceneManager.LoadScene("Mission2");
             if (index == 2) { }
             //SceneManager.LoadScene("Mission3");
             if (index == 3) { }
