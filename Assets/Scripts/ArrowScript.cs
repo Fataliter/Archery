@@ -60,6 +60,7 @@ public class ArrowScript : MonoBehaviour {
         else if (collision.gameObject.tag == "Enemy2")
         {
             MissionManager.enemy2Count++;
+            MissionManager.hit = true;
             ScoreBrowser.hit = true;
             ProgressDuringMission.hit = true;
             ProgressDuringMission.targetName = "Enemy2";
@@ -69,6 +70,7 @@ public class ArrowScript : MonoBehaviour {
         else if (collision.gameObject.tag == "Enemy3")
         {
             MissionManager.enemy3Count++;
+            MissionManager.hit = true;
             ScoreBrowser.hit = true;
             ProgressDuringMission.hit = true;
             ProgressDuringMission.targetName = "Enemy3";
