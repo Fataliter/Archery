@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RespawnMission1 : MonoBehaviour {
+public class RespawnTraining : MonoBehaviour {
 
     int targetHitCount;
     public Image targetLeft, targetRight;
     float xOff, zOff;
     public GameObject target;
-    
+
+
     void Start () {
-        targetHitCount = 1;
         xOff = 0f;
         zOff = 0f;
         RespawnArcherTarget();
@@ -21,31 +21,15 @@ public class RespawnMission1 : MonoBehaviour {
         ShowArrow(IfTargetSeen());
         if (MissionManager.hit)
         {
-            targetHitCount++;
             RespawnArcherTarget();
             MissionManager.hit = false;
         }
-	}
+    }
 
     void RespawnArcherTarget()
     {
-        if (targetHitCount > 8)
-            targetHitCount = 1;
         Vector3 vector = transform.position;
-        if (targetHitCount <= 4)
-        {
-            if (targetHitCount % 2 == 0)
-                Offsets(10f, 15f, -17f, -15f);
-            else
-                Offsets(-15f, -10f, -17f, -15f);
-        }
-        else if (targetHitCount <= 8 && targetHitCount > 4)
-        {
-            if (targetHitCount % 2 == 0)
-                Offsets(20f, 25f, 0f, 5f);
-            else
-                Offsets(-20f, -25f, 0f, 5f);
-        }
+        Offsets(-25f, 25f, -15f, 5f);
         vector.z = vector.z + zOff;
         vector.x = vector.x + xOff;
         target.transform.position = vector;
