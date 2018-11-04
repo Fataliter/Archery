@@ -6,12 +6,19 @@ using UnityEngine;
 public class EndMissionParticles : MonoBehaviour {
     public ParticleSystem fireworks;
     ParticleSystem fireworksInst;
+    GameObject player;
 
     float timer = 0f;
 
 	void Start () {
         PlayerRotation_keyboard.canRotateKeyboard = false;
         PlayerRotation.canRotateSlider = false;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerShoot>().enabled = false;
+        player.GetComponent<PlayerShoot_keyboard>().enabled = false;
+        player.GetComponent<PlayerRotation>().enabled = false;
+        player.GetComponent<PlayerRotation_keyboard>().enabled = false;
 
         Vector3 pos = new Vector3(200f, 0f, 200f);
         if (fireworksInst == null)

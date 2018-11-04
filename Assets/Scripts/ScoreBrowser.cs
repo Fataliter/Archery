@@ -14,11 +14,14 @@ public class ScoreBrowser : MonoBehaviour {
     Transform lookerTransform;
     public static bool hit = false;
 
+    bool oneTime;
+
     float nextActionTime = 0.2f;
     float period = 0.2f;
     float timer = 0f;
 
     void Start () {
+        oneTime = true;
         hit = false;
         timer = 0f;
         nextActionTime = 0.2f;
@@ -45,10 +48,11 @@ public class ScoreBrowser : MonoBehaviour {
             PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
             hit = false;
         }
-        if(MissionManager.endOfMission==true)
+        if(MissionManager.endOfMission==true && oneTime)
         {
             PersistentManagerScript.Instance.data.timeOfPlaying = MissionManager.timePlayed;
             SendData.SaveDataFromMission();
+            oneTime = false;
         }
     }
     void Parameters()

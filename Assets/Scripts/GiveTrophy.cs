@@ -23,7 +23,10 @@ public class GiveTrophy : MonoBehaviour {
 
     public static bool gave;
 
+    bool oneTime;
+
     void Start () {
+        oneTime = true;
         gave = false;
         activeScene = SceneManager.GetActiveScene().name;
         MedalsOnStart();
@@ -35,7 +38,11 @@ public class GiveTrophy : MonoBehaviour {
         {
             scoredTime = MissionManager.timeAlreadyPlayed;
             scoredTargets = MissionManager.targetsOnEnd;
-            ScoredAchievment();
+            if (oneTime)
+            {
+                ScoredAchievment();
+                oneTime = false;
+            }
             gave = true;
             MedalsOnEnd();
         }
