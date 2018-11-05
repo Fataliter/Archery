@@ -7,8 +7,11 @@ public class RespawnBandits : MonoBehaviour {
     Transform player;
     Animator animator;
     AnimatorClipInfo[] currentClipInfo;
+    AudioSource audioSrc;
+    public AudioClip dieFX;
 
 	void Start () {
+        audioSrc = GetComponent<AudioSource>();
         RespawnMission2.banditLife = 2;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         animator = gameObject.GetComponent<Animator>();
@@ -47,7 +50,14 @@ public class RespawnBandits : MonoBehaviour {
         if (collision.collider.tag == "arrow" && (currentClipInfo[0].clip.name != "Matinee_sleep1" && currentClipInfo[0].clip.name != "Airborne_Down"))
         {
             animator.SetBool("airborneDown", true);
+            if (RespawnMission2.banditLife == 0)
+            {
+                audioSrc.clip = dieFX;
+                audioSrc.Play();
+            }
+            else audioSrc.Play();
             RespawnMission2.banditLife--;
+            
         }
     }
 
