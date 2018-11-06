@@ -2,17 +2,23 @@
 using UnityEngine;
 
 public class RespawnBandits : MonoBehaviour {
-    public static bool kill = false;
+    public static bool kill;
     bool canPlayAttack = true;
     Transform player;
     Animator animator;
     AnimatorClipInfo[] currentClipInfo;
     AudioSource audioSrc;
     public AudioClip dieFX;
+    float moveSpeed;
+    public static int banditLife;
+    public static bool banditNoLife;
 
 	void Start () {
+        kill = false;
+        banditNoLife = false;
+        moveSpeed = PersistentManagerScript.Instance.config["general"]["banditMoveSpeed"].FloatValue;
         audioSrc = GetComponent<AudioSource>();
-        RespawnMission2.banditLife = 2;
+        banditLife = 2;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         animator = gameObject.GetComponent<Animator>();
         currentClipInfo = this.animator.GetCurrentAnimatorClipInfo(0);
@@ -26,7 +32,7 @@ public class RespawnBandits : MonoBehaviour {
         {
             if (currentClipInfo[0].clip.name == "Walk" && distance > 10)
             {
-                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, 3 * Time.deltaTime);
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, moveSpeed * Time.deltaTime);
             }
         }
 
@@ -38,26 +44,24 @@ public class RespawnBandits : MonoBehaviour {
                 canPlayAttack = false;
             }
         }
+        Debug.Log(banditNoLife);
     }
-
-    void DestroyBandit()
-    {
-        Destroy(gameObject);
-    }
+    
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "arrow" && (currentClipInfo[0].clip.name != "Matinee_sleep1" && currentClipInfo[0].clip.name != "Airborne_Down"))
         {
+            Debug.Log("życko przed trafieniem: " + banditLife);
             animator.SetBool("airborneDown", true);
-            if (RespawnMission2.banditLife == 0)
+            if (banditLife == 0)
             {
+                banditNoLife = true;
                 audioSrc.clip = dieFX;
                 audioSrc.Play();
             }
             else audioSrc.Play();
-            RespawnMission2.banditLife--;
-            
+            banditLife--;
         }
     }
 
@@ -65,7 +69,8 @@ public class RespawnBandits : MonoBehaviour {
     {
         if (kill == true)
         {
-            DestroyBandit();
+            Debug.Log("dedek");
+            Destroy(gameObject);
             kill = false;
         }
         else

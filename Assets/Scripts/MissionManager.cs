@@ -32,8 +32,10 @@ public class MissionManager : MonoBehaviour {
     public static bool endOfMission;
     bool onetime;
     public static bool hit = false;
+    public static bool fireworks;
 
     void Awake () {
+        fireworks = false;
         timePlayed = 0f;
         endOfMission = false;
         keyPressed = false;
@@ -174,6 +176,7 @@ public class MissionManager : MonoBehaviour {
                 SaveManager.Instance.Save();
                 onetime = false;
                 GameObject.Instantiate(EndMissionParticles);
+                fireworks = true;
             }
         }
         if (keypressTime > 3 && keyPressed == false)

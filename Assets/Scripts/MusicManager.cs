@@ -33,6 +33,15 @@ public class MusicManager : MonoBehaviour {
             Destroy(gameObject);
     }
 
+    void Update()
+    {
+        if(MissionManager.fireworks)
+        {
+            audioSrc.Stop();
+            MissionManager.fireworks = false;
+        }
+    }
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -40,9 +49,14 @@ public class MusicManager : MonoBehaviour {
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        for(int i=0; i<sceneNames.Length; i++)
+        if (scene.name == "MenuMedievalMissionChoice" && audioSrc.clip != clips[0])
         {
-            if(scene.name == sceneNames[i] && audioSrc.clip!=clips[i])
+            audioSrc.clip = clips[0];
+            audioSrc.Play();
+        }
+        for (int i=0; i<sceneNames.Length; i++)
+        {
+            if (scene.name == sceneNames[i] && audioSrc.clip!=clips[i])
             {
                 audioSrc.clip = clips[i];
                 audioSrc.Play();

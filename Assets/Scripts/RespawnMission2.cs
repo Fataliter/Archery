@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RespawnMission2 : MonoBehaviour {
-
-    public static int banditLife;
+    
 
     public GameObject bandit;
 
@@ -15,8 +14,7 @@ public class RespawnMission2 : MonoBehaviour {
     public GameObject target;
     
     void Start () {
-        banditLife = 2;
-        targetHitCount = 1;
+        targetHitCount = 5;
         xOff = 0f;
         zOff = 0f;
         RespawnArcherTarget();

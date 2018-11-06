@@ -46,7 +46,7 @@ public class ArrowScript : MonoBehaviour {
         }
         else if (collision.gameObject.tag == "Enemy1")
         {
-            if (RespawnMission2.banditLife == 0)
+            if (RespawnBandits.banditLife == 0)
             {
                 MissionManager.enemy1Count++;
                 MissionManager.hit = true;

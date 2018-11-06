@@ -88,7 +88,6 @@ public class FillUpBars : MonoBehaviour {
             if (SaveManager.Instance.state.targetsMission2 != "0,0")
             {
                 float progress = CheckProgress(timeFloat, time2, targets, target2);
-                Debug.Log(progress);
                 mission2.fillAmount = progress;
             }
         }

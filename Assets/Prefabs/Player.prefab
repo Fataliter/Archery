@@ -1224,7 +1224,6 @@ GameObject:
   - component: {fileID: 114945942997029276}
   - component: {fileID: 114183158295095652}
   - component: {fileID: 114039276529095844}
-  - component: {fileID: 114832239776351594}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4868,7 +4867,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1543564374699232}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eec780a7ff88b3d4aa68b0ca2ad1c0ce, type: 3}
   m_Name: 
@@ -4879,7 +4878,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1543564374699232}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27713245ab203c74ab3349b65ea5dadd, type: 3}
   m_Name: 
@@ -4915,7 +4914,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1543564374699232}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fb57792b2c52694b8e8f9efd77c067b, type: 3}
   m_Name: 
@@ -4923,24 +4922,13 @@ MonoBehaviour:
   forceValue: 0
   arrow: {fileID: 1755541496322930, guid: 5cf973dfbfee63a4b9592b5de61de299, type: 2}
   power: {fileID: 0}
---- !u!114 &114832239776351594
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1543564374699232}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab5ad3abac6fd0346afcc1e2e4c56e66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114945942997029276
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1543564374699232}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff954a318d4b9c747ac37a95442221ee, type: 3}
   m_Name: 

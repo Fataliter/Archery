@@ -67,10 +67,10 @@ public class PillowsCanvas : MonoBehaviour {
         background.color = new Color(0f, 0f, 0f, intensity);
 
         if (LeftPillow >= pillowPress)
-            left.color = new Color(0f, 0f, 0f, (LeftPillow / 100f) + 0.4f);
+            left.color = new Color(0f, 0f, 220f, (LeftPillow / 100f) + 0.4f);
         if (RightPillow >= pillowPress)
-            right.color = new Color(0f, 0f, 0f, (RightPillow / 100f) + 0.4f);
+            right.color = new Color(0f, 0f, 220f, (RightPillow / 100f) + 0.4f);
         if (RearPillow >= pillowPress)
-            rear.color = new Color(0f, 0f, 0f, (RearPillow / 100f) + 0.4f);
+            rear.color = new Color(0f, 0f, 220f, (RearPillow / 100f) + 0.4f);
     }
 }
