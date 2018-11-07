@@ -36,45 +36,17 @@ public class ArrowScript : MonoBehaviour {
         if (collision.gameObject.tag == "Target" )
         {
             TakeParticles(collision.gameObject.transform.position);
-            MissionManager.shootTargetCount++;
-            MissionManager.hit = true;
-            ScoreBrowser.hit = true;
-            ProgressDuringMission.hit = true;
-            ProgressDuringMission.targetName = "Target";
+            MissionManager.shootTargetCount++; //MUST HAVE
+            MissionManager.hit = true; //MUST HAVE
+            ScoreBrowser.hit = true; //MUST HAVE
+            ProgressDuringMission.hit = true; //MUST HAVE
+            ProgressDuringMission.targetName = "Target"; //MUST HAVE
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "Enemy1")
+        else if (collision.gameObject.tag == "Enemy1" || collision.gameObject.tag == "Enemy2" || collision.gameObject.tag == "Enemy3")
         {
-            if (RespawnBandits.banditLife == 0)
-            {
-                MissionManager.enemy1Count++;
-                MissionManager.hit = true;
-                ProgressDuringMission.hit = true;
-                ProgressDuringMission.targetName = "Enemy1";
-                RespawnBandits.kill = true;
-            }
             ScoreBrowser.hit = true;
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.tag == "Enemy2")
-        {
-            MissionManager.enemy2Count++;
-            MissionManager.hit = true;
-            ScoreBrowser.hit = true;
-            ProgressDuringMission.hit = true;
-            ProgressDuringMission.targetName = "Enemy2";
-            //Destroy(collision.gameObject);
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.tag == "Enemy3")
-        {
-            MissionManager.enemy3Count++;
-            MissionManager.hit = true;
-            ScoreBrowser.hit = true;
-            ProgressDuringMission.hit = true;
-            ProgressDuringMission.targetName = "Enemy3";
-            //Destroy(collision.gameObject);
             Destroy(gameObject);
         }
         else

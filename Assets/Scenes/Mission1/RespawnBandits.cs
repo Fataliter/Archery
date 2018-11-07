@@ -11,11 +11,9 @@ public class RespawnBandits : MonoBehaviour {
     public AudioClip dieFX;
     float moveSpeed;
     public static int banditLife;
-    public static bool banditNoLife;
 
 	void Start () {
         kill = false;
-        banditNoLife = false;
         moveSpeed = PersistentManagerScript.Instance.config["general"]["banditMoveSpeed"].FloatValue;
         audioSrc = GetComponent<AudioSource>();
         banditLife = 2;
@@ -52,16 +50,19 @@ public class RespawnBandits : MonoBehaviour {
     {
         if (collision.collider.tag == "arrow" && (currentClipInfo[0].clip.name != "Matinee_sleep1" && currentClipInfo[0].clip.name != "Airborne_Down"))
         {
-           // Debug.Log("życko przed trafieniem: " + banditLife);
+            banditLife--;
             animator.SetBool("airborneDown", true);
             if (banditLife == 0)
             {
-                banditNoLife = true;
+                MissionManager.enemy1Count++;
+                MissionManager.hit = true;
+                ProgressDuringMission.hit = true;
+                ProgressDuringMission.targetName = "Enemy1";
+                kill = true;
                 audioSrc.clip = dieFX;
                 audioSrc.Play();
             }
             else audioSrc.Play();
-            banditLife--;
         }
     }
 
@@ -69,7 +70,6 @@ public class RespawnBandits : MonoBehaviour {
     {
         if (kill == true)
         {
-            //Debug.Log("dedek");
             Destroy(gameObject);
             kill = false;
         }
