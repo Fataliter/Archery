@@ -41,7 +41,7 @@ public class MissionManager : MonoBehaviour {
         time1 = time2 = time3 = 0f;
         string pillowsPressFromCfg = PersistentManagerScript.Instance.config["general"]["pillowsLevels"].StringValue;
         pillowsPressValues = pillowsPressFromCfg.Split(',').Select(float.Parse).ToArray();
-        for(int i=0; i<4; i++) { Debug.Log(pillowsPressValues[i]); }
+        //for(int i=0; i<4; i++) { Debug.Log(pillowsPressValues[i]); }
         fireworks = false;
         timePlayed = 0f;
         endOfMission = false;
@@ -52,6 +52,7 @@ public class MissionManager : MonoBehaviour {
         pillowPress = pillowsPressValues[pillowsPressLevel];
         onetime = true;
         hit = false;
+        //Debug.Log(pillowPress);
     }
 
     private void Update() {

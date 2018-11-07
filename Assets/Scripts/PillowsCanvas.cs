@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class PillowsCanvas : MonoBehaviour {
     float RightPillow;
     float RearPillow;
     public static int pillowsPressed;
+    float[] pillowPressValue = new float[3];
 
     float pillowPress;
     float legsDifference;
@@ -20,6 +22,8 @@ public class PillowsCanvas : MonoBehaviour {
         pillowsPressed = 0;
         pillowPress = MissionManager.pillowPress; 
         legsDifference = MissionManager.pillowsLegsDiff;
+        string pillowsPressFromCfg = PersistentManagerScript.Instance.config["general"]["pillowsTimeCount"].StringValue;
+        pillowPressValue = pillowsPressFromCfg.Split(',').Select(float.Parse).ToArray();
 
         GameObject backgroundObject = GameObject.Find("BlackScreen");
         background = backgroundObject.GetComponent<Image>();
@@ -99,9 +103,9 @@ public class PillowsCanvas : MonoBehaviour {
 
     void HasPillowBeenPressed()
     {
-        if (LeftPillow > 80 || RightPillow > 80 || RearPillow > 80)  pillowsPressed = 3; 
-        else if (LeftPillow > 55 || RightPillow > 55 || RearPillow > 55) pillowsPressed = 2;
-        else if (LeftPillow > 30 || RightPillow > 30 || RearPillow > 30) pillowsPressed = 1;
+        if (LeftPillow > pillowPressValue[0] || RightPillow > pillowPressValue[0] || RearPillow > pillowPressValue[0])  pillowsPressed = 3; 
+        else if (LeftPillow > pillowPressValue[1] || RightPillow > pillowPressValue[1] || RearPillow > pillowPressValue[1]) pillowsPressed = 2;
+        else if (LeftPillow > pillowPressValue[2] || RightPillow > pillowPressValue[2] || RearPillow > pillowPressValue[2]) pillowsPressed = 1;
         else pillowsPressed = 0;
     }
 }

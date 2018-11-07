@@ -44,7 +44,7 @@ public class RespawnBandits : MonoBehaviour {
                 canPlayAttack = false;
             }
         }
-        Debug.Log(banditNoLife);
+        //Debug.Log(banditNoLife);
     }
     
 
@@ -52,7 +52,7 @@ public class RespawnBandits : MonoBehaviour {
     {
         if (collision.collider.tag == "arrow" && (currentClipInfo[0].clip.name != "Matinee_sleep1" && currentClipInfo[0].clip.name != "Airborne_Down"))
         {
-            Debug.Log("życko przed trafieniem: " + banditLife);
+           // Debug.Log("życko przed trafieniem: " + banditLife);
             animator.SetBool("airborneDown", true);
             if (banditLife == 0)
             {
@@ -69,7 +69,7 @@ public class RespawnBandits : MonoBehaviour {
     {
         if (kill == true)
         {
-            Debug.Log("dedek");
+            //Debug.Log("dedek");
             Destroy(gameObject);
             kill = false;
         }
