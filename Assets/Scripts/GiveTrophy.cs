@@ -42,7 +42,7 @@ public class GiveTrophy : MonoBehaviour {
     }
 	
 	void Update () {
-        if (MissionManager.endOfMission == true)
+        if (MissionManager.endOfMission == true && MissionManager.keyPressed == false)
         {
             scoredTime = MissionManager.timeAlreadyPlayed;
             scoredTargets = MissionManager.targetsOnEnd;

@@ -23,7 +23,7 @@ public class MissionManager : MonoBehaviour {
 
     string activeScene = string.Empty;
 
-    bool keyPressed = false;
+    public static bool keyPressed = false;
 
     public static float maxTime;
     public static float timePlayed;
