@@ -93,11 +93,11 @@ public class PillowsCanvas : MonoBehaviour {
     {
         LeftLeg = 80f;
         RightLeg = 20f;
-        if (Input.GetKey(KeyCode.J)) LeftPillow = 60f;
+        if (Input.GetKey(KeyCode.J)) LeftPillow = 90f;
         else LeftPillow = 0f;
-        if (Input.GetKey(KeyCode.K)) RearPillow = 60f;
+        if (Input.GetKey(KeyCode.K)) RearPillow = 90f;
         else RearPillow = 0f;
-        if (Input.GetKey(KeyCode.L)) RightPillow = 60f;
+        if (Input.GetKey(KeyCode.L)) RightPillow = 90f;
         else RightPillow = 0f;
     }
 

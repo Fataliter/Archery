@@ -183,6 +183,7 @@ public class MissionManager : MonoBehaviour {
             {
                 endOfMission = true;
                 timeAlreadyPlayed += maxTime;
+                SetPillowPressLevel();
                 SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
                 SaveManager.Instance.Save();
                 onetime = false;
@@ -195,6 +196,7 @@ public class MissionManager : MonoBehaviour {
             endOfMission = true;
             keyPressed = true;
             timeAlreadyPlayed += timePlayed;
+            SetPillowPressLevel();
             SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
             SaveManager.Instance.Save();
             SceneManager.LoadScene("MenuMedieval");

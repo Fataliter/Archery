@@ -53,6 +53,7 @@ public class ScoreBrowser : MonoBehaviour {
         if(MissionManager.endOfMission==true && oneTime)
         {
             PersistentManagerScript.Instance.data.timeOfPlaying = MissionManager.timePlayed;
+            PersistentManagerScript.Instance.data.pillowsLevel = MissionManager.pillowPress.ToString();
             SendData.SaveDataFromMission();
             oneTime = false;
         }
