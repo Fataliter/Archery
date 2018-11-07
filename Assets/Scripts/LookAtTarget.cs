@@ -45,20 +45,20 @@ public class LookAtTarget : MonoBehaviour {
         if (enemy1 != null)
         {
             lookAtCentre.transform.LookAt(enemy1.transform.position);
-            lookAtLeft.transform.rotation = Quaternion.identity;
-            lookAtRight.transform.rotation = Quaternion.identity;
+            lookAtLeft.transform.LookAt(enemy1.transform.position);
+            lookAtRight.transform.LookAt(enemy1.transform.position);
         }
         if (enemy2 != null)
         {
             lookAtCentre.transform.LookAt(enemy2.transform.position);
-            lookAtLeft.transform.rotation = Quaternion.identity;
-            lookAtRight.transform.rotation = Quaternion.identity;
+            lookAtLeft.transform.LookAt(enemy2.transform.position);
+            lookAtRight.transform.LookAt(enemy2.transform.position);
         }
         if (enemy3 != null)
         {
             lookAtCentre.transform.LookAt(enemy3.transform.position);
-            lookAtLeft.transform.rotation = Quaternion.identity;
-            lookAtRight.transform.rotation = Quaternion.identity;
+            lookAtLeft.transform.LookAt(enemy3.transform.position);
+            lookAtRight.transform.LookAt(enemy3.transform.position);
         }
     }
     
