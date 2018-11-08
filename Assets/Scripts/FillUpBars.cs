@@ -118,7 +118,6 @@ public class FillUpBars : MonoBehaviour {
             string[] targets = SaveManager.Instance.state.targetsMission3.Split(',');
 
             float timeFloat = Convert.ToSingle(Math.Floor(Convert.ToDouble(timePlayed / 60f)));
-
             if (PersistentManagerScript.Instance.medalsMenu.medals2 == 1)
             {
                 target.text = targets[0] + "/" + target3[0].ToString();
