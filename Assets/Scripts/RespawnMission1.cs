@@ -11,7 +11,7 @@ public class RespawnMission1 : MonoBehaviour {
     public GameObject target;
     
     void Start () {
-        targetHitCount = 1;
+        targetHitCount = 6;
         xOff = 0f;
         zOff = 0f;
         RespawnArcherTarget();
@@ -35,16 +35,16 @@ public class RespawnMission1 : MonoBehaviour {
         if (targetHitCount <= 4)
         {
             if (targetHitCount % 2 == 0)
-                Offsets(10f, 15f, -17f, -15f);
+                Offsets(11f, 11.5f, -17.1f, -16.4f);
             else
-                Offsets(-15f, -10f, -17f, -15f);
+                Offsets(-11.5f, -11f, -17.1f, -16.4f);
         }
         else if (targetHitCount <= 8 && targetHitCount > 4)
         {
             if (targetHitCount % 2 == 0)
-                Offsets(20f, 25f, 0f, 5f);
+                Offsets(25f, 26f, 0f, 1f);
             else
-                Offsets(-20f, -25f, 0f, 5f);
+                Offsets(-26f, -25f, 0f, 1f);
         }
         vector.z = vector.z + zOff;
         vector.x = vector.x + xOff;
