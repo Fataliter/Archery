@@ -24,6 +24,7 @@ public class SaveManager : MonoBehaviour
     public void Save()
     {
         PlayerPrefs.SetString("save", SerializeHelper.Serialize<SaveState>(state));
+        Debug.Log("zapisano postępy misji");
     }
 
     public void Load()

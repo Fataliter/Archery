@@ -35,9 +35,12 @@ public class MissionManager : MonoBehaviour {
     public static bool hit = false;
     public static bool fireworks;
 
+    public static bool endGameFaster;
+
     float time1, time2, time3;
 
     void Awake () {
+        endGameFaster = false;
         time1 = time2 = time3 = 0f;
         string pillowsPressFromCfg = PersistentManagerScript.Instance.config["general"]["pillowsLevels"].StringValue;
         pillowsPressValues = pillowsPressFromCfg.Split(',').Select(float.Parse).ToArray();
@@ -191,14 +194,18 @@ public class MissionManager : MonoBehaviour {
                 fireworks = true;
             }
         }
-        if (keypressTime > 3 && keyPressed == false)
+        if (keypressTime > 1 && keyPressed == false)
+        {
+            keyPressed = true;
+        }
+        if (endGameFaster)
         {
             endOfMission = true;
-            keyPressed = true;
             timeAlreadyPlayed += timePlayed;
             SetPillowPressLevel();
             SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
             SaveManager.Instance.Save();
+            endGameFaster = false;
             SceneManager.LoadScene("MenuMedieval");
         }
     }

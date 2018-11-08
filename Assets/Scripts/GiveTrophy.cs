@@ -42,7 +42,7 @@ public class GiveTrophy : MonoBehaviour {
     }
 	
 	void Update () {
-        if (MissionManager.endOfMission == true && MissionManager.keyPressed == false)
+        if (MissionManager.endOfMission == true)
         {
             scoredTime = MissionManager.timeAlreadyPlayed;
             scoredTargets = MissionManager.targetsOnEnd;
@@ -50,10 +50,11 @@ public class GiveTrophy : MonoBehaviour {
             {
                 ScoredAchievment();
                 oneTime = false;
+                Debug.Log("zapis medali");
             }
             gave = true;
-            MedalsOnEnd();
             MissionManager.endOfMission = false;
+            if(MissionManager.endGameFaster) MedalsOnEnd();
         }
 	}
 

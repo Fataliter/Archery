@@ -24,6 +24,8 @@ public class SendData : MonoBehaviour {
         writer.Write(PersistentManagerScript.Instance.data.pillowsLevel + "#");
         writer.Close();
 
+        Debug.Log("zapisano dane do przeglądarki wyników");
+
         
         PersistentManagerScript.Instance.data.timeToHit = "";
         PersistentManagerScript.Instance.data.angle = "";
