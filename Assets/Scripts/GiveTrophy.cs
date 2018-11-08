@@ -50,10 +50,11 @@ public class GiveTrophy : MonoBehaviour {
             {
                 ScoredAchievment();
                 oneTime = false;
+                Debug.Log("zapis medali");
             }
             gave = true;
-            MedalsOnEnd();
             MissionManager.endOfMission = false;
+            if(MissionManager.endGameFaster == false) MedalsOnEnd();
         }
 	}
 
@@ -170,6 +171,9 @@ public class GiveTrophy : MonoBehaviour {
             medal = medalObject.GetComponent<Image>();
             medal.enabled = false;
 
+            Text newMission = GameObject.Find("NewMission").GetComponent<Text>();
+            newMission.enabled = false;
+
             if (activeScene == "Mission1")
             {
                 trophyOnEnd[0] = PersistentManagerScript.Instance.medalsMenu.medalb1;
@@ -205,6 +209,7 @@ public class GiveTrophy : MonoBehaviour {
                     medalText.enabled = true;
                     medal.enabled = true;
                     medal.sprite = trophies[i];
+                    if (i == 1) newMission.enabled = true;
                 }
             }
         }

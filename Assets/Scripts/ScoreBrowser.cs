@@ -11,7 +11,7 @@ public class ScoreBrowser : MonoBehaviour {
     float rightPillow;
     float rearPillow;
     Transform playerTransform;
-    Transform lookerTransform;
+    Transform lookerCentre, lookerRight, lookerLeft;
     public static bool hit = false;
 
     bool oneTime;
@@ -25,7 +25,9 @@ public class ScoreBrowser : MonoBehaviour {
         hit = false;
         timer = 0f;
         nextActionTime = 0.2f;
-        lookerTransform = GameObject.FindGameObjectWithTag("Looker").GetComponent<Transform>();
+        lookerCentre = GameObject.Find("LookAtTarget/LookAtCentre").GetComponent<Transform>();
+        lookerRight = GameObject.Find("LookAtTarget/LookAtRight").GetComponent<Transform>();
+        lookerLeft = GameObject.Find("LookAtTarget/LookAtLeft").GetComponent<Transform>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         PersistentManagerScript.Instance.data.missionName = SceneManager.GetActiveScene().name.ToLower();
     }
@@ -51,6 +53,7 @@ public class ScoreBrowser : MonoBehaviour {
         if(MissionManager.endOfMission==true && oneTime)
         {
             PersistentManagerScript.Instance.data.timeOfPlaying = MissionManager.timePlayed;
+            PersistentManagerScript.Instance.data.pillowsLevel = MissionManager.pillowPress.ToString();
             SendData.SaveDataFromMission();
             oneTime = false;
         }
@@ -75,11 +78,19 @@ public class ScoreBrowser : MonoBehaviour {
 
     void UpperDiagram()
     {
-        
-        if (lookerTransform.eulerAngles.y > 180)
-            PersistentManagerScript.Instance.data.targetLocation += (lookerTransform.eulerAngles.y - 360f).ToString() + ",";
+
+        if (lookerCentre.eulerAngles.y > 180)
+        {
+            PersistentManagerScript.Instance.data.targetLocation += (lookerCentre.eulerAngles.y - 360f).ToString() + ",";
+            PersistentManagerScript.Instance.data.targetAngleLeft += (lookerLeft.eulerAngles.y - 360f).ToString() + ",";
+            PersistentManagerScript.Instance.data.targetAngleRight += (lookerRight.eulerAngles.y - 360f).ToString() + ",";
+        }
         else
-            PersistentManagerScript.Instance.data.targetLocation += lookerTransform.eulerAngles.y.ToString() + ",";
+        {
+            PersistentManagerScript.Instance.data.targetLocation += lookerCentre.eulerAngles.y.ToString() + ",";
+            PersistentManagerScript.Instance.data.targetAngleLeft += lookerLeft.eulerAngles.y.ToString() + ",";
+            PersistentManagerScript.Instance.data.targetAngleRight += lookerRight.eulerAngles.y.ToString() + ",";
+        }
         if (playerTransform.eulerAngles.y > 180)
             PersistentManagerScript.Instance.data.angle += (playerTransform.eulerAngles.y - 360f).ToString() + ",";
         else

@@ -18,8 +18,13 @@ public class SendData : MonoBehaviour {
         writer.Write(PersistentManagerScript.Instance.data.pressOnRightLeg + "@");
         writer.Write(PersistentManagerScript.Instance.data.pressOnLeft + "@");
         writer.Write(PersistentManagerScript.Instance.data.pressOnRight + "@");
-        writer.Write(PersistentManagerScript.Instance.data.pressOnRear + "#");
+        writer.Write(PersistentManagerScript.Instance.data.pressOnRear + "@");
+        writer.Write(PersistentManagerScript.Instance.data.targetAngleLeft + "@");
+        writer.Write(PersistentManagerScript.Instance.data.targetAngleRight + "@");
+        writer.Write(PersistentManagerScript.Instance.data.pillowsLevel + "#");
         writer.Close();
+
+        Debug.Log("zapisano dane do przeglądarki wyników");
 
         
         PersistentManagerScript.Instance.data.timeToHit = "";
@@ -32,5 +37,8 @@ public class SendData : MonoBehaviour {
         PersistentManagerScript.Instance.data.pressOnLeft = "";
         PersistentManagerScript.Instance.data.pressOnRight = "";
         PersistentManagerScript.Instance.data.pressOnRear = "";
+        PersistentManagerScript.Instance.data.targetAngleLeft = "";
+        PersistentManagerScript.Instance.data.targetAngleRight = "";
+        PersistentManagerScript.Instance.data.pillowsLevel = "";
     }
 }

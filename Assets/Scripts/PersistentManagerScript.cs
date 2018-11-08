@@ -105,6 +105,9 @@ public class Data
     public string pressOnLeft = "";
     public string pressOnRight = "";
     public string pressOnRear = "";
+    public string targetAngleLeft = "";
+    public string targetAngleRight = "";
+    public string pillowsLevel = "";
 }
 [Serializable]
 public class Medals
