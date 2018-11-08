@@ -32,7 +32,7 @@ public class PlayerRotation : MonoBehaviour
     void rotation() 
     {
         if (Mathf.Abs(leftLeg - rightLeg) >= legsDiff && PlayerShoot.keypressed == false && canRotateSlider)    
-            transform.Rotate(0, (rightLeg - leftLeg) * rotationSens, 0); 
+            transform.Rotate(0, (rightLeg - leftLeg) * Time.deltaTime * rotationSens, 0); 
         else
             transform.Rotate(0, 0, 0);
     }

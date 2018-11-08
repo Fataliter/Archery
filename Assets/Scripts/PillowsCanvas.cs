@@ -37,8 +37,8 @@ public class PillowsCanvas : MonoBehaviour {
     }
 	
 	void Update () {
-        //Parameters();
-        KeyboardParam();
+        Parameters();
+        //KeyboardParam();
         HasPillowBeenPressed();
         PillowsPressure();
     }
