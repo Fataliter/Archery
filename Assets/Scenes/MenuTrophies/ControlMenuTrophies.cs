@@ -9,10 +9,9 @@ public class ControlMenuTrophies : MonoBehaviour {
     public RespawnMedals resp;
 	
 	void Update () {
-        if (PersistentManagerScript.Instance.mydata.RightButton == 0)
+        if (ClickedButton.rightButtonDown)
         { //Jeżeli naciśnięto klawisz "RightArrow"
-            while (PersistentManagerScript.Instance.mydata.RightButton == 0)
-            { }
+            //while (PersistentManagerScript.Instance.mydata.RightButton == 0) { }
             if (index < lMisji - 1)
             {
                 index++;

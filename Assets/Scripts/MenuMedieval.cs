@@ -19,53 +19,13 @@ public class MenuMedieval : MonoBehaviour
 
     void Update()
     {
-        if (pressed == false)
-        {
-            if (PersistentManagerScript.Instance.mydata.RightButton == 0)
-            { //Jeżeli naciśnięto klawisz "RightButton"
-                if (index < lPrzyciskow - 1)
-                {
-                    index++;
-                    Vector2 position = transform.position;
-                    position.y += yOffset;
-                    transform.position = position;
-                }
-                else
-                {
-                    index = 0;
-                    Vector2 position = transform.position;
-                    position.y -= yOffset * 3f;
-                    transform.position = position;
-                }
-
-            }
-            if (PersistentManagerScript.Instance.mydata.LeftButton == 0)
-            { //Jeżeli naciśnięto klawisz "LeftButton"
-                if (index == 0)
-                {
-                    SceneManager.LoadScene("Training");
-                }
-                if (index == 1)
-                {
-                    SceneManager.LoadScene("MenuMedievalMissionChoice");
-                }
-                if (index == 2)
-                {
-                    SceneManager.LoadScene("MenuTrophies");
-                }
-                if (index == 3)
-                {
-                    PersistentManagerScript.Instance.WebSocketClose();
-                    Application.Quit();
-                }
-            }
-        }
-
-        if (PersistentManagerScript.Instance.mydata.RightButton == 0 || PersistentManagerScript.Instance.mydata.LeftButton == 0)
-            pressed = true;
-        else
-            pressed = false;
-
+        JanekStepSteer();
+        KeyboardSteer();
+        
+        
+    }
+    void KeyboardSteer()
+    {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         { //Jeżeli naciśnięto klawisz "RightArrow"
 
@@ -109,6 +69,49 @@ public class MenuMedieval : MonoBehaviour
                 Application.Quit();
             }
         }
+    }
+
+    void JanekStepSteer()
+    {
+        if (ClickedButton.rightButtonDown)
+        { //Jeżeli naciśnięto klawisz "RightButton"
+            if (index < lPrzyciskow - 1)
+            {
+                index++;
+                Vector2 position = transform.position;
+                position.y += yOffset;
+                transform.position = position;
+            }
+            else
+            {
+                index = 0;
+                Vector2 position = transform.position;
+                position.y -= yOffset * 3f;
+                transform.position = position;
+            }
+
+        }
+        if (ClickedButton.leftButtonDown)
+        { //Jeżeli naciśnięto klawisz "LeftButton"
+            if (index == 0)
+            {
+                SceneManager.LoadScene("Training");
+            }
+            if (index == 1)
+            {
+                SceneManager.LoadScene("MenuMedievalMissionChoice");
+            }
+            if (index == 2)
+            {
+                SceneManager.LoadScene("MenuTrophies");
+            }
+            if (index == 3)
+            {
+                PersistentManagerScript.Instance.WebSocketClose();
+                Application.Quit();
+            }
+        }
+
     }
 
 }

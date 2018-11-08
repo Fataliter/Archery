@@ -20,45 +20,12 @@ public class MenuMedievalMissionChoice : MonoBehaviour
 
     void Update()
     {
-        if (pressed == false)
-        {
-            if (PersistentManagerScript.Instance.mydata.RightButton == 0)
-            { //Jeżeli naciśnięto klawisz "RightButton"
-                if (index < lPrzyciskow - 1)
-                {
-                    index++;
-                    Vector2 position = transform.position;
-                    position.y += yOffset;
-                    transform.position = position;
-                }
-                else
-                {
-                    index = 0;
-                    Vector2 position = transform.position;
-                    position.y -= yOffset * 4f;
-                    transform.position = position;
-                }
-            }
-            if (PersistentManagerScript.Instance.mydata.LeftButton == 0)
-            { //Jeżeli naciśnięto klawisz "LeftButton"
-                if (index == 0)
-                    SceneManager.LoadScene("Mission1");
-                if (index == 1 && PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
-                    SceneManager.LoadScene("Mission2");
-                if (index == 2) { }
-                    //SceneManager.LoadScene("Mission3");
-                if (index == 3) { }
-                    //SceneManager.LoadScene("Mission4");
-                if (index == 4)
-                    SceneManager.LoadScene("MenuMedieval");
-            }
-        }
+        KeyboardSteer();
+        JanekStepSteer();
+    }
 
-        if (PersistentManagerScript.Instance.mydata.RightButton == 0 || PersistentManagerScript.Instance.mydata.LeftButton == 0)
-            pressed = true;
-        else
-            pressed = false;
-
+    void KeyboardSteer()
+    {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         { //Jeżeli naciśnięto klawisz "RightArrow"
 
@@ -91,7 +58,41 @@ public class MenuMedievalMissionChoice : MonoBehaviour
             if (index == 2) { }
             //SceneManager.LoadScene("Mission3");
             if (index == 3) { }
-                //SceneManager.LoadScene("Mission4");
+            //SceneManager.LoadScene("Mission4");
+            if (index == 4)
+                SceneManager.LoadScene("MenuMedieval");
+        }
+    }
+
+    void JanekStepSteer()
+    {
+        if (ClickedButton.rightButtonDown)
+        { //Jeżeli naciśnięto klawisz "RightButton"
+            if (index < lPrzyciskow - 1)
+            {
+                index++;
+                Vector2 position = transform.position;
+                position.y += yOffset;
+                transform.position = position;
+            }
+            else
+            {
+                index = 0;
+                Vector2 position = transform.position;
+                position.y -= yOffset * 4f;
+                transform.position = position;
+            }
+        }
+        if (ClickedButton.leftButtonDown)
+        { //Jeżeli naciśnięto klawisz "LeftButton"
+            if (index == 0)
+                SceneManager.LoadScene("Mission1");
+            if (index == 1 && PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
+                SceneManager.LoadScene("Mission2");
+            if (index == 2) { }
+            //SceneManager.LoadScene("Mission3");
+            if (index == 3) { }
+            //SceneManager.LoadScene("Mission4");
             if (index == 4)
                 SceneManager.LoadScene("MenuMedieval");
         }
