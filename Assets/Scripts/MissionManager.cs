@@ -205,7 +205,6 @@ public class MissionManager : MonoBehaviour {
             SetPillowPressLevel();
             SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
             SaveManager.Instance.Save();
-            endGameFaster = false;
             SceneManager.LoadScene("MenuMedieval");
         }
     }

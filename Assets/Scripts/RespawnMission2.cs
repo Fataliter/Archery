@@ -14,7 +14,7 @@ public class RespawnMission2 : MonoBehaviour {
     public GameObject target;
     
     void Start () {
-        targetHitCount = 5;
+        targetHitCount = 1;
         xOff = 0f;
         zOff = 0f;
         RespawnArcherTarget();
