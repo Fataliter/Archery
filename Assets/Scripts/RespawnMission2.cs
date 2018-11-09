@@ -39,9 +39,9 @@ public class RespawnMission2 : MonoBehaviour {
         if (targetHitCount <= 4)
         {
             if (targetHitCount % 2 == 0)
-                Offsets(5f, 10f, -9f, -7f);
+                Offsets(11f, 11.5f, -17.1f, -16.4f);
             else
-                Offsets(-20f, -15f, -13f, -11f);
+                Offsets(-11.5f, -11f, -17.1f, -16.4f);
         }
         else if (targetHitCount == 5)
         {
@@ -52,9 +52,9 @@ public class RespawnMission2 : MonoBehaviour {
         else if (targetHitCount <= 8 && targetHitCount > 4)
         {
             if (targetHitCount % 2 == 0)
-                Offsets(10f, 15f, 28f, 31f);
+                Offsets(25f, 26f, 0f, 1f);
             else
-                Offsets(-40f, -35f, 15f, 18f);
+                Offsets(-26f, -25f, 0f, 1f);
         }
         vector.z = vector.z + zOff;
         vector.x = vector.x + xOff;
