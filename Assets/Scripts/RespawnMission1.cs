@@ -11,7 +11,7 @@ public class RespawnMission1 : MonoBehaviour {
     public GameObject target;
     
     void Start () {
-        targetHitCount = 6;
+        targetHitCount = 1;
         xOff = 0f;
         zOff = 0f;
         RespawnArcherTarget();
@@ -63,11 +63,10 @@ public class RespawnMission1 : MonoBehaviour {
     string IfTargetSeen()
     {
         Vector3 targetLocation = Camera.main.WorldToViewportPoint(target.transform.position);
-        if (!(targetLocation.x < 1 && targetLocation.x > 0 && targetLocation.z > 0))
-            if (targetLocation.x >= 1)
-                return "right";
-            else
-                return "left";
+        if ((targetLocation.x >= 1 && targetLocation.z >0) || (targetLocation.x <=0.6f && targetLocation.z<0))
+            return "right";
+        else if ((targetLocation.x <= 0 && targetLocation.z > 0) || (targetLocation.x >= 0.6f && targetLocation.z < 0))
+            return "left";
         else
             return "visible";
     }

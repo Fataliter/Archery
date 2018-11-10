@@ -30,8 +30,7 @@ public class RespawnTraining : MonoBehaviour {
     {
         Vector3 vector = transform.position;
         Offsets(-25f, 25f, -15f, 5f);
-        vector.z = vector.z + zOff;
-        vector.x = vector.x + xOff;
+        vector += new Vector3 (xOff, 0, zOff);
         target.transform.position = vector;
         GameObject.Instantiate(target);
         target.name = "Target";
@@ -47,11 +46,10 @@ public class RespawnTraining : MonoBehaviour {
     string IfTargetSeen()
     {
         Vector3 targetLocation = Camera.main.WorldToViewportPoint(target.transform.position);
-        if (!(targetLocation.x < 1 && targetLocation.x > 0 && targetLocation.z > 0))
-            if (targetLocation.x >= 1)
-                return "right";
-            else
-                return "left";
+        if ((targetLocation.x >= 1 && targetLocation.z > 0) || (targetLocation.x <= 0.6f && targetLocation.z < 0))
+            return "right";
+        else if ((targetLocation.x <= 0 && targetLocation.z > 0) || (targetLocation.x >= 0.6f && targetLocation.z < 0))
+            return "left";
         else
             return "visible";
     }

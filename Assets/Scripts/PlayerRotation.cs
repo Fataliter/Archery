@@ -10,6 +10,7 @@ public class PlayerRotation : MonoBehaviour
     int legsDiff;
     float leftLeg;
     float rightLeg;
+    bool leftRange, rightRange;
 
     private void Start()
     {
@@ -23,17 +24,27 @@ public class PlayerRotation : MonoBehaviour
         rotation();
     }
 
-    void parameters() 
+    void parameters()
     {
         leftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
         rightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
+        rightRange = transform.eulerAngles.y >= -140 && transform.eulerAngles.y <= 140;
+        leftRange = transform.eulerAngles.y < 360 && transform.eulerAngles.y >= 220;
     }
 
-    void rotation() 
+    void rotation()
     {
-        if (Mathf.Abs(leftLeg - rightLeg) >= legsDiff && PlayerShoot.keypressed == false && canRotateSlider)    
-            transform.Rotate(0, (rightLeg - leftLeg) * Time.deltaTime * rotationSens, 0); 
+        if (Mathf.Abs(leftLeg - rightLeg) >= legsDiff && PlayerShoot.keypressed == false && canRotateSlider)
+            transform.Rotate(0, (rightLeg - leftLeg) * Time.deltaTime * rotationSens, 0);
         else
-            transform.Rotate(0, 0, 0);
+        {
+            if (!rightRange && transform.eulerAngles.y < 200)
+                transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 140, 0));
+            else if (!leftRange && transform.eulerAngles.y > 160)
+                transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 220, 0));
+            else
+                transform.Rotate(0, 0, 0);
+
+        }
     }
 }

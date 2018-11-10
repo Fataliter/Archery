@@ -74,19 +74,13 @@ public class RespawnMission2 : MonoBehaviour {
     {
         Vector3 targetLocation = new Vector3(0,0,0);
         if (targetHitCount == 5)
-        {
             targetLocation = Camera.main.WorldToViewportPoint(bandit.transform.position);
-        }
         else
-        {
             targetLocation = Camera.main.WorldToViewportPoint(target.transform.position);
-        }
-
-        if (!(targetLocation.x < 1 && targetLocation.x > 0 && targetLocation.z > 0))
-            if (targetLocation.x >= 1)
-                return "right";
-            else
-                return "left";
+        if ((targetLocation.x >= 1 && targetLocation.z > 0) || (targetLocation.x <= 0.6f && targetLocation.z < 0))
+            return "right";
+        else if ((targetLocation.x <= 0 && targetLocation.z > 0) || (targetLocation.x >= 0.6f && targetLocation.z < 0))
+            return "left";
         else
             return "visible";
     }
