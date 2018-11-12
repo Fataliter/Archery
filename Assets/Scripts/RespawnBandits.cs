@@ -9,6 +9,8 @@ public class RespawnBandits : MonoBehaviour {
     AnimatorClipInfo[] currentClipInfo;
     AudioSource audioSrc;
     public AudioClip dieFX;
+    public AudioClip attackFX;
+    public AudioClip hitFX;
     float moveSpeed;
     public static int banditLife;
 
@@ -62,7 +64,11 @@ public class RespawnBandits : MonoBehaviour {
                 audioSrc.clip = dieFX;
                 audioSrc.Play();
             }
-            else audioSrc.Play();
+            else
+            {
+                audioSrc.clip = hitFX;
+                audioSrc.Play();
+            }
         }
     }
 
@@ -80,5 +86,11 @@ public class RespawnBandits : MonoBehaviour {
     void StopAirborneDown()
     {
         animator.SetBool("airborneDown", false);
+    }
+
+    void Attack()
+    {
+        audioSrc.clip = attackFX;
+        audioSrc.Play();
     }
 }

@@ -9413,6 +9413,11 @@ Prefab:
       propertyPath: power
       value: 
       objectReference: {fileID: 1826283813}
+    - target: {fileID: 120260842228388470, guid: 85dd926a237885a41a360e5daf4008e9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85dd926a237885a41a360e5daf4008e9, type: 2}
   m_IsPrefabAsset: 0
