@@ -18,10 +18,8 @@ public class MenuTrophies : MonoBehaviour
 
     void Update()
     {
-        if(PersistentManagerScript.Instance.mydata.LeftButton==0)
+        if(ClickedButton.leftButtonDown || Input.GetKey(KeyCode.Space))
         {
-            while (PersistentManagerScript.Instance.mydata.LeftButton == 0)
-            {}
             SceneManager.LoadScene("MenuMedieval");
         }
 
@@ -45,9 +43,7 @@ public class MenuTrophies : MonoBehaviour
             actualMission.text = "";
             background.sprite = mission4;
         }
-
-        if (Input.GetKey(KeyCode.Space))
-            SceneManager.LoadScene("MenuMedieval");
+        
     }
 
 }

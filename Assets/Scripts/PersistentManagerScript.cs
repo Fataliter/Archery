@@ -6,7 +6,7 @@ using WebSocketSharp;
 using SharpConfig;
 
 public class PersistentManagerScript : MonoBehaviour {
-
+    
     public string date;
     public static PersistentManagerScript Instance { get; private set; }
     public MyData mydata = new MyData();
@@ -54,6 +54,7 @@ public class PersistentManagerScript : MonoBehaviour {
         };
     }
 
+    
     void AssignData(string json)
     {
         mydata = JsonUtility.FromJson<MyData>(json);

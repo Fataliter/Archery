@@ -37,11 +37,12 @@ public class MissionManager : MonoBehaviour {
 
     public static bool endGameFaster;
 
-    float time1, time2, time3;
+    float time1, time2, time3, timePercentage;
 
     void Awake () {
         endGameFaster = false;
         time1 = time2 = time3 = 0f;
+        timePercentage = PersistentManagerScript.Instance.config["general"]["timePercentageForPillows"].FloatValue;
         string pillowsPressFromCfg = PersistentManagerScript.Instance.config["general"]["pillowsLevels"].StringValue;
         pillowsPressValues = pillowsPressFromCfg.Split(',').Select(float.Parse).ToArray();
         //for(int i=0; i<4; i++) { Debug.Log(pillowsPressValues[i]); }
@@ -219,9 +220,9 @@ public class MissionManager : MonoBehaviour {
 
     void SetPillowPressLevel()
     {
-        if (time3 / timePlayed * 100 > 30) pillowsPressLevel = 3;
-        else if (time2 / timePlayed * 100 > 30) pillowsPressLevel = 2;
-        else if (time1 / timePlayed * 100 > 30) pillowsPressLevel = 1;
+        if (time3 / timePlayed * 100 > timePercentage) pillowsPressLevel = 3;
+        else if (time2 / timePlayed * 100 > timePercentage) pillowsPressLevel = 2;
+        else if (time1 / timePlayed * 100 > timePercentage) pillowsPressLevel = 1;
         else pillowsPressLevel = 0;
     }
     

@@ -1605,6 +1605,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dieFX: {fileID: 8300000, guid: 3f2bfcbc4f0469245afa16840d61bb38, type: 3}
+  attackFX: {fileID: 8300000, guid: 3102ef41cfd48ac4587c3d6fad4d554d, type: 3}
+  hitFX: {fileID: 8300000, guid: 6731bca57daa944438842aadd7207543, type: 3}
 --- !u!137 &137846476496616344
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
