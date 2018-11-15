@@ -35,20 +35,23 @@ public class ScoreBrowser : MonoBehaviour {
     void Update() {
         Parameters();
         timer += Time.deltaTime;
-        if (timer > nextActionTime)
+        if (GameObject.FindGameObjectWithTag("Finish") == null)
         {
-            LowerDiagram();
-            UpperDiagram();
-            nextActionTime += period;
-        }
-        if(hit)
-        {
-            if (playerTransform.eulerAngles.y > 180)
-                PersistentManagerScript.Instance.data.hitAngle += (playerTransform.eulerAngles.y - 360f).ToString() + ",";
-            else
-                PersistentManagerScript.Instance.data.hitAngle += (playerTransform.eulerAngles.y).ToString() + ",";
-            PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
-            hit = false;
+            if (timer > nextActionTime)
+            {
+                LowerDiagram();
+                UpperDiagram();
+                nextActionTime += period;
+            }
+            if (hit)
+            {
+                if (playerTransform.eulerAngles.y > 180)
+                    PersistentManagerScript.Instance.data.hitAngle += (playerTransform.eulerAngles.y - 360f).ToString() + ",";
+                else
+                    PersistentManagerScript.Instance.data.hitAngle += (playerTransform.eulerAngles.y).ToString() + ",";
+                PersistentManagerScript.Instance.data.timeToHit += timer.ToString() + ",";
+                hit = false;
+            }
         }
         if(MissionManager.endOfMission==true && oneTime)
         {
@@ -78,23 +81,30 @@ public class ScoreBrowser : MonoBehaviour {
 
     void UpperDiagram()
     {
-
-        if (lookerCentre.eulerAngles.y > 180)
-        {
-            PersistentManagerScript.Instance.data.targetLocation += (lookerCentre.eulerAngles.y - 360f).ToString() + ",";
-            PersistentManagerScript.Instance.data.targetAngleLeft += (lookerLeft.eulerAngles.y - 360f).ToString() + ",";
-            PersistentManagerScript.Instance.data.targetAngleRight += (lookerRight.eulerAngles.y - 360f).ToString() + ",";
-        }
-        else
-        {
-            PersistentManagerScript.Instance.data.targetLocation += lookerCentre.eulerAngles.y.ToString() + ",";
-            PersistentManagerScript.Instance.data.targetAngleLeft += lookerLeft.eulerAngles.y.ToString() + ",";
-            PersistentManagerScript.Instance.data.targetAngleRight += lookerRight.eulerAngles.y.ToString() + ",";
-        }
+        //player angle
         if (playerTransform.eulerAngles.y > 180)
             PersistentManagerScript.Instance.data.angle += (playerTransform.eulerAngles.y - 360f).ToString() + ",";
         else
             PersistentManagerScript.Instance.data.angle += (playerTransform.eulerAngles.y).ToString() + ",";
+
+        //target center angle
+        if (lookerCentre.eulerAngles.y > 180)
+            PersistentManagerScript.Instance.data.targetLocation += (lookerCentre.eulerAngles.y - 360f).ToString() + ",";
+        else
+            PersistentManagerScript.Instance.data.targetLocation += lookerCentre.eulerAngles.y.ToString() + ",";
+
+        //target left side angle
+        if (lookerLeft.eulerAngles.y > 180)
+            PersistentManagerScript.Instance.data.targetAngleLeft += (lookerLeft.eulerAngles.y - 360f).ToString() + ",";
+        else
+            PersistentManagerScript.Instance.data.targetAngleLeft += lookerLeft.eulerAngles.y.ToString() + ",";
+
+        //target right side angle
+        if (lookerRight.eulerAngles.y > 180)
+            PersistentManagerScript.Instance.data.targetAngleRight += (lookerRight.eulerAngles.y - 360f).ToString() + ",";
+        else
+            PersistentManagerScript.Instance.data.targetAngleRight += lookerRight.eulerAngles.y.ToString() + ",";
+
     }
 
 }

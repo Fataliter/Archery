@@ -12,18 +12,17 @@ public class PillowsCanvas : MonoBehaviour {
     float LeftPillow;
     float RightPillow;
     float RearPillow;
-    public static int pillowsPressed;
-    float[] pillowPressValue = new float[3];
+    public static bool pillowsPressed;
+    float pillowPressMinValue;
 
     float pillowPress;
     float legsDifference;
 
     void Start () {
-        pillowsPressed = 0;
+        pillowsPressed = false;
         pillowPress = MissionManager.pillowPress; 
         legsDifference = MissionManager.pillowsLegsDiff;
-        string pillowsPressFromCfg = PersistentManagerScript.Instance.config["general"]["pillowsTimeCount"].StringValue;
-        pillowPressValue = pillowsPressFromCfg.Split(',').Select(float.Parse).ToArray();
+        pillowPressMinValue = PersistentManagerScript.Instance.config["general"]["pillowsPressTimeCount"].FloatValue;
 
         GameObject backgroundObject = GameObject.Find("BlackScreen");
         background = backgroundObject.GetComponent<Image>();
@@ -37,10 +36,20 @@ public class PillowsCanvas : MonoBehaviour {
     }
 	
 	void Update () {
-        Parameters();
-        //KeyboardParam();
-        HasPillowBeenPressed();
-        PillowsPressure();
+        if (GameObject.FindGameObjectWithTag("Finish") == null)
+        {
+            Parameters();
+            //KeyboardParam();
+            HasPillowBeenPressed();
+            PillowsPressure();
+        }
+        else
+        {
+            background.color = new Color(0f, 0f, 0f, 0f);
+            left.color = new Color(0f, 0f, 0f, 0f);
+            right.color = new Color(0f, 0f, 0f, 0f);
+            rear.color = new Color(0f, 0f, 0f, 0f);
+        }
     }
 
     void PillowsPressure()
@@ -103,9 +112,7 @@ public class PillowsCanvas : MonoBehaviour {
 
     void HasPillowBeenPressed()
     {
-        if (LeftPillow > pillowPressValue[0] || RightPillow > pillowPressValue[0] || RearPillow > pillowPressValue[0])  pillowsPressed = 3; 
-        else if (LeftPillow > pillowPressValue[1] || RightPillow > pillowPressValue[1] || RearPillow > pillowPressValue[1]) pillowsPressed = 2;
-        else if (LeftPillow > pillowPressValue[2] || RightPillow > pillowPressValue[2] || RearPillow > pillowPressValue[2]) pillowsPressed = 1;
-        else pillowsPressed = 0;
+        if (LeftPillow > pillowPressMinValue || RightPillow > pillowPressMinValue || RearPillow > pillowPressMinValue) pillowsPressed = true;
+        else pillowsPressed = false;
     }
 }

@@ -28,8 +28,8 @@ public class PlayerRotation : MonoBehaviour
     {
         leftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
         rightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
-        rightRange = transform.eulerAngles.y > 0 && transform.eulerAngles.y <= 140;
-        leftRange = transform.eulerAngles.y < 360 && transform.eulerAngles.y >= 220;
+        rightRange = transform.eulerAngles.y >= 0 && transform.eulerAngles.y <= 140;
+        leftRange = transform.eulerAngles.y <= 360 && transform.eulerAngles.y >= 220;
     }
 
     void rotation()

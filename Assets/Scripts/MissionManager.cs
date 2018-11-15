@@ -37,15 +37,15 @@ public class MissionManager : MonoBehaviour {
 
     public static bool endGameFaster;
 
-    float time1, time2, time3, timePercentage;
+    float timePillowPressed;
+    float timePercentage;
 
     void Awake () {
         endGameFaster = false;
-        time1 = time2 = time3 = 0f;
+        timePillowPressed = 0f;
         timePercentage = PersistentManagerScript.Instance.config["general"]["timePercentageForPillows"].FloatValue;
         string pillowsPressFromCfg = PersistentManagerScript.Instance.config["general"]["pillowsLevels"].StringValue;
         pillowsPressValues = pillowsPressFromCfg.Split(',').Select(float.Parse).ToArray();
-        //for(int i=0; i<4; i++) { Debug.Log(pillowsPressValues[i]); }
         fireworks = false;
         timePlayed = 0f;
         endOfMission = false;
@@ -56,7 +56,6 @@ public class MissionManager : MonoBehaviour {
         pillowPress = pillowsPressValues[pillowsPressLevel];
         onetime = true;
         hit = false;
-        //Debug.Log(pillowPress);
     }
 
     private void Update() {
@@ -132,7 +131,7 @@ public class MissionManager : MonoBehaviour {
         {
             SaveManager.Instance.state.timePlayedTraining = timeAlreadyPlayed;     
             SaveManager.Instance.state.targetsTraining = T.ToString();
-            SaveManager.Instance.state.pillowsLevelTraining = 1;
+            SaveManager.Instance.state.pillowsLevelTraining = 0;
             targetsOnEnd = new int[1];
             targetsOnEnd[0] = T;
         }   
@@ -213,17 +212,13 @@ public class MissionManager : MonoBehaviour {
 
     void PillowsTimePress()
     {
-        if (PillowsCanvas.pillowsPressed == 3) time3 += Time.deltaTime;
-        if (PillowsCanvas.pillowsPressed == 2) time2 += Time.deltaTime;
-        if (PillowsCanvas.pillowsPressed == 1) time1 += Time.deltaTime;
+        if (PillowsCanvas.pillowsPressed == true) timePillowPressed += Time.deltaTime;
     }
 
     void SetPillowPressLevel()
     {
-        if (time3 / timePlayed * 100 > timePercentage) pillowsPressLevel = 3;
-        else if (time2 / timePlayed * 100 > timePercentage) pillowsPressLevel = 2;
-        else if (time1 / timePlayed * 100 > timePercentage) pillowsPressLevel = 1;
-        else pillowsPressLevel = 0;
+        if (timePillowPressed / timePlayed * 100 > timePercentage) pillowsPressLevel = 0;
+        else pillowsPressLevel = 1;
     }
     
 }
