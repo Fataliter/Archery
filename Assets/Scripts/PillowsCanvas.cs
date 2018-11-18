@@ -18,7 +18,12 @@ public class PillowsCanvas : MonoBehaviour {
     float pillowPress;
     float legsDifference;
 
+    float fadeTime;
+    float fadeTimeFromCfg;
+
     void Start () {
+        fadeTimeFromCfg = PersistentManagerScript.Instance.config["general"]["fadeTime"].FloatValue;
+        fadeTime = 0f;
         pillowsPressed = false;
         pillowPress = MissionManager.pillowPress; 
         legsDifference = MissionManager.pillowsLegsDiff;
@@ -39,12 +44,13 @@ public class PillowsCanvas : MonoBehaviour {
         if (GameObject.FindGameObjectWithTag("Finish") == null)
         {
             Parameters();
-            //KeyboardParam();
+            KeyboardParam();
             HasPillowBeenPressed();
             PillowsPressure();
         }
         else
         {
+            fadeTime = 0f;
             background.color = new Color(0f, 0f, 0f, 0f);
             left.color = new Color(0f, 0f, 0f, 0f);
             right.color = new Color(0f, 0f, 0f, 0f);
@@ -55,13 +61,14 @@ public class PillowsCanvas : MonoBehaviour {
     void PillowsPressure()
     {
         if ((LeftLeg - RightLeg) > legsDifference && RightPillow > pillowPress)
-            SetColor(RightPillow);
+            SetColor();
         if ((RightLeg - LeftLeg) > legsDifference && LeftPillow > pillowPress)
-            SetColor(LeftPillow);
+            SetColor();
         if (RearPillow > pillowPress)
-            SetColor(RearPillow);
+            SetColor();
         if(RearPillow < pillowPress && RightPillow < pillowPress && LeftPillow <= pillowPress)
         {
+            fadeTime = 0f;
             background.color = new Color(0f, 0f, 0f, 0f);
             left.color = new Color(0f, 0f, 0f, 0f);
             right.color = new Color(0f, 0f, 0f, 0f);
@@ -78,23 +85,28 @@ public class PillowsCanvas : MonoBehaviour {
         RearPillow = PersistentManagerScript.Instance.mydata.RearPillow;
     }
 
-    void SetColor(float pressure)
+    void SetColor()
     {
-        float intensity = (pressure / 100f) + 0.4f;
+        fadeTime += Time.deltaTime;
+        float intensity = Mathf.Clamp(fadeTime / fadeTimeFromCfg, 0f, 1f);
+
         background.color = new Color(0f, 0f, 0f, intensity);
 
-        if (LeftPillow >= pillowPress)
-            left.color = new Color(0f, 0f, 220f, (LeftPillow / 100f) + 0.4f);
-        else
-            left.color = new Color(0f, 0f, 0f, 0f);
-        if (RightPillow >= pillowPress)
-            right.color = new Color(0f, 0f, 220f, (RightPillow / 100f) + 0.4f);
-        else
-            right.color = new Color(0f, 0f, 0f, 0f);
-        if (RearPillow >= pillowPress)
-            rear.color = new Color(0f, 0f, 220f, (RearPillow / 100f) + 0.4f);
-        else
-            rear.color = new Color(0f, 0f, 0f, 0f);
+        if (intensity >= 0.2f)
+        {
+            if (LeftPillow >= pillowPress)
+                left.color = new Color(0f, 0f, 1f, intensity);
+            else
+                left.color = new Color(0f, 0f, 0f, 0f);
+            if (RightPillow >= pillowPress)
+                right.color = new Color(0f, 0f, 1f, intensity);
+            else
+                right.color = new Color(0f, 0f, 0f, 0f);
+            if (RearPillow >= pillowPress)
+                rear.color = new Color(0f, 0f, 1f, intensity);
+            else
+                rear.color = new Color(0f, 0f, 0f, 0f);
+        }
 
     }
 

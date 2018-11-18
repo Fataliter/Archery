@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class RespawnBandits : MonoBehaviour {
-    public static bool kill;
+    bool kill;
     bool canPlayAttack = true;
     Transform player;
     Animator animator;
@@ -12,7 +12,7 @@ public class RespawnBandits : MonoBehaviour {
     public AudioClip attackFX;
     public AudioClip hitFX;
     float moveSpeed;
-    public static int banditLife;
+    int banditLife;
 
 	void Start () {
         kill = false;
@@ -44,7 +44,6 @@ public class RespawnBandits : MonoBehaviour {
                 canPlayAttack = false;
             }
         }
-        //Debug.Log(banditNoLife);
     }
     
 

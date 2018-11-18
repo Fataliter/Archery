@@ -90,7 +90,7 @@ public class MenuMedievalMissionChoice : MonoBehaviour
             if (index == 1 && PersistentManagerScript.Instance.medalsMenu.medals1 == 1)
                 SceneManager.LoadScene("Mission2");
             if (index == 2) { }
-            //SceneManager.LoadScene("Mission3");
+                SceneManager.LoadScene("Mission3");
             if (index == 3) { }
             //SceneManager.LoadScene("Mission4");
             if (index == 4)

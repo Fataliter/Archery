@@ -2660,6 +2660,12 @@ Prefab:
       propertyPath: targetRight
       value: 
       objectReference: {fileID: 1826283812}
+    - target: {fileID: 114812809877991278, guid: 12fac6aa0a4261c4586062b0ea42d152,
+        type: 2}
+      propertyPath: bandit
+      value: 
+      objectReference: {fileID: 1067590198439696, guid: 81fddc462b3f77b438c5dc9316e4e967,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12fac6aa0a4261c4586062b0ea42d152, type: 2}
   m_IsPrefabAsset: 0
