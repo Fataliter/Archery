@@ -12,6 +12,7 @@ TagManager:
   - Enemy1
   - Enemy2
   - Enemy3
+  - DragonMaw
   layers:
   - Default
   - TransparentFX

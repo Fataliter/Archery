@@ -185,7 +185,7 @@ public class MissionManager : MonoBehaviour {
             if (onetime)
             {
                 endOfMission = true;
-                timeAlreadyPlayed += maxTime;
+                timeAlreadyPlayed += timePlayed;
                 SetPillowPressLevel();
                 SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
                 SaveManager.Instance.Save();
