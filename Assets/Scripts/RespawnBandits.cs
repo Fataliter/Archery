@@ -28,22 +28,27 @@ public class RespawnBandits : MonoBehaviour {
         gameObject.transform.LookAt(player);
         currentClipInfo = this.animator.GetCurrentAnimatorClipInfo(0);
         float distance = Vector3.Distance(gameObject.transform.position, player.position);
-        if (currentClipInfo.Length > 0)
+        if (MissionManager.freezeEnemies == false)
         {
-            if (currentClipInfo[0].clip.name == "Walk" && distance > 10)
+            if (currentClipInfo.Length > 0)
             {
-                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, moveSpeed * Time.deltaTime);
+                if (currentClipInfo[0].clip.name == "Walk" && distance > 10)
+                {
+                    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, moveSpeed * Time.deltaTime);
+                }
             }
-        }
 
-        if (distance < 11)
-        {
-            if (canPlayAttack == true)
+            if (distance < 11)
             {
-                animator.Play("Attack2");
-                canPlayAttack = false;
+                if (canPlayAttack == true)
+                {
+                    animator.Play("Attack2");
+                    canPlayAttack = false;
+                }
             }
         }
+        else
+            animator.speed = 0;
     }
     
 
@@ -55,7 +60,8 @@ public class RespawnBandits : MonoBehaviour {
             animator.SetBool("airborneDown", true);
             if (banditLife == 0)
             {
-                MissionManager.enemy1Count++;
+                if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+                    MissionManager.enemy1Count++;
                 MissionManager.hit = true;
                 ProgressDuringMission.hit = true;
                 ProgressDuringMission.targetName = "Enemy1";

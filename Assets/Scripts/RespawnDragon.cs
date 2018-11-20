@@ -47,42 +47,46 @@ public class RespawnDragon : MonoBehaviour {
         }
         transform.LookAt(player);
         float distance = Vector3.Distance(player.position, transform.position);
-        if (currentClipInfo[0].clip.name == "run" && distance > 14)
+        if (MissionManager.freezeEnemies == false)
         {
-            particle.Stop();
-            dragonHits = 0;
-            oneTime = true;
-            anim.SetBool("dragonBreath", false);
-            anim.SetBool("instantiated", false);
-            anim.SetBool("backToRun", true);
-            anim.SetBool("backToAttack", false);
-            transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, moveSpeed * Time.deltaTime);
-        }
-        if (distance < 15)
-        {
-            anim.SetBool("backToRun", false);
-            anim.SetBool("backToAttack", true);
-            anim.SetBool("isClose", true);
-        }
-        if (currentClipInfo[0].clip.name == "die")
-            anim.SetBool("noHealth", false);
-        if (currentClipInfo[0].clip.name == "hit")
-            anim.SetBool("hit", false);
-        if (dragonHits == 5)
-        {
-            if (oneTime)
+            if (currentClipInfo[0].clip.name == "run" && distance > 14)
             {
-                breathDist = Vector3.Distance(transform.position, breathPos);
-                anim.SetBool("stomp", true);
-                oneTime = false;
+                particle.Stop();
+                dragonHits = 0;
+                oneTime = true;
+                anim.SetBool("dragonBreath", false);
+                anim.SetBool("instantiated", false);
+                anim.SetBool("backToRun", true);
+                anim.SetBool("backToAttack", false);
+                transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, moveSpeed * Time.deltaTime);
             }
-            anim.SetBool("dragonBreath", true);
-            anim.SetBool("isClose", false);
-            if (anim.GetBool("stomp") == true)
-                transform.position = Vector3.MoveTowards(transform.position, breathPos, breathDist * Time.deltaTime / 2.7f);
-            
-        }
+            if (distance < 15)
+            {
+                anim.SetBool("backToRun", false);
+                anim.SetBool("backToAttack", true);
+                anim.SetBool("isClose", true);
+            }
+            if (currentClipInfo[0].clip.name == "die")
+                anim.SetBool("noHealth", false);
+            if (currentClipInfo[0].clip.name == "hit")
+                anim.SetBool("hit", false);
+            if (dragonHits == 5)
+            {
+                if (oneTime)
+                {
+                    breathDist = Vector3.Distance(transform.position, breathPos);
+                    anim.SetBool("stomp", true);
+                    oneTime = false;
+                }
+                anim.SetBool("dragonBreath", true);
+                anim.SetBool("isClose", false);
+                if (anim.GetBool("stomp") == true)
+                    transform.position = Vector3.MoveTowards(transform.position, breathPos, breathDist * Time.deltaTime / 2.7f);
 
+            }
+        }
+        else
+            anim.speed = 0;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -94,7 +98,8 @@ public class RespawnDragon : MonoBehaviour {
             {
                 gameObject.GetComponent<MeshCollider>().enabled = false;
                 anim.SetBool("noHealth", true);
-                MissionManager.enemy3Count++;  //comment dla etstu w innej misji
+                if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+                    MissionManager.enemy3Count++;  //comment dla etstu w innej misji
                 MissionManager.hit = true;
                 ProgressDuringMission.hit = true;
                 ProgressDuringMission.targetName = "Enemy3"; //comment dla testu w innej misji

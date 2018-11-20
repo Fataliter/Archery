@@ -18,6 +18,14 @@ public class PlayerShoot_keyboard : MonoBehaviour
 
     private Animator anim;
 
+    private void Awake()
+    {
+        if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue == 1)
+            this.enabled = true;
+        else
+            this.enabled = false;
+    }
+
 
     private void Start()
     {

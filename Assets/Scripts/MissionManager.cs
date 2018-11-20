@@ -36,11 +36,13 @@ public class MissionManager : MonoBehaviour {
     public static bool fireworks;
 
     public static bool endGameFaster;
+    public static bool freezeEnemies;
 
     float timePillowPressed;
     float timePercentage;
 
     void Awake () {
+        freezeEnemies = false;
         endGameFaster = false;
         timePillowPressed = 0f;
         timePercentage = PersistentManagerScript.Instance.config["general"]["timePercentageForPillows"].FloatValue;
@@ -184,8 +186,10 @@ public class MissionManager : MonoBehaviour {
         {
             if (onetime)
             {
+                freezeEnemies = true;
                 endOfMission = true;
-                timeAlreadyPlayed += timePlayed;
+                if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+                    timeAlreadyPlayed += maxTime;
                 SetPillowPressLevel();
                 SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
                 SaveManager.Instance.Save();
@@ -201,7 +205,8 @@ public class MissionManager : MonoBehaviour {
         if (endGameFaster)
         {
             endOfMission = true;
-            timeAlreadyPlayed += timePlayed;
+            if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+                timeAlreadyPlayed += timePlayed;
             SetPillowPressLevel();
             SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
             SaveManager.Instance.Save();

@@ -44,7 +44,7 @@ public class PillowsCanvas : MonoBehaviour {
         if (GameObject.FindGameObjectWithTag("Finish") == null)
         {
             Parameters();
-            KeyboardParam();
+            //KeyboardParam();
             HasPillowBeenPressed();
             PillowsPressure();
         }

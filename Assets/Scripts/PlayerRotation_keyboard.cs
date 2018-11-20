@@ -8,7 +8,15 @@ public class PlayerRotation_keyboard : MonoBehaviour
     public float rotation_sensitivity = 1f; //mnożnik czułości reakcji gry (obrotu postaci) na zmianę nacisku platform
     bool leftRange, rightRange;
 
-    
+
+    private void Awake()
+    {
+        if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue == 1)
+            this.enabled = true;
+        else
+            this.enabled = false;
+    }
+
     void Update()
     {
         rightRange = transform.eulerAngles.y >= -10 && transform.eulerAngles.y <= 140;

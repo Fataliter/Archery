@@ -8,6 +8,8 @@ public class CalmMusic : MonoBehaviour {
     Transform player, lookerLeft, lookerRight;
     float difference;
     float playerAngle, rightAngle, leftAngle;
+    float maxVolume;
+    float calmMusicRange;
 
 
     private void Awake()
@@ -24,6 +26,8 @@ public class CalmMusic : MonoBehaviour {
         calmSrc = gameObject.GetComponent<AudioSource>();
         musicSrc = GameObject.Find("MusicManager").GetComponent<AudioSource>();
         difference = 0.005f;
+        maxVolume = PersistentManagerScript.Instance.config["general"]["maxMusicVolume"].FloatValue;
+        calmMusicRange = PersistentManagerScript.Instance.config["general"]["calmMusicRange"].FloatValue;
     }
 	
 	// Update is called once per frame
@@ -31,7 +35,7 @@ public class CalmMusic : MonoBehaviour {
 
         SetAngles();
 
-        if (playerAngle>= (leftAngle -5) && playerAngle<=(rightAngle +5f))
+        if (playerAngle>= (leftAngle - calmMusicRange) && playerAngle<=(rightAngle + calmMusicRange))
         {
             VolumeUp(calmSrc);
             VolumeDown(musicSrc);
@@ -64,13 +68,13 @@ public class CalmMusic : MonoBehaviour {
 
     void VolumeUp(AudioSource audio)
     {
-        audio.volume = Mathf.Clamp(audio.volume, 0f, 0.09f);
         audio.volume += difference;
+        audio.volume = Mathf.Clamp(audio.volume, 0f, maxVolume);
     }
 
     void VolumeDown(AudioSource audio)
     {
-        audio.volume = Mathf.Clamp(audio.volume, 0f, 0.09f);
         audio.volume -= difference;
+        audio.volume = Mathf.Clamp(audio.volume, 0f, maxVolume);
     }
 }

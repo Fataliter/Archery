@@ -12,6 +12,14 @@ public class PlayerRotation : MonoBehaviour
     float rightLeg;
     bool leftRange, rightRange;
 
+    private void Awake()
+    {
+        if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue == 1)
+            this.enabled = false;
+        else
+            this.enabled = true;
+    }
+
     private void Start()
     {
         rotationSens = PersistentManagerScript.Instance.config["general"]["rotationSensitivity"].FloatValue;
