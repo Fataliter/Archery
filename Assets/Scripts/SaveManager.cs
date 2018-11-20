@@ -17,8 +17,10 @@ public class SaveManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+        
         Load();
         Debug.Log(SerializeHelper.Serialize<SaveState>(state));
+
     }
 
     public void Save()
@@ -29,6 +31,7 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
+        
         if (PlayerPrefs.HasKey("save"))
         {
             state = SerializeHelper.Deserialize<SaveState>(PlayerPrefs.GetString("save"));

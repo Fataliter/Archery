@@ -11,7 +11,7 @@ public class PlayerRotation_keyboard : MonoBehaviour
     
     void Update()
     {
-        rightRange = transform.eulerAngles.y >= -140 && transform.eulerAngles.y <= 140;
+        rightRange = transform.eulerAngles.y >= 0 && transform.eulerAngles.y <= 140;
         leftRange = transform.eulerAngles.y < 360 && transform.eulerAngles.y >= 220;
         
         if (Input.GetAxis("Horizontal") != 0 && !Input.GetKey(KeyCode.Space) && canRotateKeyboard && (leftRange || rightRange))
@@ -20,9 +20,9 @@ public class PlayerRotation_keyboard : MonoBehaviour
         }
         else
         {
-            if (!rightRange && transform.eulerAngles.y < 200)
+            if (!rightRange && transform.eulerAngles.y <= 180)
                 transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 140, 0));
-            else if (!leftRange && transform.eulerAngles.y > 160)
+            else if (!leftRange && transform.eulerAngles.y > 180)
                 transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 220, 0));
             else
                 transform.Rotate(0, 0, 0);

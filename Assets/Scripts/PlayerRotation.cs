@@ -28,19 +28,19 @@ public class PlayerRotation : MonoBehaviour
     {
         leftLeg = PersistentManagerScript.Instance.mydata.LeftLeg;
         rightLeg = PersistentManagerScript.Instance.mydata.RightLeg;
-        rightRange = transform.eulerAngles.y >= -140 && transform.eulerAngles.y <= 140;
+        rightRange = transform.eulerAngles.y > 0 && transform.eulerAngles.y <= 140;
         leftRange = transform.eulerAngles.y < 360 && transform.eulerAngles.y >= 220;
     }
 
     void rotation()
     {
-        if (Mathf.Abs(leftLeg - rightLeg) >= legsDiff && PlayerShoot.keypressed == false && canRotateSlider)
+        if (Mathf.Abs(leftLeg - rightLeg) >= legsDiff && PlayerShoot.keypressed == false && canRotateSlider && (leftRange || rightRange))
             transform.Rotate(0, (rightLeg - leftLeg) * Time.deltaTime * rotationSens, 0);
         else
         {
-            if (!rightRange && transform.eulerAngles.y < 200)
+            if (!rightRange && transform.eulerAngles.y <= 180)
                 transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 140, 0));
-            else if (!leftRange && transform.eulerAngles.y > 160)
+            else if (!leftRange && transform.eulerAngles.y > 180)
                 transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 220, 0));
             else
                 transform.Rotate(0, 0, 0);
