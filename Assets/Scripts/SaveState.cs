@@ -3,7 +3,7 @@
 
     public string targetsTraining = "0";
     public float timePlayedTraining = 0f;
-    public int pillowsLevelTraining = 1;
+    public int pillowsLevelTraining = 0;
 
     public string targetsMission1 = "0";
     public float timePlayedMission1 = 0f;

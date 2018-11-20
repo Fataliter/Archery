@@ -35,12 +35,12 @@ public class MenuTrophies : MonoBehaviour
         }
         else if (ControlMenuTrophies.index == 2)
         {
-            actualMission.text = "";
+            actualMission.text = "Polana";
             background.sprite = mission3;
         }
         else if (ControlMenuTrophies.index == 3)
         {
-            actualMission.text = "";
+            actualMission.text = "Zamek";
             background.sprite = mission4;
         }
         

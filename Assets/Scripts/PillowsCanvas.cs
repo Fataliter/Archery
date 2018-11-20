@@ -12,18 +12,22 @@ public class PillowsCanvas : MonoBehaviour {
     float LeftPillow;
     float RightPillow;
     float RearPillow;
-    public static int pillowsPressed;
-    float[] pillowPressValue = new float[3];
+    public static bool pillowsPressed;
+    float pillowPressMinValue;
 
     float pillowPress;
     float legsDifference;
 
+    float fadeTime;
+    float fadeTimeFromCfg;
+
     void Start () {
-        pillowsPressed = 0;
+        fadeTimeFromCfg = PersistentManagerScript.Instance.config["general"]["fadeTime"].FloatValue;
+        fadeTime = 0f;
+        pillowsPressed = false;
         pillowPress = MissionManager.pillowPress; 
         legsDifference = MissionManager.pillowsLegsDiff;
-        string pillowsPressFromCfg = PersistentManagerScript.Instance.config["general"]["pillowsTimeCount"].StringValue;
-        pillowPressValue = pillowsPressFromCfg.Split(',').Select(float.Parse).ToArray();
+        pillowPressMinValue = PersistentManagerScript.Instance.config["general"]["pillowsPressTimeCount"].FloatValue;
 
         GameObject backgroundObject = GameObject.Find("BlackScreen");
         background = backgroundObject.GetComponent<Image>();
@@ -37,22 +41,34 @@ public class PillowsCanvas : MonoBehaviour {
     }
 	
 	void Update () {
-        Parameters();
-        //KeyboardParam();
-        HasPillowBeenPressed();
-        PillowsPressure();
+        if (GameObject.FindGameObjectWithTag("Finish") == null)
+        {
+            Parameters();
+            //KeyboardParam();
+            HasPillowBeenPressed();
+            PillowsPressure();
+        }
+        else
+        {
+            fadeTime = 0f;
+            background.color = new Color(0f, 0f, 0f, 0f);
+            left.color = new Color(0f, 0f, 0f, 0f);
+            right.color = new Color(0f, 0f, 0f, 0f);
+            rear.color = new Color(0f, 0f, 0f, 0f);
+        }
     }
 
     void PillowsPressure()
     {
         if ((LeftLeg - RightLeg) > legsDifference && RightPillow > pillowPress)
-            SetColor(RightPillow);
+            SetColor();
         if ((RightLeg - LeftLeg) > legsDifference && LeftPillow > pillowPress)
-            SetColor(LeftPillow);
+            SetColor();
         if (RearPillow > pillowPress)
-            SetColor(RearPillow);
+            SetColor();
         if(RearPillow < pillowPress && RightPillow < pillowPress && LeftPillow <= pillowPress)
         {
+            fadeTime = 0f;
             background.color = new Color(0f, 0f, 0f, 0f);
             left.color = new Color(0f, 0f, 0f, 0f);
             right.color = new Color(0f, 0f, 0f, 0f);
@@ -69,23 +85,28 @@ public class PillowsCanvas : MonoBehaviour {
         RearPillow = PersistentManagerScript.Instance.mydata.RearPillow;
     }
 
-    void SetColor(float pressure)
+    void SetColor()
     {
-        float intensity = (pressure / 100f) + 0.4f;
+        fadeTime += Time.deltaTime;
+        float intensity = Mathf.Clamp(fadeTime / fadeTimeFromCfg, 0f, 1f);
+
         background.color = new Color(0f, 0f, 0f, intensity);
 
-        if (LeftPillow >= pillowPress)
-            left.color = new Color(0f, 0f, 220f, (LeftPillow / 100f) + 0.4f);
-        else
-            left.color = new Color(0f, 0f, 0f, 0f);
-        if (RightPillow >= pillowPress)
-            right.color = new Color(0f, 0f, 220f, (RightPillow / 100f) + 0.4f);
-        else
-            right.color = new Color(0f, 0f, 0f, 0f);
-        if (RearPillow >= pillowPress)
-            rear.color = new Color(0f, 0f, 220f, (RearPillow / 100f) + 0.4f);
-        else
-            rear.color = new Color(0f, 0f, 0f, 0f);
+        if (intensity >= 0.2f)
+        {
+            if (LeftPillow >= pillowPress)
+                left.color = new Color(0f, 0f, 1f, intensity);
+            else
+                left.color = new Color(0f, 0f, 0f, 0f);
+            if (RightPillow >= pillowPress)
+                right.color = new Color(0f, 0f, 1f, intensity);
+            else
+                right.color = new Color(0f, 0f, 0f, 0f);
+            if (RearPillow >= pillowPress)
+                rear.color = new Color(0f, 0f, 1f, intensity);
+            else
+                rear.color = new Color(0f, 0f, 0f, 0f);
+        }
 
     }
 
@@ -103,9 +124,7 @@ public class PillowsCanvas : MonoBehaviour {
 
     void HasPillowBeenPressed()
     {
-        if (LeftPillow > pillowPressValue[0] || RightPillow > pillowPressValue[0] || RearPillow > pillowPressValue[0])  pillowsPressed = 3; 
-        else if (LeftPillow > pillowPressValue[1] || RightPillow > pillowPressValue[1] || RearPillow > pillowPressValue[1]) pillowsPressed = 2;
-        else if (LeftPillow > pillowPressValue[2] || RightPillow > pillowPressValue[2] || RearPillow > pillowPressValue[2]) pillowsPressed = 1;
-        else pillowsPressed = 0;
+        if (LeftPillow > pillowPressMinValue || RightPillow > pillowPressMinValue || RearPillow > pillowPressMinValue) pillowsPressed = true;
+        else pillowsPressed = false;
     }
 }

@@ -20,8 +20,8 @@ public class MusicManager : MonoBehaviour {
         clips[1] = Resources.Load<AudioClip>("Music/TrainingMusic");
         clips[2] = Resources.Load<AudioClip>("Music/Mission1Music");
         clips[3] = Resources.Load<AudioClip>("Music/Mission2Music");
-        //clips[4] = Resources.Load<AudioClip>("Music/");
-        //clips[5] = Resources.Load<AudioClip>("Music/");
+        clips[4] = Resources.Load<AudioClip>("Music/Mission3Music");
+        clips[5] = Resources.Load<AudioClip>("Music/Mission4Music");
         audioSrc.clip = clips[0];
         audioSrc.Play();
         if (Instance == null)
