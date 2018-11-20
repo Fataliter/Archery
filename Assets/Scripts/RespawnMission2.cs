@@ -45,7 +45,7 @@ public class RespawnMission2 : MonoBehaviour {
         }
         else if (targetHitCount == 5)
         {
-            //bandit.transform.position = new Vector3(205f, 30f, 20f);
+            bandit.transform.position = new Vector3(205f, 30f, 20f);
             GameObject.Instantiate(bandit);
             return;
         }

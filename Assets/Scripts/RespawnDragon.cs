@@ -90,7 +90,6 @@ public class RespawnDragon : MonoBehaviour {
         if (collision.gameObject.tag == "arrow" && (currentClipInfo[0].clip.name == "run" || currentClipInfo[0].clip.name == "atk01"))
         {
             dragonLife--;
-            Debug.Log(dragonLife);
             if (dragonLife == 0)
             {
                 gameObject.GetComponent<MeshCollider>().enabled = false;

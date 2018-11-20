@@ -13,6 +13,7 @@ TagManager:
   - Enemy2
   - Enemy3
   - DragonMaw
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - FireLayer
   - 
   - 
   - 

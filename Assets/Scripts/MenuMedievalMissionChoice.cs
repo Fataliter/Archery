@@ -57,8 +57,8 @@ public class MenuMedievalMissionChoice : MonoBehaviour
                 SceneManager.LoadScene("Mission2");
             if (index == 2) 
                 SceneManager.LoadScene("Mission3");
-            if (index == 3) { }
-            //SceneManager.LoadScene("Mission4");
+            if (index == 3) 
+                SceneManager.LoadScene("Mission4");
             if (index == 4)
                 SceneManager.LoadScene("MenuMedieval");
         }

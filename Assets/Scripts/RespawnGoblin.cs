@@ -29,18 +29,24 @@ public class RespawnGoblin : MonoBehaviour {
         currentClipInfo = this.anim.GetCurrentAnimatorClipInfo(0);
         transform.LookAt(player);
         float distance = Vector3.Distance(player.position, transform.position);
-        if(currentClipInfo[0].clip.name == "Run" && distance > 10)
+        if(currentClipInfo[0].clip.name == "Run" && distance > 10 && goblinLife>0)
         {
             anim.SetBool("backToRun", true);
             anim.SetBool("backToAttack", false);
             transform.position = Vector3.MoveTowards(gameObject.transform.position, player.position, moveSpeed * Time.deltaTime);
         }
 
-        if(distance<11)
+        if(distance<11 && goblinLife>0)
         {
             anim.SetBool("backToRun", false);
             anim.SetBool("backToAttack", true);
             anim.SetBool("isClose", true);
+        }
+
+        if(goblinLife == 0)
+        {
+            anim.SetBool("backToRun", false);
+            anim.SetBool("backToAttack", false);
         }
 	}
 
@@ -72,8 +78,7 @@ public class RespawnGoblin : MonoBehaviour {
         anim.SetBool("hit", false);
         if(goblinLife == 0)
         {
-            anim.SetBool("backToRun", false);
-            anim.SetBool("backToAttack", false);
+            
             Destroy(gameObject,.7f);
         }
     }
