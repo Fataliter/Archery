@@ -10,7 +10,6 @@ public class MenuMedievalMissionChoice : MonoBehaviour
     public int lPrzyciskow = 5;
     float yOffset;
     public Text textMission1, textMission2;
-    bool pressed = false;
 
     void Start()
     {

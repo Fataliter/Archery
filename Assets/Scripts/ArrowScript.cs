@@ -52,7 +52,6 @@ public class ArrowScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("PUDŁO!!!");
             audioSrc.clip = clipOnHit;
             audioSrc.Play();
             Destroy(gameObject, 1);

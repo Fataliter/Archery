@@ -30,6 +30,7 @@ public class ScoreBrowser : MonoBehaviour {
         lookerLeft = GameObject.Find("LookAtTarget/LookAtLeft").GetComponent<Transform>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         PersistentManagerScript.Instance.data.missionName = SceneManager.GetActiveScene().name.ToLower();
+        PersistentManagerScript.Instance.data.pillowsLevel = MissionManager.pillowPress.ToString();
     }
 
     void Update() {
@@ -56,7 +57,6 @@ public class ScoreBrowser : MonoBehaviour {
         if(MissionManager.endOfMission==true && oneTime)
         {
             PersistentManagerScript.Instance.data.timeOfPlaying = MissionManager.timePlayed;
-            PersistentManagerScript.Instance.data.pillowsLevel = MissionManager.pillowPress.ToString();
             SendData.SaveDataFromMission();
             oneTime = false;
         }

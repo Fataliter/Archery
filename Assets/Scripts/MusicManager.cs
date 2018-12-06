@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MusicManager : MonoBehaviour {
 
     public static MusicManager Instance { get; private set; }
-    string actualScene;
     public AudioClip[] clips = new AudioClip[6];
     AudioSource audioSrc;
     string[] sceneNames = { "MenuMedieval", "Training", "Mission1", "Mission2", "Mission3", "Mission4" };
@@ -14,7 +13,6 @@ public class MusicManager : MonoBehaviour {
 
     void Awake()
     {
-        actualScene = SceneManager.GetActiveScene().name;
         audioSrc = GetComponent<AudioSource>();
         clips[0] = Resources.Load<AudioClip>("Music/MenuMusic");
         clips[1] = Resources.Load<AudioClip>("Music/TrainingMusic");
@@ -52,6 +50,7 @@ public class MusicManager : MonoBehaviour {
         if (scene.name == "MenuMedievalMissionChoice" && audioSrc.clip != clips[0])
         {
             audioSrc.clip = clips[0];
+            audioSrc.volume = PersistentManagerScript.Instance.config["general"]["maxMusicVolume"].FloatValue;
             audioSrc.Play();
         }
         for (int i=0; i<sceneNames.Length; i++)
@@ -62,7 +61,6 @@ public class MusicManager : MonoBehaviour {
                 audioSrc.Play();
             }
         }
-        //Debug.Log("OnSceneLoaded: " + scene.name);
     }
    
     

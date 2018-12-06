@@ -222,8 +222,16 @@ public class MissionManager : MonoBehaviour {
 
     void SetPillowPressLevel()
     {
-        if (timePillowPressed / timePlayed * 100 > timePercentage) pillowsPressLevel = 0;
-        else pillowsPressLevel = 1;
+        if (PersistentManagerScript.Instance.config["general"]["pillowOnIfTimeLow"].IntValue == 1)
+        {
+            if (timePillowPressed / timePlayed * 100 > timePercentage) pillowsPressLevel = 0;
+            else pillowsPressLevel = 1;
+        }
+        else
+        {
+            if (timePillowPressed / timePlayed * 100 > timePercentage) pillowsPressLevel = 1;
+            else pillowsPressLevel = 0;
+        }
     }
     
 }

@@ -9,7 +9,6 @@ public class MenuMedieval : MonoBehaviour
     public int lPrzyciskow = 4;
     public Text textMission, textTraining;
     float yOffset;
-    bool pressed = false;
 
     void Start()
     {
