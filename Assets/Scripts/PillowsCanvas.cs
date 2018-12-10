@@ -25,7 +25,8 @@ public class PillowsCanvas : MonoBehaviour {
         fadeTimeFromCfg = PersistentManagerScript.Instance.config["general"]["fadeTime"].FloatValue;
         fadeTime = 0f;
         pillowsPressed = false;
-        pillowPress = MissionManager.pillowPress; 
+        if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue == 1) pillowPress = 80;
+        else pillowPress = MissionManager.pillowPress; 
         legsDifference = MissionManager.pillowsLegsDiff;
         pillowPressMinValue = PersistentManagerScript.Instance.config["general"]["pillowsPressTimeCount"].FloatValue;
 
@@ -43,8 +44,8 @@ public class PillowsCanvas : MonoBehaviour {
 	void Update () {
         if (GameObject.FindGameObjectWithTag("Finish") == null)
         {
-            Parameters();
-            //KeyboardParam();
+            if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue == 1) KeyboardParam(); 
+            else Parameters();
             HasPillowBeenPressed();
             PillowsPressure();
         }
@@ -112,13 +113,23 @@ public class PillowsCanvas : MonoBehaviour {
 
     void KeyboardParam()
     {
-        LeftLeg = 80f;
-        RightLeg = 20f;
-        if (Input.GetKey(KeyCode.J)) LeftPillow = 90f;
-        else LeftPillow = 0f;
+
+
         if (Input.GetKey(KeyCode.K)) RearPillow = 90f;
         else RearPillow = 0f;
-        if (Input.GetKey(KeyCode.L)) RightPillow = 90f;
+        if (Input.GetKey(KeyCode.J))
+        {
+            LeftLeg = 20f;
+            RightLeg = 80f;
+            LeftPillow = 90f;
+        }
+        else LeftPillow = 0f;
+        if (Input.GetKey(KeyCode.L))
+        { 
+            LeftLeg = 80f;
+            RightLeg = 20f;
+            RightPillow = 90f;
+        }
         else RightPillow = 0f;
     }
 
