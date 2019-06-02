@@ -21,10 +21,10 @@ public class SendData : MonoBehaviour {
         writer.Write(PersistentManagerScript.Instance.data.pressOnRear + "@");
         writer.Write(PersistentManagerScript.Instance.data.targetAngleLeft + "@");
         writer.Write(PersistentManagerScript.Instance.data.targetAngleRight + "@");
-        writer.Write(PersistentManagerScript.Instance.data.pillowsLevel + "#");
+        writer.Write(PersistentManagerScript.Instance.data.pillowsLevel + "@");
+        writer.Write(PersistentManagerScript.Instance.config["general"]["rotationSensitivity"].StringValue + "#");
         writer.Close();
-
-        Debug.Log("zapisano dane do przeglądarki wyników");
+        
 
         
         PersistentManagerScript.Instance.data.timeToHit = "";

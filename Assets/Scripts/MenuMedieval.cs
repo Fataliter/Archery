@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuMedieval : MonoBehaviour
 {
     int index = 0;
-    public int lPrzyciskow = 4;
+    int lPrzyciskow = 5;
     public Text textMission, textTraining;
     float yOffset;
 
@@ -25,7 +25,7 @@ public class MenuMedieval : MonoBehaviour
     }
     void KeyboardSteer()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         { //Jeżeli naciśnięto klawisz "RightArrow"
 
             if (index < lPrzyciskow - 1)
@@ -36,7 +36,7 @@ public class MenuMedieval : MonoBehaviour
                 transform.position = position;
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         { //Jeżeli naciśnięto klawisz "LeftArrow"
 
             if (index > 0)
@@ -63,6 +63,10 @@ public class MenuMedieval : MonoBehaviour
                 SceneManager.LoadScene("MenuTrophies");
             }
             if (index == 3)
+            {
+                SceneManager.LoadScene("MenuOptions");
+            }
+            if (index == 4)
             {
                 PersistentManagerScript.Instance.WebSocketClose();
                 Application.Quit();
@@ -105,6 +109,10 @@ public class MenuMedieval : MonoBehaviour
                 SceneManager.LoadScene("MenuTrophies");
             }
             if (index == 3)
+            {
+                SceneManager.LoadScene("MenuOptions");
+            }
+            if (index == 4)
             {
                 PersistentManagerScript.Instance.WebSocketClose();
                 Application.Quit();
