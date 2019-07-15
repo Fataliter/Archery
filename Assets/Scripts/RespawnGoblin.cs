@@ -64,7 +64,7 @@ public class RespawnGoblin : MonoBehaviour {
             anim.SetBool("hit", true);
             if (goblinLife == 0)
             {
-                if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+                if (MissionManager.keyboardSteerPlayer != 1 || (MissionManager.keyboardSteerPlayer == 1 && MissionManager.keyboardSteerSaveStatusJSON == 1))
                     MissionManager.enemy2Count++;
                 MissionManager.hit = true;
                 ProgressDuringMission.hit = true;

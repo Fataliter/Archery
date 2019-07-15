@@ -36,7 +36,7 @@ public class ArrowScript : MonoBehaviour {
         if (collision.gameObject.tag == "Target" )
         {
             TakeParticles(collision.gameObject.transform.position);
-            if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+            if (MissionManager.keyboardSteerPlayer != 1 || (MissionManager.keyboardSteerPlayer == 1 && MissionManager.keyboardSteerSaveStatusJSON == 1))
                 MissionManager.shootTargetCount++; //MUST HAVE
             MissionManager.hit = true; //MUST HAVE
             ScoreBrowser.hit = true; //MUST HAVE

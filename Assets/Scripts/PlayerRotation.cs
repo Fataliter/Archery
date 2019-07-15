@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using System;
 
 public class PlayerRotation : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PlayerRotation : MonoBehaviour
     float leftLeg;
     float rightLeg;
     bool leftRange, rightRange;
+    
 
     private void Awake()
     {
@@ -18,6 +21,7 @@ public class PlayerRotation : MonoBehaviour
             this.enabled = false;
         else
             this.enabled = true;
+
     }
 
     private void Start()
@@ -52,7 +56,7 @@ public class PlayerRotation : MonoBehaviour
                 transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 220, 0));
             else
                 transform.Rotate(0, 0, 0);
-
         }
     }
+
 }

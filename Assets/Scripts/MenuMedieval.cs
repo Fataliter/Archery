@@ -7,20 +7,23 @@ public class MenuMedieval : MonoBehaviour
 {
     int index = 0;
     int lPrzyciskow = 5;
-    public Text textMission, textTraining;
+    public Text textMission, textTraining, textUserID;
     float yOffset;
 
     void Start()
     {
+        PersistentManagerScript.Instance.finishedLoad = false;
         yOffset = textMission.transform.position.y - textTraining.transform.position.y;
         Cursor.visible = false;//Ukrycie pokazanie kursora myszy.
+        textUserID.text = "User: " + PersistentManagerScript.Instance.userID;
+
     }
 
     void Update()
     {
         JanekStepSteer();
         KeyboardSteer();
-        
+        //if(PersistentManagerScript.gotUserID) textUserID.text = PersistentManagerScript.Instance.msg;
         
     }
     void KeyboardSteer()
@@ -69,6 +72,7 @@ public class MenuMedieval : MonoBehaviour
             if (index == 4)
             {
                 PersistentManagerScript.Instance.WebSocketClose();
+                PersistentManagerScript.Instance.HideFolder();
                 Application.Quit();
             }
         }
@@ -115,7 +119,8 @@ public class MenuMedieval : MonoBehaviour
             if (index == 4)
             {
                 PersistentManagerScript.Instance.WebSocketClose();
-                Application.Quit();
+                PersistentManagerScript.Instance.HideFolder();
+                //Application.Quit();
             }
         }
 

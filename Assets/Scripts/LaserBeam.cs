@@ -7,6 +7,7 @@ public class LaserBeam : MonoBehaviour {
     private LineRenderer lineRendComp;
     RaycastHit hit;
 
+
     void Start ()
     {
         Color lineColor = new Color();
@@ -28,4 +29,7 @@ public class LaserBeam : MonoBehaviour {
         }
 
     }
+
+   
+
 }

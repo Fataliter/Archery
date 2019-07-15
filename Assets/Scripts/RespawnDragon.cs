@@ -26,6 +26,7 @@ public class RespawnDragon : MonoBehaviour {
 
     int dragonHits;
 
+
     void Start() {
         dragonMaw = GameObject.FindGameObjectWithTag("DragonMaw");
         particle = dragonMaw.GetComponent<ParticleSystem>();
@@ -37,6 +38,7 @@ public class RespawnDragon : MonoBehaviour {
         currentClipInfo = anim.GetCurrentAnimatorClipInfo(0);
         stompDist = Vector3.Distance(gameObject.transform.position, stompPos);
         audioSrc = GetComponent<AudioSource>();
+        
     }
 
     void Update() {
@@ -98,7 +100,7 @@ public class RespawnDragon : MonoBehaviour {
             {
                 gameObject.GetComponent<MeshCollider>().enabled = false;
                 anim.SetBool("noHealth", true);
-                if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+                if (MissionManager.keyboardSteerPlayer != 1 || (MissionManager.keyboardSteerPlayer == 1 && MissionManager.keyboardSteerSaveStatusJSON == 1))
                     MissionManager.enemy3Count++;  //comment dla etstu w innej misji
                 MissionManager.hit = true;
                 ProgressDuringMission.hit = true;

@@ -5,9 +5,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using WebSocketSharp;
 using SharpConfig;
 using System.Linq;
+using Newtonsoft.Json;
 
 public class PersistentManagerScript : MonoBehaviour {
-    
+
     public string date;
     public static PersistentManagerScript Instance { get; private set; }
     public MyData mydata = new MyData();
@@ -16,7 +17,12 @@ public class PersistentManagerScript : MonoBehaviour {
     public Configuration config = new Configuration();
     public MessageFromJstep msg = new MessageFromJstep();
     WebSocket ws;
-    public string userFolder, userID;
+    public string gameFolder, userID = "";
+    public bool finishedLoad, connected, serverDown;
+
+    public bool hiddenFolder;
+
+    private string requestID = JsonUtility.ToJson(new MessageToJstep("request", "getUserData"));
 
 
     public SaveMedals saveMedals;
@@ -32,68 +38,104 @@ public class PersistentManagerScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
-
         date = System.DateTime.Now.ToString("dd_MM_yyyy HH_mm_ss");
-        if (!Directory.Exists(Application.persistentDataPath + "/Wyniki"))
-            Directory.CreateDirectory(Application.persistentDataPath + "/Wyniki");
-        ReadTrophies();
-        ReadConfig();
+        hiddenFolder = false;
     }
+
+    
 
     public void WebSocketClose()
     {
         ws.Close();
     }
 
+    
+
     void Start()
     {
+        finishedLoad = false;
+        connected= false;
         ws = new WebSocket("ws://localhost:8080/JanekWebServer/measurement");
-        ws.OnOpen += (sender, e) => Debug.Log("opened");
-        ws.Connect();
-        var mesin = new MessageToJstep()
+        ws.OnOpen += (sender, e) =>
         {
-            type = "getUserID"
+            Debug.Log("opened");
+            serverDown = false;
+            connected = true;
         };
-        string requestID = JsonUtility.ToJson(mesin);
-        ws.Send(requestID);
+        ws.OnError += (sender, e) =>
+        {
+            if (e.Message.Contains("An error has occurred during the OnClose event."))
+            {
+                serverDown = true;
+                Debug.Log("after 10 reconnect retries, serverDown = " + serverDown);
+            }
+        };
         ws.OnMessage += (sender, e) =>
         {
-            try{ mydata = JsonUtility.FromJson<MyData>(e.Data);} //to jest lekko z dupy :V
-            catch{ msg = JsonUtility.FromJson<MessageFromJstep>(e.Data); 
-            //userID = msg.user.name;
+            //Debug.Log("achieved data from server: " + e.Data);
+            if (e.Data == "Connection Established")
+            {}
+            else
+            {
+                if (e.Data.Contains("userDataReply"))
+                {
+                    msg = JsonConvert.DeserializeObject<MessageFromJstep>(e.Data);
+                    userID = msg.data.userName + "_" + msg.data.userId;
+                    hiddenFolder = false;
+                    LoadGame(userID, 0, 0);
+                }
+                else mydata = JsonUtility.FromJson<MyData>(e.Data);
             }
+            if (userID == "") ws.Send(requestID);
+
         };
         ws.OnClose += (sender, e) =>
         {
-            try{ws.Connect();}
-            catch(Exception exc){Debug.Log(exc.Message);}
+            if (userID != "OfflineLocalUser")
+            {
+                if (e.Code != (ushort)CloseStatusCode.NoStatus)
+                {
+                    Debug.Log("Disconnected! CloseStatusCode #" + e.Code + ": " + e.Reason);
+                    connected = false;
+                    ws.Connect();
+                }
+                else Debug.Log("Disconnected! CloseStatusCode #" + e.Code + ": Used disconnecting with server function websocket.close() during game [Exit button in MenuMedieval]");
+            }
+            else
+            {
+                Debug.Log("Logged as OfflineLocalUser");
+                serverDown = true;
+            }
+
+
         };
-        //userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        ws.Connect();
     }
     
 
-    void ReadConfig()
+    void ReadConfig(byte steer, byte save)
     {
-        if(!File.Exists(Application.persistentDataPath + "/config.cfg")) 
-        { 
-            var g = new GeneralConfig() 
+        if(!File.Exists(gameFolder + "/config.cfg")) 
+        {
+            var g = new GeneralConfig()
             {
-                rotationSensitivity=0.18f,
-                legsDifferenceForRotation=30,
-                pillowsPressTimeCount=30,
-                timePercentageForPillows=50,
-                pillowsLevels="110,85",
-                arrowPositionAngle=9,
-                banditMoveSpeed=3,
-                goblinMoveSpeed=3,
-                dragonMoveSpeed=4,
-                lineRGBColor="df11d9",
-                fadeTime=0.4f,
-                maxMusicVolume=0.09f,
-                calmMusicRange=6,
-                keyboardSteerPlayer=0,
-                pillowOnIfTimeLow=0
+                rotationSensitivity = 0.18f,
+                legsDifferenceForRotation = 30,
+                pillowsPressTimeCount = 30,
+                timePercentageForPillows = 50,
+                pillowsLevels = "110,85",
+                arrowPositionAngle = 9,
+                banditMoveSpeed = 3,
+                goblinMoveSpeed = 3,
+                dragonMoveSpeed = 4,
+                lineRGBColor = "df11d9",
+                fadeTime = 0.4f,
+                maxMusicVolume = 0.09f,
+                calmMusicRange = 6,
+                calmMusicOn = 0,
+                keyboardSteerPlayer = steer,
+                keyboardSteerSaveStatusJSON = save,
+                pillowOnIfTimeLow = 0
             }; config.Add(Section.FromObject("general", g));
             var t = new TrainingConfig()
             {
@@ -112,29 +154,29 @@ public class PersistentManagerScript : MonoBehaviour {
             }; config.Add(Section.FromObject("mission1", m));
 
             m.bronze = "10,40,3"; m.silver = "30,100,10";
-            m.gold = "60,250,24";m.trophy = "120,600,55";m.missionTime = 120;
+            m.gold = "60,250,24"; m.trophy = "120,600,55"; m.missionTime = 120;
             config.Add(Section.FromObject("mission2", m));
 
             m.bronze = "12,50,4,2"; m.silver = "36,120,12,6";
-            m.gold = "75,280,27,14";m.trophy = "140,700,60,35";m.missionTime = 150;
+            m.gold = "75,280,27,14"; m.trophy = "140,700,60,35"; m.missionTime = 150;
             config.Add(Section.FromObject("mission3", m));
 
             m.bronze = "15,60,8,6"; m.silver = "40,130,20,13";
-            m.gold = "80,300,40,30";m.trophy = "160,750,75,60";m.missionTime = 180;
+            m.gold = "80,300,40,30"; m.trophy = "160,750,75,60"; m.missionTime = 180;
             config.Add(Section.FromObject("mission4", m));
 
-            config.SaveToFile(Application.persistentDataPath + "/config.cfg");
+            config.SaveToFile(gameFolder + "/config.cfg");
 
         }
-        else config = Configuration.LoadFromFile(Application.persistentDataPath + "/config.cfg");
+        else config = Configuration.LoadFromFile(gameFolder + "/config.cfg");
         
     }
 
     void ReadTrophies()
     {
-        if (File.Exists(Application.persistentDataPath + "/trophies.data"))
+        if (File.Exists(gameFolder + "/trophies.data"))
         {
-            FileStream file = File.Open(Application.persistentDataPath + "/trophies.data", FileMode.Open);
+            FileStream file = File.Open(gameFolder + "/trophies.data", FileMode.Open);
             BinaryFormatter bf = new BinaryFormatter();
             medalsMenu = (Medals)bf.Deserialize(file);
             file.Close();
@@ -144,6 +186,38 @@ public class PersistentManagerScript : MonoBehaviour {
             saveMedals = new SaveMedals();
             saveMedals.Save();
         }
+    }
+
+    public void LoadGame(string userID, byte steerByKeyboard, byte saveStatusKeyboard)
+    {
+        string userFolder = System.Environment.GetEnvironmentVariable("USERPROFILE") + @"\Balancer\Users\" + userID;
+        gameFolder = userFolder + @"\Archery";
+        if (!Directory.Exists(userFolder))
+            Directory.CreateDirectory(userFolder);
+        DirectoryInfo dir = new DirectoryInfo(userFolder);
+        dir.Attributes &= ~FileAttributes.Hidden;
+        if (!Directory.Exists(gameFolder))
+            Directory.CreateDirectory(gameFolder);
+        if (!Directory.Exists(gameFolder + @"\Scores"))
+            Directory.CreateDirectory(gameFolder + @"\Scores");
+        ReadConfig(steerByKeyboard, saveStatusKeyboard);
+        ReadTrophies();
+        SaveManager.Instance.Load();
+    }
+
+    public void HideFolder()
+    {
+        if(hiddenFolder)
+        {
+            string userFolder = System.Environment.GetEnvironmentVariable("USERPROFILE") + @"\Balancer\Users\" + userID;
+            DirectoryInfo dir = new DirectoryInfo(userFolder);
+            dir.Attributes |= FileAttributes.Hidden;
+        }
+    }
+
+    public void SendRequestId()
+    {
+        ws.Send(requestID);
     }
 }
 public class MyData
@@ -156,6 +230,17 @@ public class MyData
     //public int FrontPillow = 1;
     public int LeftButton = 1;
     public int RightButton = 1;
+
+    public void setToZero()
+    {
+        this.LeftLeg = 0;
+        this.RightLeg = 0;
+        this.LeftPillow = 0;
+        this.RightPillow = 0;
+        this.RearPillow = 0;
+        this.LeftButton = 1;
+        this.RightButton = 1;
+    }
 }
 public class Data
 {
@@ -165,7 +250,6 @@ public class Data
     public string angle = "";
     public string targetLocation = "";
     public string hitAngle = "";
-    public string points = "";
     public string pressOnLeftLeg = "";
     public string pressOnRightLeg = "";
     public string pressOnLeft = "";
@@ -215,7 +299,9 @@ public class GeneralConfig
     public float fadeTime  {get;set;}
     public float maxMusicVolume  {get;set;}
     public float calmMusicRange {get;set;}
+    public byte calmMusicOn { get; set; }
     public byte keyboardSteerPlayer {get;set;}
+    public byte keyboardSteerSaveStatusJSON { get; set; }
     public byte pillowOnIfTimeLow {get;set;}
 }
 
@@ -236,28 +322,31 @@ public class TrainingConfig
     public string trophy {get;set;}
 }
 
+
 public class MessageToJstep
 {
-    public string type {get; set;}
-    ///////////////////////////////////////////////////
-    ///                    AKTUALNIE
-    ///               {"type":"getUserId"}
-    ///                   W PRZYSZŁOŚCI
-    /// {"type":"request",data:{"requestName":"getUserId"} }
-    //////////////////////////////////////////////////
-    // public struct data
-    // {
-    //     string requestName {get; set;}
-    // }
+    public string type; 
+    public string requestName;
+    public MessageToJstep(string type, string requestName)
+    {
+        this.type = type;
+        this.requestName = requestName;
+    }
+    
+
 }
 
 public class MessageFromJstep
 {
-    public struct user {
-        int id {get; set;}
-        string name {get; set;}
-        string lastoLoggedOn {get; set;}
-        string lang {get; set;}
+    public string type { get; set; }
+    public data data { get; set; }
 
-    }
+}
+
+public class data
+{
+    public int userId { get; set; }
+    public string userName { get; set; }
+    public string userLastLoggedOn { get; set; }
+    public string userLang { get; set; }
 }

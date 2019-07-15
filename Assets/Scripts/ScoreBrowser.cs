@@ -60,6 +60,7 @@ public class ScoreBrowser : MonoBehaviour {
             SendData.SaveDataFromMission();
             oneTime = false;
         }
+        
     }
     void Parameters()
     {

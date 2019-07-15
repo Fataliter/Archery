@@ -41,6 +41,8 @@ public class MissionManager : MonoBehaviour {
     float timePillowPressed;
     float timePercentage;
 
+    public static byte keyboardSteerPlayer, keyboardSteerSaveStatusJSON;
+
     void Awake () {
         freezeEnemies = false;
         endGameFaster = false;
@@ -58,6 +60,8 @@ public class MissionManager : MonoBehaviour {
         pillowPress = pillowsPressValues[pillowsPressLevel];
         onetime = true;
         hit = false;
+        keyboardSteerPlayer = PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].ByteValue;
+        keyboardSteerSaveStatusJSON = PersistentManagerScript.Instance.config["general"]["keyboardSteerSaveStatusJSON"].ByteValue;
     }
 
     private void Update() {
@@ -188,7 +192,7 @@ public class MissionManager : MonoBehaviour {
             {
                 freezeEnemies = true;
                 endOfMission = true;
-                if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+                if (keyboardSteerPlayer != 1 || (keyboardSteerPlayer == 1 && keyboardSteerSaveStatusJSON == 1))
                     timeAlreadyPlayed += maxTime;
                 SetPillowPressLevel();
                 SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);
@@ -205,7 +209,7 @@ public class MissionManager : MonoBehaviour {
         if (endGameFaster)
         {
             endOfMission = true;
-            if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+            if (keyboardSteerPlayer != 1 || (keyboardSteerPlayer == 1 && keyboardSteerSaveStatusJSON == 1))
                 timeAlreadyPlayed += timePlayed;
             SetPillowPressLevel();
             SaveTargetsAndTime(shootTargetCount, enemy1Count, enemy2Count, enemy3Count);

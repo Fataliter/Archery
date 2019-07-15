@@ -13,8 +13,10 @@ public class RespawnBandits : MonoBehaviour {
     public AudioClip hitFX;
     float moveSpeed;
     int banditLife;
+    
 
-	void Start () {
+
+    void Start () {
         kill = false;
         moveSpeed = PersistentManagerScript.Instance.config["general"]["banditMoveSpeed"].FloatValue;
         audioSrc = GetComponent<AudioSource>();
@@ -60,7 +62,7 @@ public class RespawnBandits : MonoBehaviour {
             animator.SetBool("airborneDown", true);
             if (banditLife == 0)
             {
-                if (PersistentManagerScript.Instance.config["general"]["keyboardSteerPlayer"].IntValue != 1)
+                if (MissionManager.keyboardSteerPlayer != 1 || (MissionManager.keyboardSteerPlayer ==1 && MissionManager.keyboardSteerSaveStatusJSON ==1))
                     MissionManager.enemy1Count++;
                 MissionManager.hit = true;
                 ProgressDuringMission.hit = true;

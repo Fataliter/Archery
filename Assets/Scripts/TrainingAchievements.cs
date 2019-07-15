@@ -30,11 +30,12 @@ public class TrainingAchievements : MonoBehaviour {
             targetsText.text = targetsScored + "/" + targets.ToString();
             timeText.text = timeFloat.ToString() + "/" + time.ToString();
 
-            if (SaveManager.Instance.state.targetsTraining != "0")
+            if (timePlayed != 0)
             {
                 float progress = CheckProgress(timeFloat, time, targetsScored, targets);
                 training.fillAmount = progress;
             }
+            
         }
     }
 

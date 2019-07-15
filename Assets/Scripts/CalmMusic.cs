@@ -18,6 +18,9 @@ public class CalmMusic : MonoBehaviour {
             this.enabled = false;
         else
             this.enabled = true;
+        if(PersistentManagerScript.Instance.config["general"]["calmMusicOn"].IntValue==1)
+            this.enabled = true;
+        else this.enabled = false;
     }
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -35,7 +38,7 @@ public class CalmMusic : MonoBehaviour {
 
         SetAngles();
 
-        if (playerAngle>= (leftAngle - calmMusicRange) && playerAngle<=(rightAngle + calmMusicRange))
+        if (playerAngle>= (rightAngle - calmMusicRange) && playerAngle<=(leftAngle + calmMusicRange))
         {
             VolumeUp(calmSrc);
             VolumeDown(musicSrc);
